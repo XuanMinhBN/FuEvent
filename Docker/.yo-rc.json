@@ -1,0 +1,11 @@
+{
+  "generator-jhipster": {
+    "appsFolders": ["Backend", "Frontend"],
+    "directoryPath": "../",
+    "gatewayType": "SpringCloudGateway",
+    "clusteredDbApps": {},
+    "monitoring": "no",
+    "serviceDiscoveryType": "eureka",
+    "jwtSecretKey": "MzkzYjFlMjdlNGY1YzU0NTI5MDc5ZjI4MWE2ZDdkNDBlZTA1MzZkNzcwMDUxZWY1ZWQ2ZmYxZTE0N2EyYzMxNWRjOWQ3MDIxOTJhMTg5MzVlMmNmMmUyYjlmYTEzZWI5MjYzZQ=="
+  }
+}
