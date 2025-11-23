@@ -1,0 +1,28 @@
+{
+  "fuEventUiApp": {
+    "userProfile": {
+      "home": {
+        "title": "User Profiles",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một User Profile",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật User Profile",
+        "notFound": "No User Profiles found"
+      },
+      "created": "Một User Profile mới được tạo với định danh {{ param }}",
+      "updated": "Một User Profile cập nhật với định danh {{ param }}",
+      "deleted": "Một User Profile đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa User Profile {{ id }}?"
+      },
+      "detail": {
+        "title": "User Profile"
+      },
+      "id": "ID",
+      "phoneNumber": "Phone Number",
+      "description": "Description",
+      "address": "Address",
+      "studentCode": "Student Code",
+      "walletId": "Wallet Id"
+    }
+  }
+}

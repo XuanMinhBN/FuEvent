@@ -24,7 +24,7 @@ describe('error-boundary-route component', () => {
   it('Should render fallback component when an uncaught error is thrown from component', () => {
     const history = createMemoryHistory();
     const { container } = render(
-      <Router history={history}>
+      <Router history={history as any}>
         <ErrorBoundaryRoute component={ErrorComp} path="/" />
       </Router>
     );

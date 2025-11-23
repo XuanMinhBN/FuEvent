@@ -1,0 +1,15 @@
+entity UserProfile {
+    phoneNumber String,
+    description String,
+    address String,
+    studentCode String,
+    walletId Long
+}
+
+relationship OneToOne {
+    UserProfile{user(login)} to User
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with pagination

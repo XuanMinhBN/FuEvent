@@ -1,0 +1,91 @@
+entity Event{
+    title String,
+    description String,
+    location String,
+    status String,
+    poster_url String,
+    start_time LocalDate,
+    end_time LocalDate,
+    event_id Long,
+    organizer_id Long
+}
+
+entity Order{
+    total_amount Double,
+    status String,
+    user_id Long,
+}
+
+entity OrderItem{
+    order_id Long,
+    product_id Long
+}
+
+entity Payment{
+    amount Double,
+    payment_method String,
+    status String,
+    order_id Long,
+    transaction_id Long
+}
+
+entity Product{
+    name String,
+    description String,
+    type String,
+    price String,
+    quantity_total Integer,
+    quantity_sold Integer,
+    image_url String,
+    event_id Long
+}
+
+entity Category{
+    name String,
+    description String
+}
+
+entity Review{
+    comment String,
+    rating Integer,
+    user_id Long,
+    event_id Long
+}
+
+entity Discount{
+    code String,
+    description String,
+    percentage Double,
+    max_users Long,
+    valid_from LocalDate,
+    valid_to LocalDate,
+    type String,
+    event_id Long,
+    user_id Long
+}
+
+entity Notification{
+    title String,
+    message String,
+    is_read Boolean,
+    user_id Long
+}
+
+entity Wallet{
+    balance Double,
+    user_id Long
+}
+
+entity OrderDiscount{
+    order_id Long,
+    discount_id Long,
+    applied_at LocalDate
+}
+
+entity TransactionHistory{
+    amount_add Double,
+    amount_subtract Double,
+    description String,
+    wallet_id Long
+}
+

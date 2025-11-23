@@ -39,7 +39,7 @@ describe('Header', () => {
       const history = createMemoryHistory();
       const { container } = render(
         <Provider store={store}>
-          <Router history={history}>
+          <Router history={history as any}>
             <Header {...props} />
           </Router>
         </Provider>
