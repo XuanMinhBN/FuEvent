@@ -1,0 +1,64 @@
+{
+  "name": "Product",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "ProductType",
+      "fieldValues": "TICKET,MERCHANDISE"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "quantityTotal",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "quantitySold",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "imageUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eventId",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "products",
+      "relationshipName": "event"
+    }
+  ],
+  "entityTableName": "product",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "FuEventAPI",
+  "clientRootFolder": "FuEventAPI",
+  "databaseType": "sql",
+  "changelogDate": "20251125112822"
+}

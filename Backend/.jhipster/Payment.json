@@ -1,0 +1,51 @@
+{
+  "name": "Payment",
+  "fields": [
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "paymentMethod",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "PaymentStatus",
+      "fieldValues": "PENDING,COMPLETED,FAILED,CANCELLED,REFUNDED"
+    },
+    {
+      "fieldName": "orderId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "transactionId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paymentTime",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "payment",
+      "relationshipName": "order"
+    }
+  ],
+  "entityTableName": "payment",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "FuEventAPI",
+  "clientRootFolder": "FuEventAPI",
+  "databaseType": "sql",
+  "changelogDate": "20251125112821"
+}

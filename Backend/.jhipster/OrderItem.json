@@ -1,0 +1,46 @@
+{
+  "name": "OrderItem",
+  "fields": [
+    {
+      "fieldName": "orderId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "productId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Long",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "unitPrice",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "orderItem",
+      "relationshipName": "product"
+    }
+  ],
+  "entityTableName": "order_item",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "FuEventAPI",
+  "clientRootFolder": "FuEventAPI",
+  "databaseType": "sql",
+  "changelogDate": "20251125112820"
+}

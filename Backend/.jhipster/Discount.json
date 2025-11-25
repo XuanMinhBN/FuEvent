@@ -1,0 +1,59 @@
+{
+  "name": "Discount",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "percentage",
+      "fieldType": "Float",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMin": "0",
+      "fieldValidateRulesMax": "100"
+    },
+    {
+      "fieldName": "maxUsers",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "validFrom",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "validTo",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eventId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "userLogin",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "discount",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "FuEventAPI",
+  "clientRootFolder": "FuEventAPI",
+  "databaseType": "sql",
+  "changelogDate": "20251125112825"
+}

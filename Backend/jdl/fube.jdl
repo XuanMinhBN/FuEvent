@@ -1,91 +1,131 @@
+enum TransactionType{
+    DEPOSIT, WITHDRAW, PAYMENT, REFUND
+}
+
+enum ProductType{
+    TICKET, MERCHANDISE
+}
+
+enum EventStatus{
+    PENDING, APPROVED, ONGOING, END, CANCELLED
+}
+
+enum OrderStatus{
+    PENDING, PAID, FAILED, CANCELLED, EXPIRED, REFUNDED
+}
+
+enum PaymentStatus{
+    PENDING, COMPLETED, FAILED, CANCELLED, REFUNDED
+}
+
 entity Event{
     title String,
-    description String,
+    description Blob,
     location String,
-    status String,
-    poster_url String,
-    start_time LocalDate,
-    end_time LocalDate,
-    event_id Long,
-    organizer_id Long
+    status EventStatus,
+    posterUrl String,
+    startTime Instant,
+    endTime Instant,
+    organizerLogin String
 }
 
 entity Order{
-    total_amount Double,
-    status String,
-    user_id Long,
+    totalAmount BigDecimal min(0),
+    status OrderStatus,
+    userLogin String,
+    orderedAt Instant
 }
 
 entity OrderItem{
-    order_id Long,
-    product_id Long
+    orderId Long,
+    productId Long,
+    quantity Long min(1),
+    unitPrice BigDecimal min(0)
 }
 
 entity Payment{
-    amount Double,
-    payment_method String,
-    status String,
-    order_id Long,
-    transaction_id Long
+    amount BigDecimal,
+    paymentMethod String,
+    status PaymentStatus,
+    orderId Long,
+    transactionId String,
+    paymentTime Instant
 }
 
 entity Product{
     name String,
-    description String,
-    type String,
-    price String,
-    quantity_total Integer,
-    quantity_sold Integer,
-    image_url String,
-    event_id Long
+    description Blob,
+    type ProductType,
+    price BigDecimal,
+    quantityTotal Integer min(0),
+    quantitySold Integer min(0),
+    imageUrl String,
+    eventId Long
 }
 
 entity Category{
     name String,
-    description String
+    description Blob
 }
 
 entity Review{
     comment String,
-    rating Integer,
-    user_id Long,
-    event_id Long
+    rating Integer min(1) max(5),
+    userLogin String,
+    eventId Long
 }
 
 entity Discount{
     code String,
-    description String,
-    percentage Double,
-    max_users Long,
-    valid_from LocalDate,
-    valid_to LocalDate,
+    description Blob,
+    percentage Float min(0) max(100),
+    maxUsers Long,
+    validFrom Instant,
+    validTo Instant,
     type String,
-    event_id Long,
-    user_id Long
+    eventId Long,
+    userLogin String
 }
 
 entity Notification{
     title String,
     message String,
-    is_read Boolean,
-    user_id Long
+    isRead Boolean,
+    userLogin String
 }
 
 entity Wallet{
-    balance Double,
-    user_id Long
+    balance BigDecimal min(0),
+    userLogin String unique
 }
 
 entity OrderDiscount{
-    order_id Long,
-    discount_id Long,
-    applied_at LocalDate
+    orderId Long,
+    discountId Long,
+    appliedAt Instant
 }
 
 entity TransactionHistory{
-    amount_add Double,
-    amount_subtract Double,
-    description String,
-    wallet_id Long
+    amount BigDecimal required,
+    type TransactionType required,
+    description Blob,
+    transactionDate Instant,
+    walletId Long
 }
 
+relationship OneToMany{
+    Event{products} to Product{event},
+    Event{reviews} to Review{event},
+    Category{events} to Event{category},
+    Order{orderDiscounts} to OrderDiscount{order}
+}
+
+relationship ManyToOne{
+    OrderItem{product} to Product,
+    OrderDiscount{discount(code)} to Discount,
+    Payment{order} to Order
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with pagination

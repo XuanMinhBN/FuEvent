@@ -1,0 +1,35 @@
+{
+  "name": "Notification",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "message",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isRead",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "userLogin",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "notification",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "FuEventAPI",
+  "clientRootFolder": "FuEventAPI",
+  "databaseType": "sql",
+  "changelogDate": "20251125112826"
+}

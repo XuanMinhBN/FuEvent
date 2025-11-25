@@ -1,0 +1,45 @@
+{
+  "name": "Order",
+  "fields": [
+    {
+      "fieldName": "totalAmount",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "OrderStatus",
+      "fieldValues": "PENDING,PAID,FAILED,CANCELLED,EXPIRED,REFUNDED"
+    },
+    {
+      "fieldName": "userLogin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderedAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "orderDiscount",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "orderDiscounts"
+    }
+  ],
+  "entityTableName": "jhi_order",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "FuEventAPI",
+  "clientRootFolder": "FuEventAPI",
+  "databaseType": "sql",
+  "changelogDate": "20251125112819"
+}

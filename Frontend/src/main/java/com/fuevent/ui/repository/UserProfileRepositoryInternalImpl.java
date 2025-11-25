@@ -20,6 +20,7 @@ import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.r2dbc.core.RowsFetchSpec;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import com.fuevent.ui.repository.rowmapper.UserRowMapper;
 
 /**
  * Spring Data SQL reactive custom repository implementation for the UserProfile entity.
@@ -74,7 +75,7 @@ class UserProfileRepositoryInternalImpl implements UserProfileRepositoryInternal
                     .append(crit.toString())
                     .toString()
             )
-            .orElse(select);
+            .orElse(select); // TODO remove once https://github.com/spring-projects/spring-data-jdbc/issues/907 will be fixed
         return db.sql(selectWhere).map(this::process);
     }
 

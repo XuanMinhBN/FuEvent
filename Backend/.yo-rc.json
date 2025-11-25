@@ -38,6 +38,21 @@
     "skipCommitHook": true,
     "jwtSecretKey": "ZGE5NmExZTU5ZjgxOGNlZTNjNDkyYzU0NThlMzQ5MGYwMDA0NzI0YzVjY2YzZWExOTA4NjQxMTBjODM0M2FmOTZkNTcyM2I3NjVjY2EzOWMxODYwMDQ3OTIzNjYwYzdkMDE4ZGZlNDNjOWZiYzM5Yjc4N2UzNGYzZmU3NWZhMTE=",
     "languages": ["vi", "en"],
-    "enableGradleEnterprise": false
+    "enableGradleEnterprise": false,
+    "entities": [
+      "Event",
+      "Order",
+      "OrderItem",
+      "Payment",
+      "Product",
+      "Category",
+      "Review",
+      "Discount",
+      "Notification",
+      "Wallet",
+      "OrderDiscount",
+      "TransactionHistory"
+    ],
+    "lastLiquibaseTimestamp": 1764070109000
   }
 }

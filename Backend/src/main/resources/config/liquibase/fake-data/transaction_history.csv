@@ -1,0 +1,11 @@
+id;amount;type;description;description_content_type;transaction_date;wallet_id
+1;89296;DEPOSIT;../fake-data/blob/hipster.png;image/png;2025-11-25T10:10:07;33125
+2;91237;DEPOSIT;../fake-data/blob/hipster.png;image/png;2025-11-24T23:13:18;34641
+3;77613;DEPOSIT;../fake-data/blob/hipster.png;image/png;2025-11-25T04:55:12;3658
+4;26156;WITHDRAW;../fake-data/blob/hipster.png;image/png;2025-11-24T19:20:46;60139
+5;59300;REFUND;../fake-data/blob/hipster.png;image/png;2025-11-25T07:33:30;97411
+6;64942;REFUND;../fake-data/blob/hipster.png;image/png;2025-11-25T01:35:17;32480
+7;75507;WITHDRAW;../fake-data/blob/hipster.png;image/png;2025-11-24T23:17:07;34693
+8;17406;REFUND;../fake-data/blob/hipster.png;image/png;2025-11-24T18:49:32;60500
+9;87634;PAYMENT;../fake-data/blob/hipster.png;image/png;2025-11-25T00:24:30;32660
+10;23695;REFUND;../fake-data/blob/hipster.png;image/png;2025-11-25T08:48:35;11936

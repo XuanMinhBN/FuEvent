@@ -1,0 +1,45 @@
+{
+  "name": "OrderDiscount",
+  "fields": [
+    {
+      "fieldName": "orderId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "discountId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "appliedAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "discount",
+      "otherEntityRelationshipName": "orderDiscount",
+      "relationshipName": "discount",
+      "otherEntityField": "code"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "orderDiscounts",
+      "relationshipName": "order"
+    }
+  ],
+  "entityTableName": "order_discount",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "FuEventAPI",
+  "clientRootFolder": "FuEventAPI",
+  "databaseType": "sql",
+  "changelogDate": "20251125112828"
+}
