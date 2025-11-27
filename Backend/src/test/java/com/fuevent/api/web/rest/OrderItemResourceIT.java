@@ -33,12 +33,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class OrderItemResourceIT {
 
-    private static final Long DEFAULT_ORDER_ID = 1L;
-    private static final Long UPDATED_ORDER_ID = 2L;
-
-    private static final Long DEFAULT_PRODUCT_ID = 1L;
-    private static final Long UPDATED_PRODUCT_ID = 2L;
-
     private static final Long DEFAULT_QUANTITY = 1L;
     private static final Long UPDATED_QUANTITY = 2L;
 
@@ -72,11 +66,7 @@ class OrderItemResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static OrderItem createEntity(EntityManager em) {
-        OrderItem orderItem = new OrderItem()
-            .orderId(DEFAULT_ORDER_ID)
-            .productId(DEFAULT_PRODUCT_ID)
-            .quantity(DEFAULT_QUANTITY)
-            .unitPrice(DEFAULT_UNIT_PRICE);
+        OrderItem orderItem = new OrderItem().quantity(DEFAULT_QUANTITY).unitPrice(DEFAULT_UNIT_PRICE);
         return orderItem;
     }
 
@@ -87,11 +77,7 @@ class OrderItemResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static OrderItem createUpdatedEntity(EntityManager em) {
-        OrderItem orderItem = new OrderItem()
-            .orderId(UPDATED_ORDER_ID)
-            .productId(UPDATED_PRODUCT_ID)
-            .quantity(UPDATED_QUANTITY)
-            .unitPrice(UPDATED_UNIT_PRICE);
+        OrderItem orderItem = new OrderItem().quantity(UPDATED_QUANTITY).unitPrice(UPDATED_UNIT_PRICE);
         return orderItem;
     }
 
@@ -114,8 +100,6 @@ class OrderItemResourceIT {
         List<OrderItem> orderItemList = orderItemRepository.findAll();
         assertThat(orderItemList).hasSize(databaseSizeBeforeCreate + 1);
         OrderItem testOrderItem = orderItemList.get(orderItemList.size() - 1);
-        assertThat(testOrderItem.getOrderId()).isEqualTo(DEFAULT_ORDER_ID);
-        assertThat(testOrderItem.getProductId()).isEqualTo(DEFAULT_PRODUCT_ID);
         assertThat(testOrderItem.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
         assertThat(testOrderItem.getUnitPrice()).isEqualByComparingTo(DEFAULT_UNIT_PRICE);
     }
@@ -151,8 +135,6 @@ class OrderItemResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(orderItem.getId().intValue())))
-            .andExpect(jsonPath("$.[*].orderId").value(hasItem(DEFAULT_ORDER_ID.intValue())))
-            .andExpect(jsonPath("$.[*].productId").value(hasItem(DEFAULT_PRODUCT_ID.intValue())))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY.intValue())))
             .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(sameNumber(DEFAULT_UNIT_PRICE))));
     }
@@ -169,8 +151,6 @@ class OrderItemResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(orderItem.getId().intValue()))
-            .andExpect(jsonPath("$.orderId").value(DEFAULT_ORDER_ID.intValue()))
-            .andExpect(jsonPath("$.productId").value(DEFAULT_PRODUCT_ID.intValue()))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY.intValue()))
             .andExpect(jsonPath("$.unitPrice").value(sameNumber(DEFAULT_UNIT_PRICE)));
     }
@@ -194,7 +174,7 @@ class OrderItemResourceIT {
         OrderItem updatedOrderItem = orderItemRepository.findById(orderItem.getId()).get();
         // Disconnect from session so that the updates on updatedOrderItem are not directly saved in db
         em.detach(updatedOrderItem);
-        updatedOrderItem.orderId(UPDATED_ORDER_ID).productId(UPDATED_PRODUCT_ID).quantity(UPDATED_QUANTITY).unitPrice(UPDATED_UNIT_PRICE);
+        updatedOrderItem.quantity(UPDATED_QUANTITY).unitPrice(UPDATED_UNIT_PRICE);
         OrderItemDTO orderItemDTO = orderItemMapper.toDto(updatedOrderItem);
 
         restOrderItemMockMvc
@@ -209,8 +189,6 @@ class OrderItemResourceIT {
         List<OrderItem> orderItemList = orderItemRepository.findAll();
         assertThat(orderItemList).hasSize(databaseSizeBeforeUpdate);
         OrderItem testOrderItem = orderItemList.get(orderItemList.size() - 1);
-        assertThat(testOrderItem.getOrderId()).isEqualTo(UPDATED_ORDER_ID);
-        assertThat(testOrderItem.getProductId()).isEqualTo(UPDATED_PRODUCT_ID);
         assertThat(testOrderItem.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testOrderItem.getUnitPrice()).isEqualTo(UPDATED_UNIT_PRICE);
     }
@@ -292,7 +270,7 @@ class OrderItemResourceIT {
         OrderItem partialUpdatedOrderItem = new OrderItem();
         partialUpdatedOrderItem.setId(orderItem.getId());
 
-        partialUpdatedOrderItem.orderId(UPDATED_ORDER_ID).quantity(UPDATED_QUANTITY).unitPrice(UPDATED_UNIT_PRICE);
+        partialUpdatedOrderItem.quantity(UPDATED_QUANTITY);
 
         restOrderItemMockMvc
             .perform(
@@ -306,10 +284,8 @@ class OrderItemResourceIT {
         List<OrderItem> orderItemList = orderItemRepository.findAll();
         assertThat(orderItemList).hasSize(databaseSizeBeforeUpdate);
         OrderItem testOrderItem = orderItemList.get(orderItemList.size() - 1);
-        assertThat(testOrderItem.getOrderId()).isEqualTo(UPDATED_ORDER_ID);
-        assertThat(testOrderItem.getProductId()).isEqualTo(DEFAULT_PRODUCT_ID);
         assertThat(testOrderItem.getQuantity()).isEqualTo(UPDATED_QUANTITY);
-        assertThat(testOrderItem.getUnitPrice()).isEqualByComparingTo(UPDATED_UNIT_PRICE);
+        assertThat(testOrderItem.getUnitPrice()).isEqualByComparingTo(DEFAULT_UNIT_PRICE);
     }
 
     @Test
@@ -324,11 +300,7 @@ class OrderItemResourceIT {
         OrderItem partialUpdatedOrderItem = new OrderItem();
         partialUpdatedOrderItem.setId(orderItem.getId());
 
-        partialUpdatedOrderItem
-            .orderId(UPDATED_ORDER_ID)
-            .productId(UPDATED_PRODUCT_ID)
-            .quantity(UPDATED_QUANTITY)
-            .unitPrice(UPDATED_UNIT_PRICE);
+        partialUpdatedOrderItem.quantity(UPDATED_QUANTITY).unitPrice(UPDATED_UNIT_PRICE);
 
         restOrderItemMockMvc
             .perform(
@@ -342,8 +314,6 @@ class OrderItemResourceIT {
         List<OrderItem> orderItemList = orderItemRepository.findAll();
         assertThat(orderItemList).hasSize(databaseSizeBeforeUpdate);
         OrderItem testOrderItem = orderItemList.get(orderItemList.size() - 1);
-        assertThat(testOrderItem.getOrderId()).isEqualTo(UPDATED_ORDER_ID);
-        assertThat(testOrderItem.getProductId()).isEqualTo(UPDATED_PRODUCT_ID);
         assertThat(testOrderItem.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testOrderItem.getUnitPrice()).isEqualByComparingTo(UPDATED_UNIT_PRICE);
     }

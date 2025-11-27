@@ -37,8 +37,6 @@ entity Order{
 }
 
 entity OrderItem{
-    orderId Long,
-    productId Long,
     quantity Long min(1),
     unitPrice BigDecimal min(0)
 }
@@ -47,7 +45,6 @@ entity Payment{
     amount BigDecimal,
     paymentMethod String,
     status PaymentStatus,
-    orderId Long,
     transactionId String,
     paymentTime Instant
 }
@@ -60,7 +57,6 @@ entity Product{
     quantityTotal Integer min(0),
     quantitySold Integer min(0),
     imageUrl String,
-    eventId Long
 }
 
 entity Category{
@@ -71,8 +67,7 @@ entity Category{
 entity Review{
     comment String,
     rating Integer min(1) max(5),
-    userLogin String,
-    eventId Long
+    userLogin String
 }
 
 entity Discount{
@@ -83,7 +78,6 @@ entity Discount{
     validFrom Instant,
     validTo Instant,
     type String,
-    eventId Long,
     userLogin String
 }
 
@@ -100,8 +94,6 @@ entity Wallet{
 }
 
 entity OrderDiscount{
-    orderId Long,
-    discountId Long,
     appliedAt Instant
 }
 
@@ -116,8 +108,10 @@ entity TransactionHistory{
 relationship OneToMany{
     Event{products} to Product{event},
     Event{reviews} to Review{event},
+    Event{discounts} to Discount{event},
     Category{events} to Event{category},
-    Order{orderDiscounts} to OrderDiscount{order}
+    Order{orderDiscounts} to OrderDiscount{order},
+    Order{orderItems} to OrderItem{order}
 }
 
 relationship ManyToOne{

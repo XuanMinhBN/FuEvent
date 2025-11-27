@@ -1,11 +1,11 @@
-id;name;description;description_content_type;type;price;quantity_total;quantity_sold;image_url;event_id
-1;Steel;../fake-data/blob/hipster.png;image/png;TICKET;98311;82284;74211;cross-platform Principal;35091
-2;wireless Handmade;../fake-data/blob/hipster.png;image/png;MERCHANDISE;92572;63950;22076;Track actuating deposit;44573
-3;Steel;../fake-data/blob/hipster.png;image/png;MERCHANDISE;63081;44325;83023;Metical Incredible;54662
-4;Internal intermediate;../fake-data/blob/hipster.png;image/png;TICKET;49167;20811;4189;Malagasy intranet;16516
-5;Australian;../fake-data/blob/hipster.png;image/png;TICKET;23281;6446;78661;Rubber;95238
-6;orange Practical;../fake-data/blob/hipster.png;image/png;MERCHANDISE;95487;35518;58781;indigo JSON Mexico;20809
-7;Awesome;../fake-data/blob/hipster.png;image/png;MERCHANDISE;27331;47574;66238;Rubber Chips;22423
-8;Shoes;../fake-data/blob/hipster.png;image/png;TICKET;5902;8723;20319;SMS;4722
-9;Account;../fake-data/blob/hipster.png;image/png;MERCHANDISE;16934;78950;33734;multi-byte Underpass project;82676
-10;Fantastic;../fake-data/blob/hipster.png;image/png;TICKET;50702;80217;94611;metrics;95618
+id;name;description;description_content_type;type;price;quantity_total;quantity_sold;image_url
+1;Steel;../fake-data/blob/hipster.png;image/png;TICKET;98311;82284;74211;cross-platform Principal
+2;wireless Computer;../fake-data/blob/hipster.png;image/png;MERCHANDISE;76808;92572;63950;Pound
+3;actuating deposit;../fake-data/blob/hipster.png;image/png;TICKET;6255;13165;4972;Kina navigating
+4;partnerships Infrastructure;../fake-data/blob/hipster.png;image/png;MERCHANDISE;85179;82822;27988;withdrawal green
+5;Bedfordshire Liban neutral;../fake-data/blob/hipster.png;image/png;TICKET;16473;23281;6446;Computer CFP orange
+6;Village;../fake-data/blob/hipster.png;image/png;MERCHANDISE;35518;58781;89275;auxiliary
+7;COM Implementation Awesome;../fake-data/blob/hipster.png;image/png;MERCHANDISE;27331;47574;66238;Rubber Chips
+8;Keyboard;../fake-data/blob/hipster.png;image/png;MERCHANDISE;46377;5902;8723;tangible
+9;Cheese Renminbi;../fake-data/blob/hipster.png;image/png;TICKET;99001;78011;57905;Underpass project hacking
+10;Arizona mobile;../fake-data/blob/hipster.png;image/png;TICKET;86012;25082;95618;Data

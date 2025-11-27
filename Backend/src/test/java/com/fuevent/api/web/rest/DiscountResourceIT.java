@@ -57,9 +57,6 @@ class DiscountResourceIT {
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_EVENT_ID = 1L;
-    private static final Long UPDATED_EVENT_ID = 2L;
-
     private static final String DEFAULT_USER_LOGIN = "AAAAAAAAAA";
     private static final String UPDATED_USER_LOGIN = "BBBBBBBBBB";
 
@@ -99,7 +96,6 @@ class DiscountResourceIT {
             .validFrom(DEFAULT_VALID_FROM)
             .validTo(DEFAULT_VALID_TO)
             .type(DEFAULT_TYPE)
-            .eventId(DEFAULT_EVENT_ID)
             .userLogin(DEFAULT_USER_LOGIN);
         return discount;
     }
@@ -120,7 +116,6 @@ class DiscountResourceIT {
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO)
             .type(UPDATED_TYPE)
-            .eventId(UPDATED_EVENT_ID)
             .userLogin(UPDATED_USER_LOGIN);
         return discount;
     }
@@ -152,7 +147,6 @@ class DiscountResourceIT {
         assertThat(testDiscount.getValidFrom()).isEqualTo(DEFAULT_VALID_FROM);
         assertThat(testDiscount.getValidTo()).isEqualTo(DEFAULT_VALID_TO);
         assertThat(testDiscount.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testDiscount.getEventId()).isEqualTo(DEFAULT_EVENT_ID);
         assertThat(testDiscount.getUserLogin()).isEqualTo(DEFAULT_USER_LOGIN);
     }
 
@@ -195,7 +189,6 @@ class DiscountResourceIT {
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].eventId").value(hasItem(DEFAULT_EVENT_ID.intValue())))
             .andExpect(jsonPath("$.[*].userLogin").value(hasItem(DEFAULT_USER_LOGIN)));
     }
 
@@ -219,7 +212,6 @@ class DiscountResourceIT {
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
-            .andExpect(jsonPath("$.eventId").value(DEFAULT_EVENT_ID.intValue()))
             .andExpect(jsonPath("$.userLogin").value(DEFAULT_USER_LOGIN));
     }
 
@@ -251,7 +243,6 @@ class DiscountResourceIT {
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO)
             .type(UPDATED_TYPE)
-            .eventId(UPDATED_EVENT_ID)
             .userLogin(UPDATED_USER_LOGIN);
         DiscountDTO discountDTO = discountMapper.toDto(updatedDiscount);
 
@@ -275,7 +266,6 @@ class DiscountResourceIT {
         assertThat(testDiscount.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);
         assertThat(testDiscount.getValidTo()).isEqualTo(UPDATED_VALID_TO);
         assertThat(testDiscount.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testDiscount.getEventId()).isEqualTo(UPDATED_EVENT_ID);
         assertThat(testDiscount.getUserLogin()).isEqualTo(UPDATED_USER_LOGIN);
     }
 
@@ -356,12 +346,7 @@ class DiscountResourceIT {
         Discount partialUpdatedDiscount = new Discount();
         partialUpdatedDiscount.setId(discount.getId());
 
-        partialUpdatedDiscount
-            .code(UPDATED_CODE)
-            .validFrom(UPDATED_VALID_FROM)
-            .type(UPDATED_TYPE)
-            .eventId(UPDATED_EVENT_ID)
-            .userLogin(UPDATED_USER_LOGIN);
+        partialUpdatedDiscount.code(UPDATED_CODE).validFrom(UPDATED_VALID_FROM).type(UPDATED_TYPE).userLogin(UPDATED_USER_LOGIN);
 
         restDiscountMockMvc
             .perform(
@@ -383,7 +368,6 @@ class DiscountResourceIT {
         assertThat(testDiscount.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);
         assertThat(testDiscount.getValidTo()).isEqualTo(DEFAULT_VALID_TO);
         assertThat(testDiscount.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testDiscount.getEventId()).isEqualTo(UPDATED_EVENT_ID);
         assertThat(testDiscount.getUserLogin()).isEqualTo(UPDATED_USER_LOGIN);
     }
 
@@ -408,7 +392,6 @@ class DiscountResourceIT {
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO)
             .type(UPDATED_TYPE)
-            .eventId(UPDATED_EVENT_ID)
             .userLogin(UPDATED_USER_LOGIN);
 
         restDiscountMockMvc
@@ -431,7 +414,6 @@ class DiscountResourceIT {
         assertThat(testDiscount.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);
         assertThat(testDiscount.getValidTo()).isEqualTo(UPDATED_VALID_TO);
         assertThat(testDiscount.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testDiscount.getEventId()).isEqualTo(UPDATED_EVENT_ID);
         assertThat(testDiscount.getUserLogin()).isEqualTo(UPDATED_USER_LOGIN);
     }
 

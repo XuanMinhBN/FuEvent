@@ -34,10 +34,6 @@
     {
       "fieldName": "imageUrl",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "eventId",
-      "fieldType": "Long"
     }
   ],
   "relationships": [

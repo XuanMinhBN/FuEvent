@@ -59,6 +59,10 @@ public class Event implements Serializable {
     @JsonIgnoreProperties(value = { "event" }, allowSetters = true)
     private Set<Review> reviews = new HashSet<>();
 
+    @OneToMany(mappedBy = "event")
+    @JsonIgnoreProperties(value = { "event" }, allowSetters = true)
+    private Set<Discount> discounts = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "events" }, allowSetters = true)
     private Category category;
@@ -254,6 +258,37 @@ public class Event implements Serializable {
     public Event removeReviews(Review review) {
         this.reviews.remove(review);
         review.setEvent(null);
+        return this;
+    }
+
+    public Set<Discount> getDiscounts() {
+        return this.discounts;
+    }
+
+    public void setDiscounts(Set<Discount> discounts) {
+        if (this.discounts != null) {
+            this.discounts.forEach(i -> i.setEvent(null));
+        }
+        if (discounts != null) {
+            discounts.forEach(i -> i.setEvent(this));
+        }
+        this.discounts = discounts;
+    }
+
+    public Event discounts(Set<Discount> discounts) {
+        this.setDiscounts(discounts);
+        return this;
+    }
+
+    public Event addDiscounts(Discount discount) {
+        this.discounts.add(discount);
+        discount.setEvent(this);
+        return this;
+    }
+
+    public Event removeDiscounts(Discount discount) {
+        this.discounts.remove(discount);
+        discount.setEvent(null);
         return this;
     }
 

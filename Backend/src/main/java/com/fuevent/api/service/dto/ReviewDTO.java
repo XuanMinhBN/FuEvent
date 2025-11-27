@@ -19,8 +19,6 @@ public class ReviewDTO implements Serializable {
 
     private String userLogin;
 
-    private Long eventId;
-
     private EventDTO event;
 
     public Long getId() {
@@ -53,14 +51,6 @@ public class ReviewDTO implements Serializable {
 
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
-    }
-
-    public Long getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
     }
 
     public EventDTO getEvent() {
@@ -100,7 +90,6 @@ public class ReviewDTO implements Serializable {
             ", comment='" + getComment() + "'" +
             ", rating=" + getRating() +
             ", userLogin='" + getUserLogin() + "'" +
-            ", eventId=" + getEventId() +
             ", event=" + getEvent() +
             "}";
     }

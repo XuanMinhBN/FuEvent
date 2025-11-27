@@ -12,10 +12,6 @@ public class OrderItemDTO implements Serializable {
 
     private Long id;
 
-    private Long orderId;
-
-    private Long productId;
-
     @Min(value = 1L)
     private Long quantity;
 
@@ -24,28 +20,14 @@ public class OrderItemDTO implements Serializable {
 
     private ProductDTO product;
 
+    private OrderDTO order;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
     }
 
     public Long getQuantity() {
@@ -70,6 +52,14 @@ public class OrderItemDTO implements Serializable {
 
     public void setProduct(ProductDTO product) {
         this.product = product;
+    }
+
+    public OrderDTO getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderDTO order) {
+        this.order = order;
     }
 
     @Override
@@ -98,11 +88,10 @@ public class OrderItemDTO implements Serializable {
     public String toString() {
         return "OrderItemDTO{" +
             "id=" + getId() +
-            ", orderId=" + getOrderId() +
-            ", productId=" + getProductId() +
             ", quantity=" + getQuantity() +
             ", unitPrice=" + getUnitPrice() +
             ", product=" + getProduct() +
+            ", order=" + getOrder() +
             "}";
     }
 }

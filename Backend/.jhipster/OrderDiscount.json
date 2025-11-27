@@ -2,14 +2,6 @@
   "name": "OrderDiscount",
   "fields": [
     {
-      "fieldName": "orderId",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "discountId",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "appliedAt",
       "fieldType": "Instant"
     }

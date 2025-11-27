@@ -31,9 +31,6 @@ public class Payment implements Serializable {
     @Column(name = "status")
     private PaymentStatus status;
 
-    @Column(name = "order_id")
-    private Long orderId;
-
     @Column(name = "transaction_id")
     private String transactionId;
 
@@ -41,7 +38,7 @@ public class Payment implements Serializable {
     private Instant paymentTime;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "orderDiscounts" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "orderDiscounts", "orderItems" }, allowSetters = true)
     private Order order;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -96,19 +93,6 @@ public class Payment implements Serializable {
 
     public void setStatus(PaymentStatus status) {
         this.status = status;
-    }
-
-    public Long getOrderId() {
-        return this.orderId;
-    }
-
-    public Payment orderId(Long orderId) {
-        this.setOrderId(orderId);
-        return this;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
     }
 
     public String getTransactionId() {
@@ -177,7 +161,6 @@ public class Payment implements Serializable {
             ", amount=" + getAmount() +
             ", paymentMethod='" + getPaymentMethod() + "'" +
             ", status='" + getStatus() + "'" +
-            ", orderId=" + getOrderId() +
             ", transactionId='" + getTransactionId() + "'" +
             ", paymentTime='" + getPaymentTime() + "'" +
             "}";

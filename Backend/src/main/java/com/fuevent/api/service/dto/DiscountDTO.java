@@ -32,9 +32,9 @@ public class DiscountDTO implements Serializable {
 
     private String type;
 
-    private Long eventId;
-
     private String userLogin;
+
+    private EventDTO event;
 
     public Long getId() {
         return id;
@@ -108,20 +108,20 @@ public class DiscountDTO implements Serializable {
         this.type = type;
     }
 
-    public Long getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
-    }
-
     public String getUserLogin() {
         return userLogin;
     }
 
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
+    }
+
+    public EventDTO getEvent() {
+        return event;
+    }
+
+    public void setEvent(EventDTO event) {
+        this.event = event;
     }
 
     @Override
@@ -157,8 +157,8 @@ public class DiscountDTO implements Serializable {
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             ", type='" + getType() + "'" +
-            ", eventId=" + getEventId() +
             ", userLogin='" + getUserLogin() + "'" +
+            ", event=" + getEvent() +
             "}";
     }
 }

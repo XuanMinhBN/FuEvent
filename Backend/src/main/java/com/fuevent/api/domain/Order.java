@@ -42,6 +42,10 @@ public class Order implements Serializable {
     @JsonIgnoreProperties(value = { "discount", "order" }, allowSetters = true)
     private Set<OrderDiscount> orderDiscounts = new HashSet<>();
 
+    @OneToMany(mappedBy = "order")
+    @JsonIgnoreProperties(value = { "product", "order" }, allowSetters = true)
+    private Set<OrderItem> orderItems = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -137,6 +141,37 @@ public class Order implements Serializable {
     public Order removeOrderDiscounts(OrderDiscount orderDiscount) {
         this.orderDiscounts.remove(orderDiscount);
         orderDiscount.setOrder(null);
+        return this;
+    }
+
+    public Set<OrderItem> getOrderItems() {
+        return this.orderItems;
+    }
+
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        if (this.orderItems != null) {
+            this.orderItems.forEach(i -> i.setOrder(null));
+        }
+        if (orderItems != null) {
+            orderItems.forEach(i -> i.setOrder(this));
+        }
+        this.orderItems = orderItems;
+    }
+
+    public Order orderItems(Set<OrderItem> orderItems) {
+        this.setOrderItems(orderItems);
+        return this;
+    }
+
+    public Order addOrderItems(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+        orderItem.setOrder(this);
+        return this;
+    }
+
+    public Order removeOrderItems(OrderItem orderItem) {
+        this.orderItems.remove(orderItem);
+        orderItem.setOrder(null);
         return this;
     }
 

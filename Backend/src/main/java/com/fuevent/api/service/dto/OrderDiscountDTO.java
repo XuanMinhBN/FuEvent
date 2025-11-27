@@ -11,10 +11,6 @@ public class OrderDiscountDTO implements Serializable {
 
     private Long id;
 
-    private Long orderId;
-
-    private Long discountId;
-
     private Instant appliedAt;
 
     private DiscountDTO discount;
@@ -27,22 +23,6 @@ public class OrderDiscountDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getDiscountId() {
-        return discountId;
-    }
-
-    public void setDiscountId(Long discountId) {
-        this.discountId = discountId;
     }
 
     public Instant getAppliedAt() {
@@ -95,8 +75,6 @@ public class OrderDiscountDTO implements Serializable {
     public String toString() {
         return "OrderDiscountDTO{" +
             "id=" + getId() +
-            ", orderId=" + getOrderId() +
-            ", discountId=" + getDiscountId() +
             ", appliedAt='" + getAppliedAt() + "'" +
             ", discount=" + getDiscount() +
             ", order=" + getOrder() +

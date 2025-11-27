@@ -27,6 +27,12 @@
       "otherEntityName": "orderDiscount",
       "otherEntityRelationshipName": "order",
       "relationshipName": "orderDiscounts"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "orderItem",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "orderItems"
     }
   ],
   "entityTableName": "jhi_order",

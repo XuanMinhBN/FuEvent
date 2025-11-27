@@ -2,14 +2,6 @@
   "name": "OrderItem",
   "fields": [
     {
-      "fieldName": "orderId",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "productId",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "quantity",
       "fieldType": "Long",
       "fieldValidateRules": ["min"],
@@ -28,6 +20,12 @@
       "otherEntityName": "product",
       "otherEntityRelationshipName": "orderItem",
       "relationshipName": "product"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "orderItems",
+      "relationshipName": "order"
     }
   ],
   "entityTableName": "order_item",

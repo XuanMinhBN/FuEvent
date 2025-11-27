@@ -7,8 +7,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Discount} and its DTO {@link DiscountDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = { EventMapper.class })
 public interface DiscountMapper extends EntityMapper<DiscountDTO, Discount> {
+    @Mapping(target = "event", source = "event", qualifiedByName = "id")
+    DiscountDTO toDto(Discount s);
+
     @Named("code")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")

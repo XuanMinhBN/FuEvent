@@ -30,11 +30,8 @@ public class Review implements Serializable {
     @Column(name = "user_login")
     private String userLogin;
 
-    @Column(name = "event_id")
-    private Long eventId;
-
     @ManyToOne
-    @JsonIgnoreProperties(value = { "products", "reviews", "category" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "products", "reviews", "discounts", "category" }, allowSetters = true)
     private Event event;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -91,19 +88,6 @@ public class Review implements Serializable {
         this.userLogin = userLogin;
     }
 
-    public Long getEventId() {
-        return this.eventId;
-    }
-
-    public Review eventId(Long eventId) {
-        this.setEventId(eventId);
-        return this;
-    }
-
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
-    }
-
     public Event getEvent() {
         return this.event;
     }
@@ -144,7 +128,6 @@ public class Review implements Serializable {
             ", comment='" + getComment() + "'" +
             ", rating=" + getRating() +
             ", userLogin='" + getUserLogin() + "'" +
-            ", eventId=" + getEventId() +
             "}";
     }
 }

@@ -1,5 +1,6 @@
 package com.fuevent.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
@@ -46,11 +47,12 @@ public class Discount implements Serializable {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "event_id")
-    private Long eventId;
-
     @Column(name = "user_login")
     private String userLogin;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "products", "reviews", "discounts", "category" }, allowSetters = true)
+    private Event event;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -171,19 +173,6 @@ public class Discount implements Serializable {
         this.type = type;
     }
 
-    public Long getEventId() {
-        return this.eventId;
-    }
-
-    public Discount eventId(Long eventId) {
-        this.setEventId(eventId);
-        return this;
-    }
-
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
-    }
-
     public String getUserLogin() {
         return this.userLogin;
     }
@@ -195,6 +184,19 @@ public class Discount implements Serializable {
 
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
+    }
+
+    public Event getEvent() {
+        return this.event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Discount event(Event event) {
+        this.setEvent(event);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -229,7 +231,6 @@ public class Discount implements Serializable {
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             ", type='" + getType() + "'" +
-            ", eventId=" + getEventId() +
             ", userLogin='" + getUserLogin() + "'" +
             "}";
     }

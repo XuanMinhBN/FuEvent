@@ -50,6 +50,12 @@
       "relationshipName": "reviews"
     },
     {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "discount",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "discounts"
+    },
+    {
       "relationshipType": "many-to-one",
       "otherEntityName": "category",
       "otherEntityRelationshipName": "events",

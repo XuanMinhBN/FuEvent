@@ -34,15 +34,18 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "eventId",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "userLogin",
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "discounts",
+      "relationshipName": "event"
+    }
+  ],
   "entityTableName": "discount",
   "dto": "mapstruct",
   "pagination": "pagination",

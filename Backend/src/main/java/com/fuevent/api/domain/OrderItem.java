@@ -20,12 +20,6 @@ public class OrderItem implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "order_id")
-    private Long orderId;
-
-    @Column(name = "product_id")
-    private Long productId;
-
     @Min(value = 1L)
     @Column(name = "quantity")
     private Long quantity;
@@ -37,6 +31,10 @@ public class OrderItem implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "event" }, allowSetters = true)
     private Product product;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "orderDiscounts", "orderItems" }, allowSetters = true)
+    private Order order;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -51,32 +49,6 @@ public class OrderItem implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getOrderId() {
-        return this.orderId;
-    }
-
-    public OrderItem orderId(Long orderId) {
-        this.setOrderId(orderId);
-        return this;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getProductId() {
-        return this.productId;
-    }
-
-    public OrderItem productId(Long productId) {
-        this.setProductId(productId);
-        return this;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
     }
 
     public Long getQuantity() {
@@ -118,6 +90,19 @@ public class OrderItem implements Serializable {
         return this;
     }
 
+    public Order getOrder() {
+        return this.order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public OrderItem order(Order order) {
+        this.setOrder(order);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -142,8 +127,6 @@ public class OrderItem implements Serializable {
     public String toString() {
         return "OrderItem{" +
             "id=" + getId() +
-            ", orderId=" + getOrderId() +
-            ", productId=" + getProductId() +
             ", quantity=" + getQuantity() +
             ", unitPrice=" + getUnitPrice() +
             "}";

@@ -19,8 +19,6 @@ public class PaymentDTO implements Serializable {
 
     private PaymentStatus status;
 
-    private Long orderId;
-
     private String transactionId;
 
     private Instant paymentTime;
@@ -57,14 +55,6 @@ public class PaymentDTO implements Serializable {
 
     public void setStatus(PaymentStatus status) {
         this.status = status;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
     }
 
     public String getTransactionId() {
@@ -120,7 +110,6 @@ public class PaymentDTO implements Serializable {
             ", amount=" + getAmount() +
             ", paymentMethod='" + getPaymentMethod() + "'" +
             ", status='" + getStatus() + "'" +
-            ", orderId=" + getOrderId() +
             ", transactionId='" + getTransactionId() + "'" +
             ", paymentTime='" + getPaymentTime() + "'" +
             ", order=" + getOrder() +

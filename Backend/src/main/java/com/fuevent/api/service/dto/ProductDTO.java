@@ -32,8 +32,6 @@ public class ProductDTO implements Serializable {
 
     private String imageUrl;
 
-    private Long eventId;
-
     private EventDTO event;
 
     public Long getId() {
@@ -108,14 +106,6 @@ public class ProductDTO implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public Long getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
-    }
-
     public EventDTO getEvent() {
         return event;
     }
@@ -157,7 +147,6 @@ public class ProductDTO implements Serializable {
             ", quantityTotal=" + getQuantityTotal() +
             ", quantitySold=" + getQuantitySold() +
             ", imageUrl='" + getImageUrl() + "'" +
-            ", eventId=" + getEventId() +
             ", event=" + getEvent() +
             "}";
     }

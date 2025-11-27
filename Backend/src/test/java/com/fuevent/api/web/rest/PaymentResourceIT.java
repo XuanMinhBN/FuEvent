@@ -45,9 +45,6 @@ class PaymentResourceIT {
     private static final PaymentStatus DEFAULT_STATUS = PaymentStatus.PENDING;
     private static final PaymentStatus UPDATED_STATUS = PaymentStatus.COMPLETED;
 
-    private static final Long DEFAULT_ORDER_ID = 1L;
-    private static final Long UPDATED_ORDER_ID = 2L;
-
     private static final String DEFAULT_TRANSACTION_ID = "AAAAAAAAAA";
     private static final String UPDATED_TRANSACTION_ID = "BBBBBBBBBB";
 
@@ -85,7 +82,6 @@ class PaymentResourceIT {
             .amount(DEFAULT_AMOUNT)
             .paymentMethod(DEFAULT_PAYMENT_METHOD)
             .status(DEFAULT_STATUS)
-            .orderId(DEFAULT_ORDER_ID)
             .transactionId(DEFAULT_TRANSACTION_ID)
             .paymentTime(DEFAULT_PAYMENT_TIME);
         return payment;
@@ -102,7 +98,6 @@ class PaymentResourceIT {
             .amount(UPDATED_AMOUNT)
             .paymentMethod(UPDATED_PAYMENT_METHOD)
             .status(UPDATED_STATUS)
-            .orderId(UPDATED_ORDER_ID)
             .transactionId(UPDATED_TRANSACTION_ID)
             .paymentTime(UPDATED_PAYMENT_TIME);
         return payment;
@@ -130,7 +125,6 @@ class PaymentResourceIT {
         assertThat(testPayment.getAmount()).isEqualByComparingTo(DEFAULT_AMOUNT);
         assertThat(testPayment.getPaymentMethod()).isEqualTo(DEFAULT_PAYMENT_METHOD);
         assertThat(testPayment.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testPayment.getOrderId()).isEqualTo(DEFAULT_ORDER_ID);
         assertThat(testPayment.getTransactionId()).isEqualTo(DEFAULT_TRANSACTION_ID);
         assertThat(testPayment.getPaymentTime()).isEqualTo(DEFAULT_PAYMENT_TIME);
     }
@@ -169,7 +163,6 @@ class PaymentResourceIT {
             .andExpect(jsonPath("$.[*].amount").value(hasItem(sameNumber(DEFAULT_AMOUNT))))
             .andExpect(jsonPath("$.[*].paymentMethod").value(hasItem(DEFAULT_PAYMENT_METHOD)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].orderId").value(hasItem(DEFAULT_ORDER_ID.intValue())))
             .andExpect(jsonPath("$.[*].transactionId").value(hasItem(DEFAULT_TRANSACTION_ID)))
             .andExpect(jsonPath("$.[*].paymentTime").value(hasItem(DEFAULT_PAYMENT_TIME.toString())));
     }
@@ -189,7 +182,6 @@ class PaymentResourceIT {
             .andExpect(jsonPath("$.amount").value(sameNumber(DEFAULT_AMOUNT)))
             .andExpect(jsonPath("$.paymentMethod").value(DEFAULT_PAYMENT_METHOD))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.orderId").value(DEFAULT_ORDER_ID.intValue()))
             .andExpect(jsonPath("$.transactionId").value(DEFAULT_TRANSACTION_ID))
             .andExpect(jsonPath("$.paymentTime").value(DEFAULT_PAYMENT_TIME.toString()));
     }
@@ -217,7 +209,6 @@ class PaymentResourceIT {
             .amount(UPDATED_AMOUNT)
             .paymentMethod(UPDATED_PAYMENT_METHOD)
             .status(UPDATED_STATUS)
-            .orderId(UPDATED_ORDER_ID)
             .transactionId(UPDATED_TRANSACTION_ID)
             .paymentTime(UPDATED_PAYMENT_TIME);
         PaymentDTO paymentDTO = paymentMapper.toDto(updatedPayment);
@@ -237,7 +228,6 @@ class PaymentResourceIT {
         assertThat(testPayment.getAmount()).isEqualTo(UPDATED_AMOUNT);
         assertThat(testPayment.getPaymentMethod()).isEqualTo(UPDATED_PAYMENT_METHOD);
         assertThat(testPayment.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testPayment.getOrderId()).isEqualTo(UPDATED_ORDER_ID);
         assertThat(testPayment.getTransactionId()).isEqualTo(UPDATED_TRANSACTION_ID);
         assertThat(testPayment.getPaymentTime()).isEqualTo(UPDATED_PAYMENT_TIME);
     }
@@ -319,7 +309,7 @@ class PaymentResourceIT {
         Payment partialUpdatedPayment = new Payment();
         partialUpdatedPayment.setId(payment.getId());
 
-        partialUpdatedPayment.paymentMethod(UPDATED_PAYMENT_METHOD).transactionId(UPDATED_TRANSACTION_ID);
+        partialUpdatedPayment.paymentMethod(UPDATED_PAYMENT_METHOD).paymentTime(UPDATED_PAYMENT_TIME);
 
         restPaymentMockMvc
             .perform(
@@ -336,9 +326,8 @@ class PaymentResourceIT {
         assertThat(testPayment.getAmount()).isEqualByComparingTo(DEFAULT_AMOUNT);
         assertThat(testPayment.getPaymentMethod()).isEqualTo(UPDATED_PAYMENT_METHOD);
         assertThat(testPayment.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testPayment.getOrderId()).isEqualTo(DEFAULT_ORDER_ID);
-        assertThat(testPayment.getTransactionId()).isEqualTo(UPDATED_TRANSACTION_ID);
-        assertThat(testPayment.getPaymentTime()).isEqualTo(DEFAULT_PAYMENT_TIME);
+        assertThat(testPayment.getTransactionId()).isEqualTo(DEFAULT_TRANSACTION_ID);
+        assertThat(testPayment.getPaymentTime()).isEqualTo(UPDATED_PAYMENT_TIME);
     }
 
     @Test
@@ -357,7 +346,6 @@ class PaymentResourceIT {
             .amount(UPDATED_AMOUNT)
             .paymentMethod(UPDATED_PAYMENT_METHOD)
             .status(UPDATED_STATUS)
-            .orderId(UPDATED_ORDER_ID)
             .transactionId(UPDATED_TRANSACTION_ID)
             .paymentTime(UPDATED_PAYMENT_TIME);
 
@@ -376,7 +364,6 @@ class PaymentResourceIT {
         assertThat(testPayment.getAmount()).isEqualByComparingTo(UPDATED_AMOUNT);
         assertThat(testPayment.getPaymentMethod()).isEqualTo(UPDATED_PAYMENT_METHOD);
         assertThat(testPayment.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testPayment.getOrderId()).isEqualTo(UPDATED_ORDER_ID);
         assertThat(testPayment.getTransactionId()).isEqualTo(UPDATED_TRANSACTION_ID);
         assertThat(testPayment.getPaymentTime()).isEqualTo(UPDATED_PAYMENT_TIME);
     }

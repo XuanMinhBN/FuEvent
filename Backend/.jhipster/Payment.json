@@ -15,10 +15,6 @@
       "fieldValues": "PENDING,COMPLETED,FAILED,CANCELLED,REFUNDED"
     },
     {
-      "fieldName": "orderId",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "transactionId",
       "fieldType": "String"
     },

@@ -19,20 +19,15 @@ public class OrderDiscount implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "order_id")
-    private Long orderId;
-
-    @Column(name = "discount_id")
-    private Long discountId;
-
     @Column(name = "applied_at")
     private Instant appliedAt;
 
     @ManyToOne
+    @JsonIgnoreProperties(value = { "event" }, allowSetters = true)
     private Discount discount;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "orderDiscounts" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "orderDiscounts", "orderItems" }, allowSetters = true)
     private Order order;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -48,32 +43,6 @@ public class OrderDiscount implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getOrderId() {
-        return this.orderId;
-    }
-
-    public OrderDiscount orderId(Long orderId) {
-        this.setOrderId(orderId);
-        return this;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getDiscountId() {
-        return this.discountId;
-    }
-
-    public OrderDiscount discountId(Long discountId) {
-        this.setDiscountId(discountId);
-        return this;
-    }
-
-    public void setDiscountId(Long discountId) {
-        this.discountId = discountId;
     }
 
     public Instant getAppliedAt() {
@@ -139,8 +108,6 @@ public class OrderDiscount implements Serializable {
     public String toString() {
         return "OrderDiscount{" +
             "id=" + getId() +
-            ", orderId=" + getOrderId() +
-            ", discountId=" + getDiscountId() +
             ", appliedAt='" + getAppliedAt() + "'" +
             "}";
     }

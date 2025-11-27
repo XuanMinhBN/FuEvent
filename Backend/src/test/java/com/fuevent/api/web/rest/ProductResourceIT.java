@@ -58,9 +58,6 @@ class ProductResourceIT {
     private static final String DEFAULT_IMAGE_URL = "AAAAAAAAAA";
     private static final String UPDATED_IMAGE_URL = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_EVENT_ID = 1L;
-    private static final Long UPDATED_EVENT_ID = 2L;
-
     private static final String ENTITY_API_URL = "/api/products";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -96,8 +93,7 @@ class ProductResourceIT {
             .price(DEFAULT_PRICE)
             .quantityTotal(DEFAULT_QUANTITY_TOTAL)
             .quantitySold(DEFAULT_QUANTITY_SOLD)
-            .imageUrl(DEFAULT_IMAGE_URL)
-            .eventId(DEFAULT_EVENT_ID);
+            .imageUrl(DEFAULT_IMAGE_URL);
         return product;
     }
 
@@ -116,8 +112,7 @@ class ProductResourceIT {
             .price(UPDATED_PRICE)
             .quantityTotal(UPDATED_QUANTITY_TOTAL)
             .quantitySold(UPDATED_QUANTITY_SOLD)
-            .imageUrl(UPDATED_IMAGE_URL)
-            .eventId(UPDATED_EVENT_ID);
+            .imageUrl(UPDATED_IMAGE_URL);
         return product;
     }
 
@@ -148,7 +143,6 @@ class ProductResourceIT {
         assertThat(testProduct.getQuantityTotal()).isEqualTo(DEFAULT_QUANTITY_TOTAL);
         assertThat(testProduct.getQuantitySold()).isEqualTo(DEFAULT_QUANTITY_SOLD);
         assertThat(testProduct.getImageUrl()).isEqualTo(DEFAULT_IMAGE_URL);
-        assertThat(testProduct.getEventId()).isEqualTo(DEFAULT_EVENT_ID);
     }
 
     @Test
@@ -189,8 +183,7 @@ class ProductResourceIT {
             .andExpect(jsonPath("$.[*].price").value(hasItem(sameNumber(DEFAULT_PRICE))))
             .andExpect(jsonPath("$.[*].quantityTotal").value(hasItem(DEFAULT_QUANTITY_TOTAL)))
             .andExpect(jsonPath("$.[*].quantitySold").value(hasItem(DEFAULT_QUANTITY_SOLD)))
-            .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL)))
-            .andExpect(jsonPath("$.[*].eventId").value(hasItem(DEFAULT_EVENT_ID.intValue())));
+            .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL)));
     }
 
     @Test
@@ -212,8 +205,7 @@ class ProductResourceIT {
             .andExpect(jsonPath("$.price").value(sameNumber(DEFAULT_PRICE)))
             .andExpect(jsonPath("$.quantityTotal").value(DEFAULT_QUANTITY_TOTAL))
             .andExpect(jsonPath("$.quantitySold").value(DEFAULT_QUANTITY_SOLD))
-            .andExpect(jsonPath("$.imageUrl").value(DEFAULT_IMAGE_URL))
-            .andExpect(jsonPath("$.eventId").value(DEFAULT_EVENT_ID.intValue()));
+            .andExpect(jsonPath("$.imageUrl").value(DEFAULT_IMAGE_URL));
     }
 
     @Test
@@ -243,8 +235,7 @@ class ProductResourceIT {
             .price(UPDATED_PRICE)
             .quantityTotal(UPDATED_QUANTITY_TOTAL)
             .quantitySold(UPDATED_QUANTITY_SOLD)
-            .imageUrl(UPDATED_IMAGE_URL)
-            .eventId(UPDATED_EVENT_ID);
+            .imageUrl(UPDATED_IMAGE_URL);
         ProductDTO productDTO = productMapper.toDto(updatedProduct);
 
         restProductMockMvc
@@ -267,7 +258,6 @@ class ProductResourceIT {
         assertThat(testProduct.getQuantityTotal()).isEqualTo(UPDATED_QUANTITY_TOTAL);
         assertThat(testProduct.getQuantitySold()).isEqualTo(UPDATED_QUANTITY_SOLD);
         assertThat(testProduct.getImageUrl()).isEqualTo(UPDATED_IMAGE_URL);
-        assertThat(testProduct.getEventId()).isEqualTo(UPDATED_EVENT_ID);
     }
 
     @Test
@@ -369,7 +359,6 @@ class ProductResourceIT {
         assertThat(testProduct.getQuantityTotal()).isEqualTo(UPDATED_QUANTITY_TOTAL);
         assertThat(testProduct.getQuantitySold()).isEqualTo(UPDATED_QUANTITY_SOLD);
         assertThat(testProduct.getImageUrl()).isEqualTo(DEFAULT_IMAGE_URL);
-        assertThat(testProduct.getEventId()).isEqualTo(DEFAULT_EVENT_ID);
     }
 
     @Test
@@ -392,8 +381,7 @@ class ProductResourceIT {
             .price(UPDATED_PRICE)
             .quantityTotal(UPDATED_QUANTITY_TOTAL)
             .quantitySold(UPDATED_QUANTITY_SOLD)
-            .imageUrl(UPDATED_IMAGE_URL)
-            .eventId(UPDATED_EVENT_ID);
+            .imageUrl(UPDATED_IMAGE_URL);
 
         restProductMockMvc
             .perform(
@@ -415,7 +403,6 @@ class ProductResourceIT {
         assertThat(testProduct.getQuantityTotal()).isEqualTo(UPDATED_QUANTITY_TOTAL);
         assertThat(testProduct.getQuantitySold()).isEqualTo(UPDATED_QUANTITY_SOLD);
         assertThat(testProduct.getImageUrl()).isEqualTo(UPDATED_IMAGE_URL);
-        assertThat(testProduct.getEventId()).isEqualTo(UPDATED_EVENT_ID);
     }
 
     @Test

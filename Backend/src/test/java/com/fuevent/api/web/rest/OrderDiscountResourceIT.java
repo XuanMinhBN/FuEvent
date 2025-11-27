@@ -33,12 +33,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class OrderDiscountResourceIT {
 
-    private static final Long DEFAULT_ORDER_ID = 1L;
-    private static final Long UPDATED_ORDER_ID = 2L;
-
-    private static final Long DEFAULT_DISCOUNT_ID = 1L;
-    private static final Long UPDATED_DISCOUNT_ID = 2L;
-
     private static final Instant DEFAULT_APPLIED_AT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_APPLIED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -69,10 +63,7 @@ class OrderDiscountResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static OrderDiscount createEntity(EntityManager em) {
-        OrderDiscount orderDiscount = new OrderDiscount()
-            .orderId(DEFAULT_ORDER_ID)
-            .discountId(DEFAULT_DISCOUNT_ID)
-            .appliedAt(DEFAULT_APPLIED_AT);
+        OrderDiscount orderDiscount = new OrderDiscount().appliedAt(DEFAULT_APPLIED_AT);
         return orderDiscount;
     }
 
@@ -83,10 +74,7 @@ class OrderDiscountResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static OrderDiscount createUpdatedEntity(EntityManager em) {
-        OrderDiscount orderDiscount = new OrderDiscount()
-            .orderId(UPDATED_ORDER_ID)
-            .discountId(UPDATED_DISCOUNT_ID)
-            .appliedAt(UPDATED_APPLIED_AT);
+        OrderDiscount orderDiscount = new OrderDiscount().appliedAt(UPDATED_APPLIED_AT);
         return orderDiscount;
     }
 
@@ -111,8 +99,6 @@ class OrderDiscountResourceIT {
         List<OrderDiscount> orderDiscountList = orderDiscountRepository.findAll();
         assertThat(orderDiscountList).hasSize(databaseSizeBeforeCreate + 1);
         OrderDiscount testOrderDiscount = orderDiscountList.get(orderDiscountList.size() - 1);
-        assertThat(testOrderDiscount.getOrderId()).isEqualTo(DEFAULT_ORDER_ID);
-        assertThat(testOrderDiscount.getDiscountId()).isEqualTo(DEFAULT_DISCOUNT_ID);
         assertThat(testOrderDiscount.getAppliedAt()).isEqualTo(DEFAULT_APPLIED_AT);
     }
 
@@ -149,8 +135,6 @@ class OrderDiscountResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(orderDiscount.getId().intValue())))
-            .andExpect(jsonPath("$.[*].orderId").value(hasItem(DEFAULT_ORDER_ID.intValue())))
-            .andExpect(jsonPath("$.[*].discountId").value(hasItem(DEFAULT_DISCOUNT_ID.intValue())))
             .andExpect(jsonPath("$.[*].appliedAt").value(hasItem(DEFAULT_APPLIED_AT.toString())));
     }
 
@@ -166,8 +150,6 @@ class OrderDiscountResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(orderDiscount.getId().intValue()))
-            .andExpect(jsonPath("$.orderId").value(DEFAULT_ORDER_ID.intValue()))
-            .andExpect(jsonPath("$.discountId").value(DEFAULT_DISCOUNT_ID.intValue()))
             .andExpect(jsonPath("$.appliedAt").value(DEFAULT_APPLIED_AT.toString()));
     }
 
@@ -190,7 +172,7 @@ class OrderDiscountResourceIT {
         OrderDiscount updatedOrderDiscount = orderDiscountRepository.findById(orderDiscount.getId()).get();
         // Disconnect from session so that the updates on updatedOrderDiscount are not directly saved in db
         em.detach(updatedOrderDiscount);
-        updatedOrderDiscount.orderId(UPDATED_ORDER_ID).discountId(UPDATED_DISCOUNT_ID).appliedAt(UPDATED_APPLIED_AT);
+        updatedOrderDiscount.appliedAt(UPDATED_APPLIED_AT);
         OrderDiscountDTO orderDiscountDTO = orderDiscountMapper.toDto(updatedOrderDiscount);
 
         restOrderDiscountMockMvc
@@ -205,8 +187,6 @@ class OrderDiscountResourceIT {
         List<OrderDiscount> orderDiscountList = orderDiscountRepository.findAll();
         assertThat(orderDiscountList).hasSize(databaseSizeBeforeUpdate);
         OrderDiscount testOrderDiscount = orderDiscountList.get(orderDiscountList.size() - 1);
-        assertThat(testOrderDiscount.getOrderId()).isEqualTo(UPDATED_ORDER_ID);
-        assertThat(testOrderDiscount.getDiscountId()).isEqualTo(UPDATED_DISCOUNT_ID);
         assertThat(testOrderDiscount.getAppliedAt()).isEqualTo(UPDATED_APPLIED_AT);
     }
 
@@ -289,8 +269,6 @@ class OrderDiscountResourceIT {
         OrderDiscount partialUpdatedOrderDiscount = new OrderDiscount();
         partialUpdatedOrderDiscount.setId(orderDiscount.getId());
 
-        partialUpdatedOrderDiscount.appliedAt(UPDATED_APPLIED_AT);
-
         restOrderDiscountMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedOrderDiscount.getId())
@@ -303,9 +281,7 @@ class OrderDiscountResourceIT {
         List<OrderDiscount> orderDiscountList = orderDiscountRepository.findAll();
         assertThat(orderDiscountList).hasSize(databaseSizeBeforeUpdate);
         OrderDiscount testOrderDiscount = orderDiscountList.get(orderDiscountList.size() - 1);
-        assertThat(testOrderDiscount.getOrderId()).isEqualTo(DEFAULT_ORDER_ID);
-        assertThat(testOrderDiscount.getDiscountId()).isEqualTo(DEFAULT_DISCOUNT_ID);
-        assertThat(testOrderDiscount.getAppliedAt()).isEqualTo(UPDATED_APPLIED_AT);
+        assertThat(testOrderDiscount.getAppliedAt()).isEqualTo(DEFAULT_APPLIED_AT);
     }
 
     @Test
@@ -320,7 +296,7 @@ class OrderDiscountResourceIT {
         OrderDiscount partialUpdatedOrderDiscount = new OrderDiscount();
         partialUpdatedOrderDiscount.setId(orderDiscount.getId());
 
-        partialUpdatedOrderDiscount.orderId(UPDATED_ORDER_ID).discountId(UPDATED_DISCOUNT_ID).appliedAt(UPDATED_APPLIED_AT);
+        partialUpdatedOrderDiscount.appliedAt(UPDATED_APPLIED_AT);
 
         restOrderDiscountMockMvc
             .perform(
@@ -334,8 +310,6 @@ class OrderDiscountResourceIT {
         List<OrderDiscount> orderDiscountList = orderDiscountRepository.findAll();
         assertThat(orderDiscountList).hasSize(databaseSizeBeforeUpdate);
         OrderDiscount testOrderDiscount = orderDiscountList.get(orderDiscountList.size() - 1);
-        assertThat(testOrderDiscount.getOrderId()).isEqualTo(UPDATED_ORDER_ID);
-        assertThat(testOrderDiscount.getDiscountId()).isEqualTo(UPDATED_DISCOUNT_ID);
         assertThat(testOrderDiscount.getAppliedAt()).isEqualTo(UPDATED_APPLIED_AT);
     }
 

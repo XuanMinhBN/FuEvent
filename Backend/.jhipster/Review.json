@@ -15,10 +15,6 @@
     {
       "fieldName": "userLogin",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "eventId",
-      "fieldType": "Long"
     }
   ],
   "relationships": [

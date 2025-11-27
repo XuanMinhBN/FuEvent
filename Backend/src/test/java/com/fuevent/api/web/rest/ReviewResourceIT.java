@@ -40,9 +40,6 @@ class ReviewResourceIT {
     private static final String DEFAULT_USER_LOGIN = "AAAAAAAAAA";
     private static final String UPDATED_USER_LOGIN = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_EVENT_ID = 1L;
-    private static final Long UPDATED_EVENT_ID = 2L;
-
     private static final String ENTITY_API_URL = "/api/reviews";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -70,11 +67,7 @@ class ReviewResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Review createEntity(EntityManager em) {
-        Review review = new Review()
-            .comment(DEFAULT_COMMENT)
-            .rating(DEFAULT_RATING)
-            .userLogin(DEFAULT_USER_LOGIN)
-            .eventId(DEFAULT_EVENT_ID);
+        Review review = new Review().comment(DEFAULT_COMMENT).rating(DEFAULT_RATING).userLogin(DEFAULT_USER_LOGIN);
         return review;
     }
 
@@ -85,11 +78,7 @@ class ReviewResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Review createUpdatedEntity(EntityManager em) {
-        Review review = new Review()
-            .comment(UPDATED_COMMENT)
-            .rating(UPDATED_RATING)
-            .userLogin(UPDATED_USER_LOGIN)
-            .eventId(UPDATED_EVENT_ID);
+        Review review = new Review().comment(UPDATED_COMMENT).rating(UPDATED_RATING).userLogin(UPDATED_USER_LOGIN);
         return review;
     }
 
@@ -115,7 +104,6 @@ class ReviewResourceIT {
         assertThat(testReview.getComment()).isEqualTo(DEFAULT_COMMENT);
         assertThat(testReview.getRating()).isEqualTo(DEFAULT_RATING);
         assertThat(testReview.getUserLogin()).isEqualTo(DEFAULT_USER_LOGIN);
-        assertThat(testReview.getEventId()).isEqualTo(DEFAULT_EVENT_ID);
     }
 
     @Test
@@ -151,8 +139,7 @@ class ReviewResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(review.getId().intValue())))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)))
             .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING)))
-            .andExpect(jsonPath("$.[*].userLogin").value(hasItem(DEFAULT_USER_LOGIN)))
-            .andExpect(jsonPath("$.[*].eventId").value(hasItem(DEFAULT_EVENT_ID.intValue())));
+            .andExpect(jsonPath("$.[*].userLogin").value(hasItem(DEFAULT_USER_LOGIN)));
     }
 
     @Test
@@ -169,8 +156,7 @@ class ReviewResourceIT {
             .andExpect(jsonPath("$.id").value(review.getId().intValue()))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT))
             .andExpect(jsonPath("$.rating").value(DEFAULT_RATING))
-            .andExpect(jsonPath("$.userLogin").value(DEFAULT_USER_LOGIN))
-            .andExpect(jsonPath("$.eventId").value(DEFAULT_EVENT_ID.intValue()));
+            .andExpect(jsonPath("$.userLogin").value(DEFAULT_USER_LOGIN));
     }
 
     @Test
@@ -192,7 +178,7 @@ class ReviewResourceIT {
         Review updatedReview = reviewRepository.findById(review.getId()).get();
         // Disconnect from session so that the updates on updatedReview are not directly saved in db
         em.detach(updatedReview);
-        updatedReview.comment(UPDATED_COMMENT).rating(UPDATED_RATING).userLogin(UPDATED_USER_LOGIN).eventId(UPDATED_EVENT_ID);
+        updatedReview.comment(UPDATED_COMMENT).rating(UPDATED_RATING).userLogin(UPDATED_USER_LOGIN);
         ReviewDTO reviewDTO = reviewMapper.toDto(updatedReview);
 
         restReviewMockMvc
@@ -210,7 +196,6 @@ class ReviewResourceIT {
         assertThat(testReview.getComment()).isEqualTo(UPDATED_COMMENT);
         assertThat(testReview.getRating()).isEqualTo(UPDATED_RATING);
         assertThat(testReview.getUserLogin()).isEqualTo(UPDATED_USER_LOGIN);
-        assertThat(testReview.getEventId()).isEqualTo(UPDATED_EVENT_ID);
     }
 
     @Test
@@ -290,7 +275,7 @@ class ReviewResourceIT {
         Review partialUpdatedReview = new Review();
         partialUpdatedReview.setId(review.getId());
 
-        partialUpdatedReview.userLogin(UPDATED_USER_LOGIN).eventId(UPDATED_EVENT_ID);
+        partialUpdatedReview.userLogin(UPDATED_USER_LOGIN);
 
         restReviewMockMvc
             .perform(
@@ -307,7 +292,6 @@ class ReviewResourceIT {
         assertThat(testReview.getComment()).isEqualTo(DEFAULT_COMMENT);
         assertThat(testReview.getRating()).isEqualTo(DEFAULT_RATING);
         assertThat(testReview.getUserLogin()).isEqualTo(UPDATED_USER_LOGIN);
-        assertThat(testReview.getEventId()).isEqualTo(UPDATED_EVENT_ID);
     }
 
     @Test
@@ -322,7 +306,7 @@ class ReviewResourceIT {
         Review partialUpdatedReview = new Review();
         partialUpdatedReview.setId(review.getId());
 
-        partialUpdatedReview.comment(UPDATED_COMMENT).rating(UPDATED_RATING).userLogin(UPDATED_USER_LOGIN).eventId(UPDATED_EVENT_ID);
+        partialUpdatedReview.comment(UPDATED_COMMENT).rating(UPDATED_RATING).userLogin(UPDATED_USER_LOGIN);
 
         restReviewMockMvc
             .perform(
@@ -339,7 +323,6 @@ class ReviewResourceIT {
         assertThat(testReview.getComment()).isEqualTo(UPDATED_COMMENT);
         assertThat(testReview.getRating()).isEqualTo(UPDATED_RATING);
         assertThat(testReview.getUserLogin()).isEqualTo(UPDATED_USER_LOGIN);
-        assertThat(testReview.getEventId()).isEqualTo(UPDATED_EVENT_ID);
     }
 
     @Test

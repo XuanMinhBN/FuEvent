@@ -49,11 +49,8 @@ public class Product implements Serializable {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "event_id")
-    private Long eventId;
-
     @ManyToOne
-    @JsonIgnoreProperties(value = { "products", "reviews", "category" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "products", "reviews", "discounts", "category" }, allowSetters = true)
     private Event event;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -175,19 +172,6 @@ public class Product implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public Long getEventId() {
-        return this.eventId;
-    }
-
-    public Product eventId(Long eventId) {
-        this.setEventId(eventId);
-        return this;
-    }
-
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
-    }
-
     public Event getEvent() {
         return this.event;
     }
@@ -233,7 +217,6 @@ public class Product implements Serializable {
             ", quantityTotal=" + getQuantityTotal() +
             ", quantitySold=" + getQuantitySold() +
             ", imageUrl='" + getImageUrl() + "'" +
-            ", eventId=" + getEventId() +
             "}";
     }
 }
