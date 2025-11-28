@@ -17,6 +17,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.core.env.Environment;
 import tech.jhipster.config.DefaultProfileUtil;
 import tech.jhipster.config.JHipsterConstants;
+import reactor.core.publisher.Hooks;
 
 @SpringBootApplication
 @EnableConfigurationProperties({ LiquibaseProperties.class, ApplicationProperties.class })
@@ -64,6 +65,7 @@ public class FuEventUiApp {
      * @param args the command line arguments.
      */
     public static void main(String[] args) {
+        Hooks.enableContextLossTracking();
         SpringApplication app = new SpringApplication(FuEventUiApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();

@@ -91,7 +91,7 @@ public class LoggingAspect {
      * @return result.
      * @throws Throwable throws {@link IllegalArgumentException}.
      */
-    @Around("applicationPackagePointcut() && springBeanPointcut()")
+    //@Around("applicationPackagePointcut() && springBeanPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         Logger log = logger(joinPoint);
         if (log.isDebugEnabled()) {

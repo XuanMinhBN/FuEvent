@@ -222,3 +222,13 @@ kafka:
 # ===================================================================
 
 # application:
+
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    # BẮT BUỘC SWAGGER HIỂN THỊ 2 MỤC NÀY
+    urls:
+      - name: gateway
+        url: /v3/api-docs
+      - name: fueventapi
+        url: /services/fueventapi/v3/api-docs
