@@ -22,7 +22,8 @@
       "description": "Description",
       "address": "Address",
       "studentCode": "Student Code",
-      "walletId": "Wallet Id"
+      "walletId": "Wallet Id",
+      "userId": "User Id"
     }
   }
 }

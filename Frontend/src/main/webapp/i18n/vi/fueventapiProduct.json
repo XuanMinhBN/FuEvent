@@ -1,0 +1,35 @@
+{
+  "fuEventUiApp": {
+    "fueventapiProduct": {
+      "home": {
+        "title": "Products",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Product",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Product",
+        "notFound": "No Products found"
+      },
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Product {{ id }}?"
+      },
+      "detail": {
+        "title": "Product"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "type": "Type",
+      "price": "Price",
+      "quantityTotal": "Quantity Total",
+      "quantitySold": "Quantity Sold",
+      "imageUrl": "Image Url",
+      "event": "Event"
+    }
+  },
+  "fueventapiApp": {
+    "fueventapiProduct": {
+      "created": "Một Product mới được tạo với định danh {{ param }}",
+      "updated": "Một Product cập nhật với định danh {{ param }}",
+      "deleted": "Một Product đã xóa với định danh {{ param }}"
+    }
+  }
+}

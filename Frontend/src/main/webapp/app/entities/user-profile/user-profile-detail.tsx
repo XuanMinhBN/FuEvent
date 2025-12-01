@@ -59,6 +59,12 @@ export const UserProfileDetail = (props: RouteComponentProps<{ id: string }>) =>
             </span>
           </dt>
           <dd>{userProfileEntity.walletId}</dd>
+          <dt>
+            <span id="userId">
+              <Translate contentKey="fuEventUiApp.userProfile.userId">User Id</Translate>
+            </span>
+          </dt>
+          <dd>{userProfileEntity.userId}</dd>
         </dl>
         <Button tag={Link} to="/user-profile" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

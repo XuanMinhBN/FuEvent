@@ -1,6 +1,8 @@
 package com.fuevent.ui.web.rest;
 
 import com.fuevent.ui.repository.UserProfileRepository;
+import com.fuevent.ui.repository.UserRepository;
+import com.fuevent.ui.security.SecurityUtils;
 import com.fuevent.ui.service.UserProfileService;
 import com.fuevent.ui.service.dto.UserProfileDTO;
 import com.fuevent.ui.web.rest.errors.BadRequestAlertException;
@@ -10,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,9 +52,12 @@ public class UserProfileResource {
 
     private final UserProfileRepository userProfileRepository;
 
-    public UserProfileResource(UserProfileService userProfileService, UserProfileRepository userProfileRepository) {
+    private final UserRepository userRepository;
+
+    public UserProfileResource(UserProfileService userProfileService, UserProfileRepository userProfileRepository, UserRepository userRepository) {
         this.userProfileService = userProfileService;
         this.userProfileRepository = userProfileRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -61,17 +68,21 @@ public class UserProfileResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/user-profiles")
-    public Mono<ResponseEntity<UserProfileDTO>> createUserProfile(@RequestBody UserProfileDTO userProfileDTO) throws URISyntaxException {
+    public Mono<ResponseEntity<UserProfileDTO>> createUserProfile(@Valid @RequestBody UserProfileDTO userProfileDTO)
+        throws URISyntaxException {
         log.debug("REST request to save UserProfile : {}", userProfileDTO);
         if (userProfileDTO.getId() != null) {
             throw new BadRequestAlertException("A new userProfile cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        return userProfileService
-            .save(userProfileDTO)
+        return SecurityUtils.getCurrentUserLogin()
+            .flatMap(login -> userRepository.findOneByLogin(login))
+            .flatMap(user -> {
+                userProfileDTO.setUserId(user.getId());
+                return userProfileService.save(userProfileDTO);
+            })
             .map(result -> {
                 try {
-                    return ResponseEntity
-                        .created(new URI("/api/user-profiles/" + result.getId()))
+                    return ResponseEntity.created(new URI("/api/user-profiles/" + result.getId()))
                         .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
                         .body(result);
                 } catch (URISyntaxException e) {
@@ -93,7 +104,7 @@ public class UserProfileResource {
     @PutMapping("/user-profiles/{id}")
     public Mono<ResponseEntity<UserProfileDTO>> updateUserProfile(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody UserProfileDTO userProfileDTO
+        @Valid @RequestBody UserProfileDTO userProfileDTO
     ) throws URISyntaxException {
         log.debug("REST request to update UserProfile : {}, {}", id, userProfileDTO);
         if (userProfileDTO.getId() == null) {
@@ -136,7 +147,7 @@ public class UserProfileResource {
     @PatchMapping(value = "/user-profiles/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public Mono<ResponseEntity<UserProfileDTO>> partialUpdateUserProfile(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody UserProfileDTO userProfileDTO
+        @NotNull @RequestBody UserProfileDTO userProfileDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update UserProfile partially : {}, {}", id, userProfileDTO);
         if (userProfileDTO.getId() == null) {

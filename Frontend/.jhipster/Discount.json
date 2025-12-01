@@ -1,0 +1,62 @@
+{
+  "name": "Discount",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "percentage",
+      "fieldType": "Float",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMin": "0",
+      "fieldValidateRulesMax": "100"
+    },
+    {
+      "fieldName": "maxUsers",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "validFrom",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "validTo",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userLogin",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "discounts",
+      "relationshipName": "event"
+    }
+  ],
+  "entityTableName": "discount",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "fueventapi",
+  "clientRootFolder": "fueventapi",
+  "databaseType": "sql",
+  "changelogDate": "20251201081038"
+}

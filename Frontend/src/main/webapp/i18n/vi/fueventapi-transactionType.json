@@ -1,0 +1,11 @@
+{
+  "fuEventUiApp": {
+    "TransactionType": {
+      "null": "",
+      "DEPOSIT": "DEPOSIT",
+      "WITHDRAW": "WITHDRAW",
+      "PAYMENT": "PAYMENT",
+      "REFUND": "REFUND"
+    }
+  }
+}

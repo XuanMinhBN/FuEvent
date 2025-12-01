@@ -1,0 +1,43 @@
+{
+  "name": "TransactionHistory",
+  "fields": [
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TransactionType",
+      "fieldValues": "DEPOSIT,WITHDRAW,PAYMENT,REFUND",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "transactionDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "walletId",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "transaction_history",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "fueventapi",
+  "clientRootFolder": "fueventapi",
+  "databaseType": "sql",
+  "changelogDate": "20251201081042"
+}

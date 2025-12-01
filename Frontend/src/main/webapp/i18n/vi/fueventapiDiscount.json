@@ -1,0 +1,36 @@
+{
+  "fuEventUiApp": {
+    "fueventapiDiscount": {
+      "home": {
+        "title": "Discounts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Discount",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Discount",
+        "notFound": "No Discounts found"
+      },
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Discount {{ id }}?"
+      },
+      "detail": {
+        "title": "Discount"
+      },
+      "id": "ID",
+      "code": "Code",
+      "description": "Description",
+      "percentage": "Percentage",
+      "maxUsers": "Max Users",
+      "validFrom": "Valid From",
+      "validTo": "Valid To",
+      "type": "Type",
+      "userLogin": "User Login",
+      "event": "Event"
+    }
+  },
+  "fueventapiApp": {
+    "fueventapiDiscount": {
+      "created": "Một Discount mới được tạo với định danh {{ param }}",
+      "updated": "Một Discount cập nhật với định danh {{ param }}",
+      "deleted": "Một Discount đã xóa với định danh {{ param }}"
+    }
+  }
+}

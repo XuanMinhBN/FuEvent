@@ -43,7 +43,21 @@
     "clientThemeVariant": "",
     "languages": ["vi", "en"],
     "enableGradleEnterprise": false,
-    "entities": ["UserProfile"],
-    "lastLiquibaseTimestamp": 1763885595000
+    "entities": [
+      "UserProfile",
+      "Event",
+      "Order",
+      "OrderItem",
+      "Payment",
+      "Product",
+      "Category",
+      "Review",
+      "Discount",
+      "Notification",
+      "Wallet",
+      "OrderDiscount",
+      "TransactionHistory"
+    ],
+    "lastLiquibaseTimestamp": 1764576642000
   }
 }

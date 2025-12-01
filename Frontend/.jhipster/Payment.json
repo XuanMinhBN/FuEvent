@@ -1,0 +1,47 @@
+{
+  "name": "Payment",
+  "fields": [
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "paymentMethod",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "PaymentStatus",
+      "fieldValues": "PENDING,COMPLETED,FAILED,CANCELLED,REFUNDED"
+    },
+    {
+      "fieldName": "transactionId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paymentTime",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "payment",
+      "relationshipName": "order"
+    }
+  ],
+  "entityTableName": "payment",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "fueventapi",
+  "clientRootFolder": "fueventapi",
+  "databaseType": "sql",
+  "changelogDate": "20251201081034"
+}

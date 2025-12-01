@@ -49,6 +49,9 @@ class UserProfileResourceIT {
     private static final Long DEFAULT_WALLET_ID = 1L;
     private static final Long UPDATED_WALLET_ID = 2L;
 
+    private static final Long DEFAULT_USER_ID = 1L;
+    private static final Long UPDATED_USER_ID = 2L;
+
     private static final String ENTITY_API_URL = "/api/user-profiles";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -81,7 +84,8 @@ class UserProfileResourceIT {
             .description(DEFAULT_DESCRIPTION)
             .address(DEFAULT_ADDRESS)
             .studentCode(DEFAULT_STUDENT_CODE)
-            .walletId(DEFAULT_WALLET_ID);
+            .walletId(DEFAULT_WALLET_ID)
+            .userId(DEFAULT_USER_ID);
         return userProfile;
     }
 
@@ -97,7 +101,8 @@ class UserProfileResourceIT {
             .description(UPDATED_DESCRIPTION)
             .address(UPDATED_ADDRESS)
             .studentCode(UPDATED_STUDENT_CODE)
-            .walletId(UPDATED_WALLET_ID);
+            .walletId(UPDATED_WALLET_ID)
+            .userId(UPDATED_USER_ID);
         return userProfile;
     }
 
@@ -143,6 +148,7 @@ class UserProfileResourceIT {
         assertThat(testUserProfile.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testUserProfile.getStudentCode()).isEqualTo(DEFAULT_STUDENT_CODE);
         assertThat(testUserProfile.getWalletId()).isEqualTo(DEFAULT_WALLET_ID);
+        assertThat(testUserProfile.getUserId()).isEqualTo(DEFAULT_USER_ID);
     }
 
     @Test
@@ -166,6 +172,28 @@ class UserProfileResourceIT {
         // Validate the UserProfile in the database
         List<UserProfile> userProfileList = userProfileRepository.findAll().collectList().block();
         assertThat(userProfileList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    void checkUserIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userProfileRepository.findAll().collectList().block().size();
+        // set the field null
+        userProfile.setUserId(null);
+
+        // Create the UserProfile, which fails.
+        UserProfileDTO userProfileDTO = userProfileMapper.toDto(userProfile);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(TestUtil.convertObjectToJsonBytes(userProfileDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        List<UserProfile> userProfileList = userProfileRepository.findAll().collectList().block();
+        assertThat(userProfileList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -195,7 +223,9 @@ class UserProfileResourceIT {
             .jsonPath("$.[*].studentCode")
             .value(hasItem(DEFAULT_STUDENT_CODE))
             .jsonPath("$.[*].walletId")
-            .value(hasItem(DEFAULT_WALLET_ID.intValue()));
+            .value(hasItem(DEFAULT_WALLET_ID.intValue()))
+            .jsonPath("$.[*].userId")
+            .value(hasItem(DEFAULT_USER_ID.intValue()));
     }
 
     @Test
@@ -225,7 +255,9 @@ class UserProfileResourceIT {
             .jsonPath("$.studentCode")
             .value(is(DEFAULT_STUDENT_CODE))
             .jsonPath("$.walletId")
-            .value(is(DEFAULT_WALLET_ID.intValue()));
+            .value(is(DEFAULT_WALLET_ID.intValue()))
+            .jsonPath("$.userId")
+            .value(is(DEFAULT_USER_ID.intValue()));
     }
 
     @Test
@@ -254,7 +286,8 @@ class UserProfileResourceIT {
             .description(UPDATED_DESCRIPTION)
             .address(UPDATED_ADDRESS)
             .studentCode(UPDATED_STUDENT_CODE)
-            .walletId(UPDATED_WALLET_ID);
+            .walletId(UPDATED_WALLET_ID)
+            .userId(UPDATED_USER_ID);
         UserProfileDTO userProfileDTO = userProfileMapper.toDto(updatedUserProfile);
 
         webTestClient
@@ -275,6 +308,7 @@ class UserProfileResourceIT {
         assertThat(testUserProfile.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testUserProfile.getStudentCode()).isEqualTo(UPDATED_STUDENT_CODE);
         assertThat(testUserProfile.getWalletId()).isEqualTo(UPDATED_WALLET_ID);
+        assertThat(testUserProfile.getUserId()).isEqualTo(UPDATED_USER_ID);
     }
 
     @Test
@@ -377,6 +411,7 @@ class UserProfileResourceIT {
         assertThat(testUserProfile.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testUserProfile.getStudentCode()).isEqualTo(DEFAULT_STUDENT_CODE);
         assertThat(testUserProfile.getWalletId()).isEqualTo(UPDATED_WALLET_ID);
+        assertThat(testUserProfile.getUserId()).isEqualTo(DEFAULT_USER_ID);
     }
 
     @Test
@@ -395,7 +430,8 @@ class UserProfileResourceIT {
             .description(UPDATED_DESCRIPTION)
             .address(UPDATED_ADDRESS)
             .studentCode(UPDATED_STUDENT_CODE)
-            .walletId(UPDATED_WALLET_ID);
+            .walletId(UPDATED_WALLET_ID)
+            .userId(UPDATED_USER_ID);
 
         webTestClient
             .patch()
@@ -415,6 +451,7 @@ class UserProfileResourceIT {
         assertThat(testUserProfile.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testUserProfile.getStudentCode()).isEqualTo(UPDATED_STUDENT_CODE);
         assertThat(testUserProfile.getWalletId()).isEqualTo(UPDATED_WALLET_ID);
+        assertThat(testUserProfile.getUserId()).isEqualTo(UPDATED_USER_ID);
     }
 
     @Test

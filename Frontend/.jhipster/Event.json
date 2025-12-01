@@ -1,0 +1,78 @@
+{
+  "name": "Event",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "EventStatus",
+      "fieldValues": "PENDING,APPROVED,ONGOING,END,CANCELLED"
+    },
+    {
+      "fieldName": "posterUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "organizerLogin",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "products"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "review",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "reviews"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "discount",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "discounts"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "events",
+      "relationshipName": "category"
+    }
+  ],
+  "entityTableName": "event",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "fueventapi",
+  "clientRootFolder": "fueventapi",
+  "databaseType": "sql",
+  "changelogDate": "20251201081031"
+}

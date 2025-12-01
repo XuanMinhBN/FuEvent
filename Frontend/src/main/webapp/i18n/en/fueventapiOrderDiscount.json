@@ -1,0 +1,30 @@
+{
+  "fuEventUiApp": {
+    "fueventapiOrderDiscount": {
+      "home": {
+        "title": "Order Discounts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Order Discount",
+        "createOrEditLabel": "Create or edit a Order Discount",
+        "notFound": "No Order Discounts found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Order Discount {{ id }}?"
+      },
+      "detail": {
+        "title": "Order Discount"
+      },
+      "id": "ID",
+      "appliedAt": "Applied At",
+      "discount": "Discount",
+      "order": "Order"
+    }
+  },
+  "fueventapiApp": {
+    "fueventapiOrderDiscount": {
+      "created": "A new Order Discount is created with identifier {{ param }}",
+      "updated": "A Order Discount is updated with identifier {{ param }}",
+      "deleted": "A Order Discount is deleted with identifier {{ param }}"
+    }
+  }
+}

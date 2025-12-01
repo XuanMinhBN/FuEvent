@@ -117,6 +117,17 @@ export const UserProfileUpdate = (props: RouteComponentProps<{ id: string }>) =>
                 data-cy="walletId"
                 type="text"
               />
+              <ValidatedField
+                label={translate('fuEventUiApp.userProfile.userId')}
+                id="user-profile-userId"
+                name="userId"
+                data-cy="userId"
+                type="text"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                  validate: v => isNumber(v) || translate('entity.validation.number'),
+                }}
+              />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/user-profile" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

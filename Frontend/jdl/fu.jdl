@@ -4,11 +4,12 @@ entity UserProfile {
     address String,
     studentCode String,
     walletId Long
+    userId Long required unique
 }
 
-relationship OneToOne {
-    UserProfile{user(login)} to User
-}
+//relationship OneToOne {
+//    UserProfile{user(login)} to User
+//}
 
 dto * with mapstruct
 service * with serviceClass

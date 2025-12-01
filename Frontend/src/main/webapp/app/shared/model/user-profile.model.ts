@@ -5,6 +5,7 @@ export interface IUserProfile {
   address?: string | null;
   studentCode?: string | null;
   walletId?: number | null;
+  userId?: number;
 }
 
 export const defaultValue: Readonly<IUserProfile> = {};

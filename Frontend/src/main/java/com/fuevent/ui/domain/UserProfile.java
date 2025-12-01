@@ -1,6 +1,7 @@
 package com.fuevent.ui.domain;
 
 import java.io.Serializable;
+import javax.validation.constraints.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
@@ -32,6 +33,10 @@ public class UserProfile implements Serializable {
 
     @Column("wallet_id")
     private Long walletId;
+
+    @NotNull(message = "must not be null")
+    @Column("user_id")
+    private Long userId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -113,6 +118,19 @@ public class UserProfile implements Serializable {
         this.walletId = walletId;
     }
 
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public UserProfile userId(Long userId) {
+        this.setUserId(userId);
+        return this;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -142,6 +160,7 @@ public class UserProfile implements Serializable {
             ", address='" + getAddress() + "'" +
             ", studentCode='" + getStudentCode() + "'" +
             ", walletId=" + getWalletId() +
+            ", userId=" + getUserId() +
             "}";
     }
 }

@@ -1,0 +1,9 @@
+{
+  "fuEventUiApp": {
+    "ProductType": {
+      "null": "",
+      "TICKET": "TICKET",
+      "MERCHANDISE": "MERCHANDISE"
+    }
+  }
+}

@@ -2,6 +2,7 @@ package com.fuevent.ui.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.fuevent.ui.domain.UserProfile} entity.
@@ -19,6 +20,9 @@ public class UserProfileDTO implements Serializable {
     private String studentCode;
 
     private Long walletId;
+
+    @NotNull(message = "must not be null")
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -68,6 +72,14 @@ public class UserProfileDTO implements Serializable {
         this.walletId = walletId;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -99,6 +111,7 @@ public class UserProfileDTO implements Serializable {
             ", address='" + getAddress() + "'" +
             ", studentCode='" + getStudentCode() + "'" +
             ", walletId=" + getWalletId() +
+            ", userId=" + getUserId() +
             "}";
     }
 }

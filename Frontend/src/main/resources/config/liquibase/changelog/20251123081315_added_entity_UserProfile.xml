@@ -29,6 +29,9 @@
             <column name="wallet_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_user_profile__user_id" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
@@ -55,7 +58,16 @@
             <column name="address" type="string"/>
             <column name="student_code" type="string"/>
             <column name="wallet_id" type="numeric"/>
+            <column name="user_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
+    </changeSet>
+
+    <changeSet id="add-fk-user-profile-user" author="jhipster">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_profile"
+                                 constraintName="fk_user_profile_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
     </changeSet>
 </databaseChangeLog>

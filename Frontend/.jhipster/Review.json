@@ -1,0 +1,41 @@
+{
+  "name": "Review",
+  "fields": [
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "rating",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMin": "1",
+      "fieldValidateRulesMax": "5"
+    },
+    {
+      "fieldName": "userLogin",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "reviews",
+      "relationshipName": "event"
+    }
+  ],
+  "entityTableName": "review",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "fueventapi",
+  "clientRootFolder": "fueventapi",
+  "databaseType": "sql",
+  "changelogDate": "20251201081037"
+}

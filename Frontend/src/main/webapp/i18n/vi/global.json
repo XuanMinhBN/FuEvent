@@ -8,6 +8,18 @@
       "entities": {
         "main": "Thực thể",
         "userProfile": "User Profile",
+        "fueventapiEvent": "Event",
+        "fueventapiOrder": "Order",
+        "fueventapiOrderItem": "Order Item",
+        "fueventapiPayment": "Payment",
+        "fueventapiProduct": "Product",
+        "fueventapiCategory": "Category",
+        "fueventapiReview": "Review",
+        "fueventapiDiscount": "Discount",
+        "fueventapiNotification": "Notification",
+        "fueventapiWallet": "Wallet",
+        "fueventapiOrderDiscount": "Order Discount",
+        "fueventapiTransactionHistory": "Transaction History",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

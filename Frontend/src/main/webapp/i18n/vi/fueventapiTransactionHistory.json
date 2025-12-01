@@ -1,0 +1,32 @@
+{
+  "fuEventUiApp": {
+    "fueventapiTransactionHistory": {
+      "home": {
+        "title": "Transaction Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Transaction History",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Transaction History",
+        "notFound": "No Transaction Histories found"
+      },
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Transaction History {{ id }}?"
+      },
+      "detail": {
+        "title": "Transaction History"
+      },
+      "id": "ID",
+      "amount": "Amount",
+      "type": "Type",
+      "description": "Description",
+      "transactionDate": "Transaction Date",
+      "walletId": "Wallet Id"
+    }
+  },
+  "fueventapiApp": {
+    "fueventapiTransactionHistory": {
+      "created": "Một Transaction History mới được tạo với định danh {{ param }}",
+      "updated": "Một Transaction History cập nhật với định danh {{ param }}",
+      "deleted": "Một Transaction History đã xóa với định danh {{ param }}"
+    }
+  }
+}

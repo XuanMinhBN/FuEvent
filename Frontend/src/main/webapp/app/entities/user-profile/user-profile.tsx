@@ -118,6 +118,9 @@ export const UserProfile = (props: RouteComponentProps<{ url: string }>) => {
                 <th className="hand" onClick={sort('walletId')}>
                   <Translate contentKey="fuEventUiApp.userProfile.walletId">Wallet Id</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('userId')}>
+                  <Translate contentKey="fuEventUiApp.userProfile.userId">User Id</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -134,6 +137,7 @@ export const UserProfile = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{userProfile.address}</td>
                   <td>{userProfile.studentCode}</td>
                   <td>{userProfile.walletId}</td>
+                  <td>{userProfile.userId}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${userProfile.id}`} color="info" size="sm" data-cy="entityDetailsButton">

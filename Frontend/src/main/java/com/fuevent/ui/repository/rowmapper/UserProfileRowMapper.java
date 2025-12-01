@@ -31,6 +31,7 @@ public class UserProfileRowMapper implements BiFunction<Row, String, UserProfile
         entity.setAddress(converter.fromRow(row, prefix + "_address", String.class));
         entity.setStudentCode(converter.fromRow(row, prefix + "_student_code", String.class));
         entity.setWalletId(converter.fromRow(row, prefix + "_wallet_id", Long.class));
+        entity.setUserId(converter.fromRow(row, prefix + "_user_id", Long.class));
         return entity;
     }
 }

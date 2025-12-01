@@ -1,0 +1,33 @@
+{
+  "fuEventUiApp": {
+    "fueventapiPayment": {
+      "home": {
+        "title": "Payments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Payment",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Payment",
+        "notFound": "No Payments found"
+      },
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Payment {{ id }}?"
+      },
+      "detail": {
+        "title": "Payment"
+      },
+      "id": "ID",
+      "amount": "Amount",
+      "paymentMethod": "Payment Method",
+      "status": "Status",
+      "transactionId": "Transaction Id",
+      "paymentTime": "Payment Time",
+      "order": "Order"
+    }
+  },
+  "fueventapiApp": {
+    "fueventapiPayment": {
+      "created": "Một Payment mới được tạo với định danh {{ param }}",
+      "updated": "Một Payment cập nhật với định danh {{ param }}",
+      "deleted": "Một Payment đã xóa với định danh {{ param }}"
+    }
+  }
+}

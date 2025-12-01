@@ -16,6 +16,7 @@ public class UserProfileSqlHelper {
         columns.add(Column.aliased("address", table, columnPrefix + "_address"));
         columns.add(Column.aliased("student_code", table, columnPrefix + "_student_code"));
         columns.add(Column.aliased("wallet_id", table, columnPrefix + "_wallet_id"));
+        columns.add(Column.aliased("user_id", table, columnPrefix + "_user_id"));
 
         return columns;
     }

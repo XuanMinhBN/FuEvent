@@ -1,0 +1,33 @@
+{
+  "fuEventUiApp": {
+    "fueventapiPayment": {
+      "home": {
+        "title": "Payments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Payment",
+        "createOrEditLabel": "Create or edit a Payment",
+        "notFound": "No Payments found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Payment {{ id }}?"
+      },
+      "detail": {
+        "title": "Payment"
+      },
+      "id": "ID",
+      "amount": "Amount",
+      "paymentMethod": "Payment Method",
+      "status": "Status",
+      "transactionId": "Transaction Id",
+      "paymentTime": "Payment Time",
+      "order": "Order"
+    }
+  },
+  "fueventapiApp": {
+    "fueventapiPayment": {
+      "created": "A new Payment is created with identifier {{ param }}",
+      "updated": "A Payment is updated with identifier {{ param }}",
+      "deleted": "A Payment is deleted with identifier {{ param }}"
+    }
+  }
+}
