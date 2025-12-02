@@ -1,3 +1,120 @@
+// --- Variables (Biến màu) ---
+$bg-dark: #1f2937; /* bg-gray-800 */
+$text-white: #fff;
+$text-gray: #d1d5db; /* text-gray-300 */
+$border-color: #374151; /* gray-700 */
+$primary-color: #f47920; /* Màu cam chủ đạo */
+$primary-hover: #d46510; /* Màu cam đậm khi hover */
+
 .footer {
-  height: 50px;
+  background: $bg-dark;
+  color: $text-white;
+  padding: 3rem 1rem;
+
+  // .footer-container
+  &-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    // Responsive: Tablet & Desktop
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  // .footer-column
+  &-column {
+    display: flex;
+    flex-direction: column;
+
+    // Các thẻ ul, li, a nằm trong column
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      font-size: 0.9rem;
+      color: $text-gray;
+      text-decoration: none;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+
+  // .footer-logo
+  &-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+
+  // .footer-text
+  &-text {
+    font-size: 0.9rem;
+    color: $text-gray;
+    line-height: 1.6;
+  }
+
+  // .footer-heading
+  &-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  // .footer-socials
+  &-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    a {
+      color: $text-gray;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+
+  // .footer-contact
+  &-contact {
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: $text-gray;
+      font-size: 0.9rem;
+    }
+  }
+
+  // .footer-bottom
+  &-bottom {
+    border-top: 1px solid $border-color;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: $text-gray;
+  }
+
+  &:hover {
+    background-color: $primary-hover;
+    transform: translateY(-2px);
+    color: $text-white;
+  }
 }
