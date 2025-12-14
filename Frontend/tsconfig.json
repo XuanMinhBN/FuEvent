@@ -14,9 +14,10 @@
     "types": ["jest", "webpack-env"],
     "allowJs": true,
     "checkJs": false,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "app/*": ["src/main/webapp/app/*"]
+      "app/*": ["src/main/webapp/app/*"],
+      "@/*": ["./*"]
     },
     "importHelpers": true,
     "esModuleInterop": true,
