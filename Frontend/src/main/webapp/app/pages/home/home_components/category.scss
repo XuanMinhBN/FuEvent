@@ -1,0 +1,131 @@
+/* --- Categories Section --- */
+.categories {
+  background-color: var(--gray-light);
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    width: 100%;
+
+    /* Responsive cho Grid */
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      // Lưu ý: Input gốc của bạn là 3 cột ở mobile, tôi giữ nguyên logic này
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+  }
+}
+
+/* --- Category Components --- */
+.category {
+  /* .category-card */
+  &-card {
+    background-color: var(--white);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    /* Hover State */
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-medium);
+      border-color: var(--category-color);
+
+      // Khi hover vào card, tác động lên icon bên trong
+      .category-icon {
+        transform: scale(1.1);
+      }
+    }
+
+    /* Active State */
+    &.active {
+      background-color: var(--light-orange);
+      border-color: var(--primary-orange);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    /* Responsive cho Card Padding */
+    @media (max-width: 768px) {
+      padding: 20px 16px;
+    }
+    @media (max-width: 480px) {
+      padding: 16px 12px;
+    }
+  }
+
+  /* .category-icon */
+  &-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--category-color);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+
+    /* Responsive cho Icon Size */
+    @media (max-width: 768px) {
+      width: 50px;
+      height: 50px;
+    }
+    @media (max-width: 480px) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* .category-info */
+  &-info {
+    text-align: center;
+  }
+
+  /* .category-name */
+  &-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 4px;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+    @media (max-width: 480px) {
+      font-size: 14px;
+    }
+  }
+
+  /* .category-count */
+  &-count {
+    font-size: 14px;
+    color: var(--gray-medium);
+
+    @media (max-width: 480px) {
+      font-size: 12px;
+    }
+  }
+}
+
+/* --- Misc --- */
+.all-icon {
+  font-weight: 700;
+  font-size: 14px;
+}

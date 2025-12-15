@@ -1,113 +1,214 @@
-$header-color: #fff;
-$header-color-secondary: #bbb;
-$header-color-hover: darken($header-color, 20%);
+/* --- Variables (Dễ dàng đổi màu chủ đạo ở đây) --- */
+$primary-color: #f47920;
+$primary-dark: #e05e00;
+$text-color: #444;
+$text-light: #555;
+$white: #fff;
+$border-color: #ddd;
+$shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-/* ==========================================================================
-Developement Ribbon
-========================================================================== */
-.ribbon {
-  background-color: rgba(170, 0, 0, 0.5);
-  left: -3.5em;
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  overflow: hidden;
-  position: absolute;
-  top: 30px;
-  white-space: nowrap;
-  width: 15em;
-  z-index: 99999;
-  pointer-events: none;
-  opacity: 0.75;
+/* --- Header Styles --- */
+.header {
+  background: $white;
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  &-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 16px;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* --- Components --- */
+
+// Logo
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: $primary-color;
+  text-decoration: none;
+}
+
+// Menu Desktop
+.menu-desktop {
+  margin-left: 32px;
+  display: flex;
+  gap: 20px;
+
   a {
-    color: #fff;
-    display: block;
-    font-weight: 400;
-    margin: 1px 0;
-    padding: 10px 50px;
-    text-align: center;
+    color: $text-color;
     text-decoration: none;
-    text-shadow: 0 0 5px #444;
-    pointer-events: none;
-  }
-}
+    font-size: 15px;
+    font-weight: 500;
+    padding: 6px 10px;
+    transition: color 0.2s;
 
-/* ==========================================================================
-Navbar styles
-========================================================================== */
-.jh-navbar {
-  background-color: #353d47;
-  padding: 0.2em 1em;
-  .profile-image {
-    margin: -10px 0px;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-  }
-  .dropdown-item.active,
-  .dropdown-item.active:focus,
-  .dropdown-item.active:hover {
-    background-color: #353d47;
-  }
-  .dropdown-toggle::after {
-    margin-left: 0.15em;
-  }
-  ul.navbar-nav {
-    padding: 0.5em;
-    .nav-item {
-      margin-left: 1.5rem;
-    }
-  }
-  a.nav-link {
-    font-weight: 400;
-    > span {
-      margin-left: 5px;
-    }
-  }
-  .jh-navbar-toggler {
-    color: #ccc;
-    font-size: 1.5em;
-    padding: 10px;
     &:hover {
-      color: #fff;
+      color: $primary-color;
     }
   }
 }
-.navbar-version {
-  font-size: 10px;
-  color: $header-color-secondary;
-  padding: 0 0 0 10px;
+
+// Actions (Login, Cart, Notifications)
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.brand-logo {
+// Buttons
+.icon-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: $text-light;
+  padding: 6px;
+  border-radius: 50%;
+  transition: color 0.2s;
+
   &:hover {
-    text-decoration: none;
+    color: $primary-color;
   }
-  .brand-icon {
-    height: 35px;
-    width: auto;
+}
+
+.login-btn {
+  background: $primary-color;
+  color: $white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+/* --- Mobile Menu --- */
+.menu-toggle {
+  display: none;
+
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: $text-color;
+    padding: 6px;
+  }
+}
+
+.menu-mobile {
+  background: $white;
+  border-top: 1px solid $border-color;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  a {
+    text-decoration: none;
+    font-size: 16px;
+    color: $text-color;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  &-bottom {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .menu-desktop,
+  .header-actions {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* --- Profile Dropdown --- */
+.profile {
+  &-root {
+    position: relative;
     display: inline-block;
-    img {
-      height: 45px;
+  }
+
+  &-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: $white;
+    border: 1px solid #e0e0e0;
+    box-shadow: $shadow-md;
+    border-radius: 8px;
+    min-width: 160px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: dropdownFade 0.2s ease;
+
+    &-item {
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #333;
+      text-align: left;
+      text-decoration: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s, color 0.2s;
+
+      &:hover {
+        background: $primary-color;
+        color: $white;
+      }
     }
   }
 }
 
-.brand-title {
-  font-size: 24px;
-  color: $header-color;
+// Admin Link Special Style
+.admin-link {
+  color: $primary-color;
+  font-weight: 600;
+
   &:hover {
-    color: $header-color-hover;
-    text-decoration: none;
+    color: $primary-dark;
   }
 }
 
-.loading-bar {
-  height: 3px;
-  background-color: #009cd8;
-  position: absolute;
-  top: 0px;
-  z-index: 1031;
+/* --- Keyframes --- */
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

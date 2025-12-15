@@ -1,66 +1,92 @@
-import './header.scss';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AccountMenu, Brand, IUser, MobileMenu, Navbar } from './header-components';
+import { useStore } from 'react-redux';
+import { Bell, MenuIcon, XIcon } from 'lucide-react';
 
-import React, { useState } from 'react';
-import { Translate, Storage } from 'react-jhipster';
-import { Navbar, Nav, NavbarToggler, Collapse } from 'reactstrap';
-import LoadingBar from 'react-redux-loading-bar';
+const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-import { Home, Brand } from './header-components';
-import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu } from '../menus';
-import { useAppDispatch } from 'app/config/store';
-import { setLocale } from 'app/shared/reducers/locale';
+  const store = useStore();
+  const user = (store as IUser) || {};
+  // const setDataUser = store?.setDataUser;
+  const navigate = useNavigate();
 
-export interface IHeaderProps {
-  isAuthenticated: boolean;
-  isAdmin: boolean;
-  ribbonEnv: string;
-  isInProduction: boolean;
-  isOpenAPIEnabled: boolean;
-  currentLocale: string;
-}
+  // useEffect(() => {
+  //   const savedUser = localStorage.getItem('user');
+  //   // Cast user ID về string hoặc undefined để so sánh an toàn
+  //   const userId = user?._id || user?.id;
 
-const Header = (props: IHeaderProps) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  //   if (savedUser && !userId) {
+  //     try {
+  //       const parsedUser = JSON.parse(savedUser) as IUser;
+  //       if (setDataUser) {
+  //         setDataUser(parsedUser);
+  //       }
+  //     } catch {}
+  //   }
+  // }, [user, setDataUser]);
 
-  const dispatch = useAppDispatch();
+  // const handleLogout = async () => {
+  //   const ok = window.confirm('Are you sure you want to logout?');
+  //   if (!ok) return;
 
-  const handleLocaleChange = event => {
-    const langKey = event.target.value;
-    Storage.session.set('locale', langKey);
-    dispatch(setLocale(langKey));
-  };
+  //   try {
+  //     await requestLogout();
+  //   } catch (e) {
+  //     console.error('Logout API error:', e);
+  //   }
 
-  const renderDevRibbon = () =>
-    props.isInProduction === false ? (
-      <div className="ribbon dev">
-        <a href="">
-          <Translate contentKey={`global.ribbon.${props.ribbonEnv}`} />
-        </a>
-      </div>
-    ) : null;
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('user');
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  //   try {
+  //     if (setDataUser) setDataUser({});
+  //   } catch (e) {}
 
-  /* jhipster-needle-add-element-to-menu - JHipster will add new menu items here */
+  //   navigate('/signin');
+  // };
 
   return (
-    <div id="app-header">
-      {renderDevRibbon()}
-      <LoadingBar className="loading-bar" />
-      <Navbar data-cy="navbar" dark expand="sm" fixed="top" className="jh-navbar">
-        <NavbarToggler aria-label="Menu" onClick={toggleMenu} />
-        <Brand />
-        <Collapse isOpen={menuOpen} navbar>
-          <Nav id="header-tabs" className="ms-auto" navbar>
-            <Home />
-            {props.isAuthenticated && <EntitiesMenu />}
-            {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
-            <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />
-            <AccountMenu isAuthenticated={props.isAuthenticated} />
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
+    <>
+      <header className="header">
+        <div className="header-container">
+          {/* --- Logo + Desktop Nav --- */}
+          <div className="header-left-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <Brand />
+            <Navbar />
+          </div>
+
+          {/* --- Actions Desktop --- */}
+          <div className="header-actions">
+            {/* <button className="icon-btn" onClick={() => setShowNotifications(true)} title="Notifications">
+              <Bell size={18} />
+            </button> */}
+
+            {/* <AccountMenu user={user} handleLogout={handleLogout} /> */}
+          </div>
+
+          {/* --- Toggle button mobile --- */}
+          <div className="menu-toggle">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}</button>
+          </div>
+        </div>
+
+        <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} user={user} />
+      </header>
+
+      {/* --- Sidebar Notifications --- */}
+      {/* Bạn có thể cần update NotificationSidebar sang TSX nếu chưa làm */}
+      {/* <NotificationSidebar
+        open={showNotifications}
+        onClose={() => setShowNotifications(false)}
+        notifications={notifications}
+        onMarkAllRead={() => setNotifications(s => s.map(n => ({ ...n, read: true })))}
+        onClear={() => setNotifications([])}
+      />
+
+      <AIRecommend userId={user?._id || user?.id} /> */}
+    </>
   );
 };
 

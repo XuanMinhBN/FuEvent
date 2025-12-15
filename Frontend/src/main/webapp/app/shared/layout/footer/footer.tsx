@@ -2,7 +2,6 @@ import './footer.scss';
 
 import React from 'react';
 import { Translate } from 'react-jhipster';
-import { Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { MapPin as MapPinIcon, Phone as PhoneIcon, Mail as MailIcon, FacebookIcon, InstagramIcon } from 'lucide-react';
 
