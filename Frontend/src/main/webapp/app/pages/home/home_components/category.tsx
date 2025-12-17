@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Book, Music, Wrench, Users, Trophy, Briefcase, Gift, Cpu, MoreHorizontal, LucideIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { CustomButton } from 'app/shared/components/button';
@@ -12,7 +12,12 @@ interface ICategory {
   count: number;
 }
 
-export const Categories: React.FC = () => {
+interface CategoriesProps {
+  selectedCategory: string;
+  setSelectedCategory: Dispatch<SetStateAction<string>>;
+}
+
+export const Categories: React.FC<CategoriesProps> = ({ selectedCategory, setSelectedCategory }) => {
   const navigate = useNavigate();
 
   const categories: ICategory[] = [
@@ -28,6 +33,11 @@ export const Categories: React.FC = () => {
     { name: 'Other', icon: MoreHorizontal, color: '#6B7280', count: 3 },
   ];
 
+  const handleCategoryClick = (categoryName: string) => {
+    setSelectedCategory(categoryName);
+    navigate('/events', { state: { category: categoryName } });
+  };
+
   return (
     <section className="categories section">
       <div className="container">
@@ -42,9 +52,14 @@ export const Categories: React.FC = () => {
               name={category.name}
               contentKey={category.name}
               icon={category.icon}
-              variant="outline"
-              onClick={() => navigate('/events', { state: { category: category.name } })}
-              style={{ '--category-color': category.color } as React.CSSProperties}
+              variant={selectedCategory === category.name ? 'default' : 'outline'}
+              onClick={() => handleCategoryClick(category.name)}
+              style={
+                {
+                  '--category-color': category.color,
+                  borderColor: selectedCategory === category.name ? category.color : undefined,
+                } as React.CSSProperties
+              }
             />
           ))}
         </div>

@@ -1,0 +1,63 @@
+// --- Variables (Nếu cần) ---
+$text-white: #fff;
+
+// --- Main Container ---
+.destinations {
+  padding: 20px;
+  background: var(--white);
+  border-radius: 10px;
+
+  // Sử dụng & để nối class: .destinations-title
+  &-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: $text-white;
+  }
+
+  // Sử dụng & để nối class: .destinations-grid
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+}
+
+// --- Card Item ---
+// Tách riêng block này hoặc lồng vào .destinations-grid nếu muốn scope chặt hơn
+.destination-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  // Hover effect: dùng & để tham chiếu chính nó
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  // Các phần tử con bên trong card
+  .destination-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .destination-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to top, rgba(241, 129, 23, 0.8), rgba(0, 128, 0, 0));
+
+    // Lồng .destination-name vào trong overlay
+    .destination-name {
+      color: $text-white;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+}

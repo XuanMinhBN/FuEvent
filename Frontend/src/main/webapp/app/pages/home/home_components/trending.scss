@@ -1,0 +1,104 @@
+// --- Variables (Biến màu sắc) ---
+$white: var(--white, #fff);
+$text-dark: #222;
+$text-gray: #555;
+$primary-orange: #ff6b35;
+
+.trending-container {
+  background-color: $white;
+  padding: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+
+  // --- Header Section ---
+  .trending-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    h2 {
+      color: $text-dark;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .emoji {
+      font-size: 22px;
+    }
+  }
+
+  // --- Card Item ---
+  .trending-card {
+    position: relative;
+    padding: 0 50px; /* Tăng khoảng cách để số Rank không bị che */
+    overflow: visible; /* Để số Rank lòi ra ngoài biên */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    // 1. Hover Effect cho toàn bộ Card
+    &:hover {
+      transform: translateY(-6px);
+      z-index: 3;
+
+      // Khi Card hover -> Zoom ảnh bên trong
+      .image-wrapper img {
+        transform: scale(1.05);
+      }
+
+      // Khi Card hover -> Đổi màu tên sự kiện
+      .event-name {
+        color: $primary-orange;
+      }
+    }
+
+    // 2. Image Area
+    .image-wrapper {
+      position: relative;
+      z-index: 1; /* Nổi trên số Rank */
+      overflow: hidden;
+      border-radius: 14px;
+
+      img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 14px;
+        display: block;
+        transition: transform 0.4s ease;
+      }
+    }
+
+    // 3. Rank Number (Số thứ tự lớn)
+    .rank {
+      position: absolute;
+      left: -25px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 140px;
+      font-weight: 900;
+      font-family: 'Bungee Outline', sans-serif; /* Lưu ý: Cần import font này ở index.html hoặc google fonts */
+      color: $primary-orange;
+      z-index: 0; /* Chìm dưới ảnh */
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    // 4. Info Area
+    .event-name {
+      margin-top: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: $text-dark;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color 0.3s ease;
+    }
+
+    .event-date {
+      font-size: 13px;
+      color: $text-gray;
+      margin-top: 2px;
+    }
+  }
+}

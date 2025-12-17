@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Calendar, MapPin, Ticket } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Banner.css';
+import './banner.scss';
 import { CustomButton } from 'app/shared/components/button';
-import { Button } from 'reactstrap';
 
 export interface IBannerEvent {
   id: string | number;
