@@ -16,6 +16,7 @@ interface CustomButtonProps extends ButtonProps {
 }
 
 export function CustomButton({
+  type,
   className,
   variant,
   size,
@@ -27,7 +28,7 @@ export function CustomButton({
   ...props
 }: CustomButtonProps) {
   return (
-    <Button variant={variant} size={size} className={className} disabled={isLoading || disabled} {...props}>
+    <Button type={type} variant={variant} size={size} className={className} disabled={isLoading || disabled} {...props}>
       {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : Icon && <Icon className="h-4 w-4" />}
       {contentKey ? <Translate contentKey={contentKey}>{name}</Translate> : name}
     </Button>

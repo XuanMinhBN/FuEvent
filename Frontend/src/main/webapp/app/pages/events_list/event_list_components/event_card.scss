@@ -1,0 +1,160 @@
+// 1. Variables (Biến màu sắc)
+$card-bg: #fff;
+$text-primary: #222;
+$text-secondary: #444;
+$text-muted: #666;
+$border-color: #ddd;
+
+$color-success: #22c55e;
+$color-danger: #ef4444;
+$color-rating: #f59e0b;
+$color-primary: #f5be6c;
+$color-primary-hover: #eb8220;
+
+.event-card {
+  background: $card-bg;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: 0.3s;
+
+  // Hover state của card
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  // --- Image Area ---
+  &__image {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // --- Badges (Price & Status) ---
+  &__price {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: $color-success;
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+  }
+
+  // Lưu ý: Class này không theo chuẩn BEM event-card__... nên không dùng &
+  .event-status {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: $color-danger;
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+  }
+
+  // --- Overlay ---
+  &__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: #fff;
+
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+  }
+
+  // --- Details Section ---
+  &__details {
+    padding: 16px;
+    font-size: 14px;
+    color: $text-secondary;
+  }
+
+  &__row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+
+    .icon {
+      margin-right: 6px;
+      font-size: 14px;
+    }
+  }
+
+  // Các class phụ bên trong row
+  .venue {
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .location {
+    font-size: 13px;
+    color: $text-muted;
+  }
+
+  &__attendees {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12px 0;
+
+    .rating {
+      font-size: 14px;
+      color: $color-rating;
+    }
+  }
+
+  // --- Buttons / Actions ---
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  // Style cho button (được scope bên trong card để tránh ảnh hưởng global)
+  .btn {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid $border-color;
+    background: #f9f9f9;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background: #eee;
+    }
+
+    &.primary {
+      background: $color-primary;
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background: $color-primary-hover;
+      }
+    }
+  }
+}

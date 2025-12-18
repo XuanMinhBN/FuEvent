@@ -1,0 +1,133 @@
+// 1. Định nghĩa biến màu sắc (Variables)
+$primary-color: #ffb703;
+$primary-hover: #ffa200;
+$heading-color: #ff7b00;
+$text-gray: #ccc;
+$border-color: #ddd;
+
+.pu-review-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.25s ease;
+
+  // 2. Sử dụng Nesting với & để tạo .pu-review-popup__content
+  &__content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    width: 360px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: popupIn 0.25s ease;
+    cursor: default;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    // Hiệu ứng hover cho popup content
+    &:hover {
+      transform: scale(1.01);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    h2 {
+      color: $heading-color;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+  }
+}
+
+// 3. Các component con bên trong (Stars, Textarea, Button)
+.pu-rating-stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+
+  .pu-star {
+    font-size: 32px;
+    color: $text-gray;
+    cursor: pointer;
+    transition: color 0.25s, transform 0.15s;
+
+    // Star Active State
+    &.active {
+      color: $primary-color;
+      transform: scale(1.2);
+    }
+  }
+}
+
+.pu-textarea {
+  width: 100%;
+  height: 90px;
+  border-radius: 8px;
+  border: 1px solid $border-color;
+  padding: 10px 12px;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+  }
+}
+
+.pu-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &.primary {
+    background-color: $primary-color;
+    color: #fff;
+
+    &:hover {
+      background-color: $primary-hover;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// 4. Keyframes Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popupIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,128 @@
+// 1. Variables
+$primary-orange: #f47920;
+$secondary-orange: #e59346;
+$gradient-bg: linear-gradient(135deg, #f47920, #dbcbb2, #f47920);
+$bg-light: #f9fafb;
+$text-dark: #111827;
+$text-gray: #6b7280;
+$text-light: #e0e7ff;
+
+// 2. Global
+.app-container {
+  min-height: 100vh;
+  background-color: $bg-light;
+  font-family: Arial, sans-serif;
+}
+
+// 3. Hero Section
+.hero-section {
+  background: $gradient-bg;
+  color: white;
+  padding: 4rem 1rem;
+  text-align: center;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    color: $text-light;
+  }
+
+  // Lồng ghép các thành phần con của Hero
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-search {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    form {
+      width: 100%;
+      max-width: 900px;
+    }
+  }
+}
+
+// 4. Main Content Layout
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.content-layout {
+  display: flex;
+  gap: 2rem;
+}
+
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.events-section {
+  flex: 1;
+}
+
+// 5. Results Header
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $text-dark;
+  }
+
+  p {
+    color: $text-gray;
+    font-size: 0.9rem;
+  }
+}
+
+// 6. Filter Button
+.filter-btn {
+  background-color: $secondary-orange;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $primary-orange;
+  }
+}
+
+// 7. Events Grid (Responsive)
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+
+  // Tablet
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // Mobile
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
