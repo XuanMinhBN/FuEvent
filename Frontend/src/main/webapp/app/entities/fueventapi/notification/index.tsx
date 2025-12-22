@@ -1,23 +1,54 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
-
-import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
-
+import { Routes, Route } from 'react-router-dom';
 import Notification from './notification';
 import NotificationDetail from './notification-detail';
 import NotificationUpdate from './notification-update';
 import NotificationDeleteDialog from './notification-delete-dialog';
+import ErrorBoundary from 'app/shared/error/error-boundary';
 
-const Routes = ({ match }) => (
-  <>
-    <Switch>
-      <ErrorBoundaryRoute exact path={`${match.url}/new`} component={NotificationUpdate} />
-      <ErrorBoundaryRoute exact path={`${match.url}/:id/edit`} component={NotificationUpdate} />
-      <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={NotificationDetail} />
-      <ErrorBoundaryRoute path={match.url} component={Notification} />
-    </Switch>
-    <ErrorBoundaryRoute exact path={`${match.url}/:id/delete`} component={NotificationDeleteDialog} />
-  </>
-);
-
-export default Routes;
+export const NotificationRoutes = () => {
+  return (
+    <Routes>
+      <Route
+        path="new"
+        element={
+          <ErrorBoundary>
+            <NotificationUpdate />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path=":id/edit"
+        element={
+          <ErrorBoundary>
+            <NotificationUpdate />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path=":id"
+        element={
+          <ErrorBoundary>
+            <NotificationDetail />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path=":id/delete"
+        element={
+          <ErrorBoundary>
+            <NotificationDeleteDialog />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        index
+        element={
+          <ErrorBoundary>
+            <Notification />
+          </ErrorBoundary>
+        }
+      />
+    </Routes>
+  );
+};

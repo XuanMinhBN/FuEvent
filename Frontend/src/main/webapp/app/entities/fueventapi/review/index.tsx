@@ -1,23 +1,54 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
-
-import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
-
+import { Routes, Route } from 'react-router-dom';
 import Review from './review';
 import ReviewDetail from './review-detail';
 import ReviewUpdate from './review-update';
 import ReviewDeleteDialog from './review-delete-dialog';
+import ErrorBoundary from 'app/shared/error/error-boundary';
 
-const Routes = ({ match }) => (
-  <>
-    <Switch>
-      <ErrorBoundaryRoute exact path={`${match.url}/new`} component={ReviewUpdate} />
-      <ErrorBoundaryRoute exact path={`${match.url}/:id/edit`} component={ReviewUpdate} />
-      <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={ReviewDetail} />
-      <ErrorBoundaryRoute path={match.url} component={Review} />
-    </Switch>
-    <ErrorBoundaryRoute exact path={`${match.url}/:id/delete`} component={ReviewDeleteDialog} />
-  </>
-);
-
-export default Routes;
+export const ReviewRoutes = () => {
+  return (
+    <Routes>
+      <Route
+        path="new"
+        element={
+          <ErrorBoundary>
+            <ReviewUpdate />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path=":id/edit"
+        element={
+          <ErrorBoundary>
+            <ReviewUpdate />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path=":id"
+        element={
+          <ErrorBoundary>
+            <ReviewDetail />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path=":id/delete"
+        element={
+          <ErrorBoundary>
+            <ReviewDeleteDialog />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        index
+        element={
+          <ErrorBoundary>
+            <Review />
+          </ErrorBoundary>
+        }
+      />
+    </Routes>
+  );
+};

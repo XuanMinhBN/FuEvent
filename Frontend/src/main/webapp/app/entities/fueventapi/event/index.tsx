@@ -1,23 +1,56 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
-
-import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
-
+import { Routes, Route } from 'react-router-dom';
 import Event from './event';
 import EventDetail from './event-detail';
 import EventUpdate from './event-update';
 import EventDeleteDialog from './event-delete-dialog';
+import ErrorBoundary from 'app/shared/error/error-boundary';
 
-const Routes = ({ match }) => (
-  <>
-    <Switch>
-      <ErrorBoundaryRoute exact path={`${match.url}/new`} component={EventUpdate} />
-      <ErrorBoundaryRoute exact path={`${match.url}/:id/edit`} component={EventUpdate} />
-      <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={EventDetail} />
-      <ErrorBoundaryRoute path={match.url} component={Event} />
-    </Switch>
-    <ErrorBoundaryRoute exact path={`${match.url}/:id/delete`} component={EventDeleteDialog} />
-  </>
-);
-
-export default Routes;
+export const EventRoutes = () => {
+  return (
+    <div>
+      <Routes>
+        <Route
+          path="new"
+          element={
+            <ErrorBoundary>
+              <EventUpdate />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path=":id/edit"
+          element={
+            <ErrorBoundary>
+              <EventUpdate />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path=":id"
+          element={
+            <ErrorBoundary>
+              <EventDetail />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          index
+          element={
+            <ErrorBoundary>
+              <Event />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path=":id/delete"
+          element={
+            <ErrorBoundary>
+              <EventDeleteDialog />
+            </ErrorBoundary>
+          }
+        />
+      </Routes>
+    </div>
+  );
+};

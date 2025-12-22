@@ -32,7 +32,7 @@ interface ReviewSectionProps {
   setReviews: React.Dispatch<React.SetStateAction<ReviewData[]>>;
 }
 
-const ReviewSection: React.FC<ReviewSectionProps> = ({ eventId, reviews, setReviews }) => {
+export const ReviewSection: React.FC<ReviewSectionProps> = ({ eventId, reviews, setReviews }) => {
   const [rating, setRating] = useState<number>(0);
   const [hover, setHover] = useState<number>(0);
   const [comment, setComment] = useState<string>('');

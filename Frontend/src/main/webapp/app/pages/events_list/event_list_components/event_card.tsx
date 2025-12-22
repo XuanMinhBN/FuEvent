@@ -7,7 +7,7 @@ import { CustomButton } from 'app/shared/components/button';
 import { ReviewPopup } from './review_popup';
 
 export interface IEvent {
-  category: any;
+  category?: string;
   id: number | string;
   image: string;
   title: string;
@@ -17,7 +17,7 @@ export interface IEvent {
   time: string;
   location: string;
   artist?: string;
-  attendees: number;
+  attendees?: any[];
 }
 
 interface EventCardProps {

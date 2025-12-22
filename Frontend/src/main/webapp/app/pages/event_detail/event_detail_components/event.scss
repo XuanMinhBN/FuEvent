@@ -1,0 +1,291 @@
+/* --- Variables --- */
+$color-gradient-start: #e6810f;
+$color-gradient-end: #e65c0c;
+$color-text-white: #ffffff;
+$color-text-yellow: #ffd966;
+$color-text-green: #4ade80;
+
+$color-btn-bg: #22c55e;
+$color-btn-hover: #16a34a;
+
+$color-share-bg: rgba(255, 255, 255, 0.15);
+$color-share-border: rgba(255, 255, 255, 0.25);
+$color-share-hover: #e65c0c; // Primary orange
+$color-share-copied: #4caf50;
+
+$shadow-text: 2px 2px 4px rgba(1, 50, 141, 0.4);
+$shadow-text-light: 1px 1px 2px rgba(0, 0, 0, 0.4);
+
+/* --- Styles --- */
+.event-hero {
+  background: linear-gradient(135deg, $color-gradient-start 0%, $color-gradient-end 100%);
+  color: $color-text-white;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+
+  // --- Content Wrapper ---
+  .event-hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  // --- Left Side: Info ---
+  .event-info {
+    flex: 1;
+    max-width: 55%;
+
+    @media (max-width: 768px) {
+      max-width: 100%; // Full width on mobile
+    }
+
+    .event-title {
+      font-size: 2.5em;
+      font-weight: 800;
+      margin-bottom: 20px;
+      text-shadow: $shadow-text;
+
+      @media (max-width: 768px) {
+        font-size: 2em;
+      }
+    }
+
+    // Meta Info (Date, Time, etc.)
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 25px;
+      font-size: 15px;
+
+      .meta-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+
+        .meta-icon {
+          font-size: 18px;
+          flex-shrink: 0;
+          line-height: 1.4;
+        }
+
+        .meta-text {
+          color: $color-text-white;
+          line-height: 1.5;
+          text-shadow: $shadow-text-light;
+        }
+
+        .age-rating {
+          font-weight: bold;
+          color: $color-text-yellow;
+        }
+      }
+    }
+
+    // Location
+    .location {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 30px;
+      font-size: 14px;
+
+      @media (max-width: 768px) {
+        justify-content: center; // Center alignment for mobile
+      }
+
+      .location-icon {
+        font-size: 16px;
+        margin-top: 2px;
+      }
+
+      .location-text {
+        color: $color-text-white;
+
+        .location-detail,
+        .event-date {
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.85);
+          margin-top: 4px;
+          line-height: 1.4;
+        }
+      }
+    }
+
+    // Pricing
+    .pricing {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      font-size: 18px;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+
+      .price-label {
+        opacity: 0.9;
+      }
+
+      .price {
+        font-size: 24px;
+        font-weight: bold;
+        color: $color-text-white;
+        text-shadow: $shadow-text-light;
+      }
+
+      .price-arrow {
+        color: $color-text-green;
+        font-size: 20px;
+      }
+    }
+
+    // Actions (Buttons)
+    .cta-button {
+      background: $color-btn-bg;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background: $color-btn-hover;
+      }
+
+      &.expired {
+        background: #9ca3af;
+        cursor: not-allowed;
+      }
+    }
+
+    .share-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+
+      @media (max-width: 768px) {
+        gap: 8px;
+        justify-content: center; // Center on mobile
+      }
+
+      .share-button {
+        background: $color-share-bg;
+        border: 1px solid $color-share-border;
+        color: $color-text-white;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+        position: relative; // Needed for tooltip
+
+        @media (max-width: 768px) {
+          padding: 8px;
+        }
+
+        &:hover {
+          background: $color-share-hover;
+          color: #fff;
+          transform: scale(1.1);
+          border-color: $color-share-hover;
+
+          // Tooltip trigger
+          &::after {
+            opacity: 1;
+          }
+        }
+
+        &.copied {
+          background: $color-share-copied;
+          color: #fff;
+          border-color: $color-share-copied;
+          transform: scale(1.1);
+        }
+
+        // Tooltip logic
+        &::after {
+          content: attr(title);
+          position: absolute;
+          bottom: 130%;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(0, 0, 0, 0.75);
+          color: white;
+          padding: 4px 8px;
+          font-size: 12px;
+          border-radius: 6px;
+          white-space: nowrap;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.2s ease;
+          z-index: 10;
+        }
+      }
+    }
+  }
+
+  // --- Right Side: Artwork ---
+  .event-artwork {
+    flex: 1;
+    max-width: 45%;
+    display: flex;
+    justify-content: flex-end;
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+      justify-content: center;
+    }
+
+    .artwork-container {
+      width: 100%;
+      // Giới hạn max-width hợp lý hơn thay vì 15000px
+      max-width: 500px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); // Thêm shadow cho đẹp
+
+      img.event-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+      }
+    }
+  }
+
+  // --- Decoration: Wave Pattern ---
+  .wave-pattern {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.15) 10px,
+      rgba(255, 255, 255, 0.15) 20px
+    );
+    border-radius: 0 0 20px 20px;
+    pointer-events: none; // Không chặn click
+  }
+}

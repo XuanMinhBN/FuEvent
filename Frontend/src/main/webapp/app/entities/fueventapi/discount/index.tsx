@@ -1,23 +1,59 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
-
-import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
-
+import { Routes, Route } from 'react-router-dom';
 import Discount from './discount';
 import DiscountDetail from './discount-detail';
 import DiscountUpdate from './discount-update';
 import DiscountDeleteDialog from './discount-delete-dialog';
+import ErrorBoundary from 'app/shared/error/error-boundary';
 
-const Routes = ({ match }) => (
-  <>
-    <Switch>
-      <ErrorBoundaryRoute exact path={`${match.url}/new`} component={DiscountUpdate} />
-      <ErrorBoundaryRoute exact path={`${match.url}/:id/edit`} component={DiscountUpdate} />
-      <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={DiscountDetail} />
-      <ErrorBoundaryRoute path={match.url} component={Discount} />
-    </Switch>
-    <ErrorBoundaryRoute exact path={`${match.url}/:id/delete`} component={DiscountDeleteDialog} />
-  </>
-);
-
-export default Routes;
+export const DiscountRoutes = () => {
+  return (
+    <>
+      <Routes>
+        <Route
+          path="/new"
+          element={
+            <ErrorBoundary>
+              <DiscountUpdate />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          index
+          path="/:id/edit"
+          element={
+            <ErrorBoundary>
+              <DiscountUpdate />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          index
+          path="/:id"
+          element={
+            <ErrorBoundary>
+              <DiscountDetail />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          index
+          element={
+            <ErrorBoundary>
+              <Discount />
+            </ErrorBoundary>
+          }
+        />
+      </Routes>
+      <Route
+        index
+        path="/:id/delete"
+        element={
+          <ErrorBoundary>
+            <DiscountDeleteDialog />
+          </ErrorBoundary>
+        }
+      />
+    </>
+  );
+};

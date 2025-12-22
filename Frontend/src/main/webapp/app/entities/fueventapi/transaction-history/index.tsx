@@ -1,23 +1,55 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
-
-import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
+import { Routes, Route } from 'react-router-dom';
 
 import TransactionHistory from './transaction-history';
 import TransactionHistoryDetail from './transaction-history-detail';
 import TransactionHistoryUpdate from './transaction-history-update';
 import TransactionHistoryDeleteDialog from './transaction-history-delete-dialog';
+import ErrorBoundary from 'app/shared/error/error-boundary';
 
-const Routes = ({ match }) => (
-  <>
-    <Switch>
-      <ErrorBoundaryRoute exact path={`${match.url}/new`} component={TransactionHistoryUpdate} />
-      <ErrorBoundaryRoute exact path={`${match.url}/:id/edit`} component={TransactionHistoryUpdate} />
-      <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={TransactionHistoryDetail} />
-      <ErrorBoundaryRoute path={match.url} component={TransactionHistory} />
-    </Switch>
-    <ErrorBoundaryRoute exact path={`${match.url}/:id/delete`} component={TransactionHistoryDeleteDialog} />
-  </>
-);
-
-export default Routes;
+export const TransactionHistoryRoutes = () => {
+  return (
+    <Routes>
+      <Route
+        path="new"
+        element={
+          <ErrorBoundary>
+            <TransactionHistoryUpdate />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path=":id/edit"
+        element={
+          <ErrorBoundary>
+            <TransactionHistoryUpdate />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path=":id"
+        element={
+          <ErrorBoundary>
+            <TransactionHistoryDetail />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path=":id/delete"
+        element={
+          <ErrorBoundary>
+            <TransactionHistoryDeleteDialog />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        index
+        element={
+          <ErrorBoundary>
+            <TransactionHistory />
+          </ErrorBoundary>
+        }
+      />
+    </Routes>
+  );
+};
