@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { IEvent } from 'app/shared/model/fueventapi/event.model';
 import { getEntities as getEvents } from 'app/entities/fueventapi/event/event.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './discount.reducer';
@@ -12,29 +11,33 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-export const DiscountUpdate = (props: RouteComponentProps<{ id: string }>) => {
+export const DiscountUpdate = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
 
-  const [isNew] = useState(!props.match.params || !props.match.params.id);
+  const isNew = !id;
 
   const events = useAppSelector(state => state.event.entities);
   const discountEntity = useAppSelector(state => state.discount.entity);
   const loading = useAppSelector(state => state.discount.loading);
   const updating = useAppSelector(state => state.discount.updating);
   const updateSuccess = useAppSelector(state => state.discount.updateSuccess);
+
   const handleClose = () => {
-    props.history.push('/discount' + props.location.search);
+    navigate('/discount' + location.search);
   };
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
     } else {
-      dispatch(getEntity(props.match.params.id));
+      dispatch(getEntity(id));
     }
 
     dispatch(getEvents({}));
-  }, []);
+  }, [id, isNew, dispatch]);
 
   useEffect(() => {
     if (updateSuccess) {

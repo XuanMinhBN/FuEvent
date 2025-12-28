@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, ButtonProps, buttonVariants } from '@/components/ui/button';
 import { type VariantProps } from 'class-variance-authority';
 import { Loader2, LucideIcon } from 'lucide-react';
 import { Translate } from 'react-jhipster';
+import { Button, ButtonProps, buttonVariants } from 'app/components/ui/button';
 
 interface CustomButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;

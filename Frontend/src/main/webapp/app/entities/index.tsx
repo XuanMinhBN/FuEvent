@@ -1,44 +1,131 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
+import { Routes, Route } from 'react-router-dom';
 
 import UserProfile from './user-profile';
-import Event from './fueventapi/event';
-import Order from './fueventapi/order';
-import OrderItem from './fueventapi/order-item';
-import Payment from './fueventapi/payment';
-import Product from './fueventapi/product';
-import Category from './fueventapi/category';
-import Review from './fueventapi/review';
-import Discount from './fueventapi/discount';
-import Notification from './fueventapi/notification';
-import Wallet from './fueventapi/wallet';
-import OrderDiscount from './fueventapi/order-discount';
-import TransactionHistory from './fueventapi/transaction-history';
+import { EventRoutes } from './fueventapi/event';
+import { OrderRoutes } from './fueventapi/order';
+import { OrderItemRoutes } from './fueventapi/order-item';
+import { PaymentRoutes } from './fueventapi/payment';
+import { ProductRoutes } from './fueventapi/product';
+import { CategoryRoutes } from './fueventapi/category';
+import { ReviewRoutes } from './fueventapi/review';
+import { DiscountRoutes } from './fueventapi/discount';
+import { NotificationRoutes } from './fueventapi/notification';
+import { WalletRoutes } from './fueventapi/wallet';
+import { OrderDiscountRoutes } from './fueventapi/order-discount';
+import { TransactionHistoryRoutes } from './fueventapi/transaction-history';
+import ErrorBoundary from 'app/shared/error/error-boundary';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
-
-const Routes = ({ match }) => (
+export const EntityRoutes = () => (
   <div>
-    <Switch>
+    <Routes>
       {/* prettier-ignore */}
-      <ErrorBoundaryRoute path={`${match.url}event`} component={Event} />
-      <ErrorBoundaryRoute path={`${match.url}order`} component={Order} />
-      <ErrorBoundaryRoute path={`${match.url}order-item`} component={OrderItem} />
-      <ErrorBoundaryRoute path={`${match.url}payment`} component={Payment} />
-      <ErrorBoundaryRoute path={`${match.url}product`} component={Product} />
-      <ErrorBoundaryRoute path={`${match.url}category`} component={Category} />
-      <ErrorBoundaryRoute path={`${match.url}review`} component={Review} />
-      <ErrorBoundaryRoute path={`${match.url}discount`} component={Discount} />
-      <ErrorBoundaryRoute path={`${match.url}notification`} component={Notification} />
-      <ErrorBoundaryRoute path={`${match.url}wallet`} component={Wallet} />
-      <ErrorBoundaryRoute path={`${match.url}order-discount`} component={OrderDiscount} />
-      <ErrorBoundaryRoute path={`${match.url}transaction-history`} component={TransactionHistory} />
-      <ErrorBoundaryRoute path={`${match.url}user-profile`} component={UserProfile} />
+      {/* Cần thêm '/*' để cho phép các sub-routes bên trong hoạt động */}
+      <Route
+        path="event/*"
+        element={
+          <ErrorBoundary>
+            <EventRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="order/*"
+        element={
+          <ErrorBoundary>
+            <OrderRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="order-item/*"
+        element={
+          <ErrorBoundary>
+            <OrderItemRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="payment/*"
+        element={
+          <ErrorBoundary>
+            <PaymentRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="product/*"
+        element={
+          <ErrorBoundary>
+            <ProductRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="category/*"
+        element={
+          <ErrorBoundary>
+            <CategoryRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="review/*"
+        element={
+          <ErrorBoundary>
+            <ReviewRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="discount/*"
+        element={
+          <ErrorBoundary>
+            <DiscountRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="notification/*"
+        element={
+          <ErrorBoundary>
+            <NotificationRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="wallet/*"
+        element={
+          <ErrorBoundary>
+            <WalletRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="order-discount/*"
+        element={
+          <ErrorBoundary>
+            <OrderDiscountRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="transaction-history/*"
+        element={
+          <ErrorBoundary>
+            <TransactionHistoryRoutes />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="user-profile/*"
+        element={
+          <ErrorBoundary>
+            <UserProfile />
+          </ErrorBoundary>
+        }
+      />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
-    </Switch>
+    </Routes>
   </div>
 );
-
-export default Routes;

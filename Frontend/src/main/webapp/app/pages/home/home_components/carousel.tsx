@@ -3,7 +3,7 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import './EventCarousel.css';
+import './carousel.scss';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { CustomButton } from 'app/shared/components/button';

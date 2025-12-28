@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntity, deleteEntity } from './category.reducer';
 
-export const CategoryDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
+export const CategoryDeleteDialog = () => {
   const [loadModal, setLoadModal] = useState(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
 
   useEffect(() => {
-    dispatch(getEntity(props.match.params.id));
-    setLoadModal(true);
-  }, []);
+    if (id) {
+      dispatch(getEntity(id));
+      setLoadModal(true);
+    }
+  }, [id, dispatch]);
 
   const categoryEntity = useAppSelector(state => state.category.entity);
   const updateSuccess = useAppSelector(state => state.category.updateSuccess);
 
   const handleClose = () => {
-    props.history.push('/category' + props.location.search);
+    navigate('/category' + location.search);
   };
 
   useEffect(() => {

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { ICategory } from 'app/shared/model/fueventapi/category.model';
 import { getEntities as getCategories } from 'app/entities/fueventapi/category/category.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './event.reducer';
@@ -13,10 +12,14 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { EventStatus } from 'app/shared/model/enumerations/event-status.model';
 
-export const EventUpdate = (props: RouteComponentProps<{ id: string }>) => {
+export const EventUpdate = () => {
   const dispatch = useAppDispatch();
 
-  const [isNew] = useState(!props.match.params || !props.match.params.id);
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
+  const isNew = !id;
 
   const categories = useAppSelector(state => state.category.entities);
   const eventEntity = useAppSelector(state => state.event.entity);
@@ -24,19 +27,20 @@ export const EventUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const updating = useAppSelector(state => state.event.updating);
   const updateSuccess = useAppSelector(state => state.event.updateSuccess);
   const eventStatusValues = Object.keys(EventStatus);
+
   const handleClose = () => {
-    props.history.push('/event' + props.location.search);
+    navigate('/event' + location.search);
   };
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
     } else {
-      dispatch(getEntity(props.match.params.id));
+      dispatch(getEntity(id));
     }
 
     dispatch(getCategories({}));
-  }, []);
+  }, [id, isNew, dispatch]);
 
   useEffect(() => {
     if (updateSuccess) {

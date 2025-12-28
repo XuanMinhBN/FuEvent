@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntity, deleteEntity } from './event.reducer';
 
-export const EventDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
+export const EventDeleteDialog = () => {
   const [loadModal, setLoadModal] = useState(false);
   const dispatch = useAppDispatch();
 
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
   useEffect(() => {
-    dispatch(getEntity(props.match.params.id));
-    setLoadModal(true);
-  }, []);
+    if (id) {
+      dispatch(getEntity(id));
+      setLoadModal(true);
+    }
+  }, [id, dispatch]);
 
   const eventEntity = useAppSelector(state => state.event.entity);
   const updateSuccess = useAppSelector(state => state.event.updateSuccess);
 
   const handleClose = () => {
-    props.history.push('/event' + props.location.search);
+    navigate('/event' + location.search);
   };
 
   useEffect(() => {

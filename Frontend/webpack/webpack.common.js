@@ -69,6 +69,14 @@ module.exports = async options => {
       module: {
         rules: [
           {
+            test: /\.mjs$/,
+            include: /node_modules/,
+            type: 'javascript/auto',
+            resolve: {
+              fullySpecified: false,
+            },
+          },
+          {
             test: /\.tsx?$/,
             use: getTsLoaderRule(options.env),
             include: [utils.root('./src/main/webapp/app')],

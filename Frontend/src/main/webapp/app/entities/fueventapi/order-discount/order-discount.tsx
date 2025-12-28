@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
 import { Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { getEntities } from './order-discount.reducer';
 import { IOrderDiscount } from 'app/shared/model/fueventapi/order-discount.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -11,11 +10,14 @@ import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.cons
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-export const OrderDiscount = (props: RouteComponentProps<{ url: string }>) => {
+export const OrderDiscount = () => {
   const dispatch = useAppDispatch();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [paginationState, setPaginationState] = useState(
-    overridePaginationStateWithQueryParams(getSortState(props.location, ITEMS_PER_PAGE, 'id'), props.location.search)
+    overridePaginationStateWithQueryParams(getSortState(location, ITEMS_PER_PAGE, 'id'), location.search)
   );
 
   const orderDiscountList = useAppSelector(state => state.orderDiscount.entities);
@@ -35,8 +37,9 @@ export const OrderDiscount = (props: RouteComponentProps<{ url: string }>) => {
   const sortEntities = () => {
     getAllEntities();
     const endURL = `?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`;
-    if (props.location.search !== endURL) {
-      props.history.push(`${props.location.pathname}${endURL}`);
+
+    if (location.search !== endURL) {
+      navigate(`${location.pathname}${endURL}`);
     }
   };
 
@@ -45,7 +48,7 @@ export const OrderDiscount = (props: RouteComponentProps<{ url: string }>) => {
   }, [paginationState.activePage, paginationState.order, paginationState.sort]);
 
   useEffect(() => {
-    const params = new URLSearchParams(props.location.search);
+    const params = new URLSearchParams(location.search);
     const page = params.get('page');
     const sort = params.get(SORT);
     if (page && sort) {
@@ -57,7 +60,7 @@ export const OrderDiscount = (props: RouteComponentProps<{ url: string }>) => {
         order: sortSplit[1],
       });
     }
-  }, [props.location.search]);
+  }, [location.search]);
 
   const sort = p => () => {
     setPaginationState({
@@ -77,7 +80,7 @@ export const OrderDiscount = (props: RouteComponentProps<{ url: string }>) => {
     sortEntities();
   };
 
-  const { match } = props;
+  const matchUrl = '/order-discount';
 
   return (
     <div>
@@ -88,7 +91,7 @@ export const OrderDiscount = (props: RouteComponentProps<{ url: string }>) => {
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
             <Translate contentKey="fuEventUiApp.fueventapiOrderDiscount.home.refreshListLabel">Refresh List</Translate>
           </Button>
-          <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+          <Link to={`${matchUrl}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
             <Translate contentKey="fuEventUiApp.fueventapiOrderDiscount.home.createLabel">Create new Order Discount</Translate>
@@ -120,7 +123,7 @@ export const OrderDiscount = (props: RouteComponentProps<{ url: string }>) => {
               {orderDiscountList.map((orderDiscount, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
                   <td>
-                    <Button tag={Link} to={`${match.url}/${orderDiscount.id}`} color="link" size="sm">
+                    <Button tag={Link} to={`${matchUrl}/${orderDiscount.id}`} color="link" size="sm">
                       {orderDiscount.id}
                     </Button>
                   </td>
@@ -128,12 +131,12 @@ export const OrderDiscount = (props: RouteComponentProps<{ url: string }>) => {
                     {orderDiscount.appliedAt ? <TextFormat type="date" value={orderDiscount.appliedAt} format={APP_DATE_FORMAT} /> : null}
                   </td>
                   <td>
-                    {orderDiscount.discount ? <Link to={`discount/${orderDiscount.discount.id}`}>{orderDiscount.discount.code}</Link> : ''}
+                    {orderDiscount.discount ? <Link to={`/discount/${orderDiscount.discount.id}`}>{orderDiscount.discount.code}</Link> : ''}
                   </td>
-                  <td>{orderDiscount.order ? <Link to={`order/${orderDiscount.order.id}`}>{orderDiscount.order.id}</Link> : ''}</td>
+                  <td>{orderDiscount.order ? <Link to={`/order/${orderDiscount.order.id}`}>{orderDiscount.order.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${orderDiscount.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+                      <Button tag={Link} to={`${matchUrl}/${orderDiscount.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.view">View</Translate>
@@ -141,7 +144,7 @@ export const OrderDiscount = (props: RouteComponentProps<{ url: string }>) => {
                       </Button>
                       <Button
                         tag={Link}
-                        to={`${match.url}/${orderDiscount.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        to={`${matchUrl}/${orderDiscount.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="primary"
                         size="sm"
                         data-cy="entityEditButton"
@@ -153,7 +156,7 @@ export const OrderDiscount = (props: RouteComponentProps<{ url: string }>) => {
                       </Button>
                       <Button
                         tag={Link}
-                        to={`${match.url}/${orderDiscount.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        to={`${matchUrl}/${orderDiscount.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="danger"
                         size="sm"
                         data-cy="entityDeleteButton"

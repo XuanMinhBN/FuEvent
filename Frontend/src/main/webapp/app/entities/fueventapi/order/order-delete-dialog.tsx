@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntity, deleteEntity } from './order.reducer';
 
-export const OrderDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
+export const OrderDeleteDialog = () => {
   const [loadModal, setLoadModal] = useState(false);
   const dispatch = useAppDispatch();
 
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
   useEffect(() => {
-    dispatch(getEntity(props.match.params.id));
-    setLoadModal(true);
-  }, []);
+    if (id) {
+      dispatch(getEntity(id));
+      setLoadModal(true);
+    }
+  }, [id, dispatch]);
 
   const orderEntity = useAppSelector(state => state.order.entity);
   const updateSuccess = useAppSelector(state => state.order.updateSuccess);
 
   const handleClose = () => {
-    props.history.push('/order' + props.location.search);
+    navigate('/order' + location.search);
   };
 
   useEffect(() => {

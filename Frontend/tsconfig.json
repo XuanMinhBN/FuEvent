@@ -17,7 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "app/*": ["src/main/webapp/app/*"],
-      "@/*": ["./*"]
+      "@/*": ["./*", "src/main/webapp/app/*"]
     },
     "importHelpers": true,
     "esModuleInterop": true,

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { IDiscount } from 'app/shared/model/fueventapi/discount.model';
 import { getEntities as getDiscounts } from 'app/entities/fueventapi/discount/discount.reducer';
 import { IOrder } from 'app/shared/model/fueventapi/order.model';
@@ -14,10 +13,14 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-export const OrderDiscountUpdate = (props: RouteComponentProps<{ id: string }>) => {
+export const OrderDiscountUpdate = () => {
   const dispatch = useAppDispatch();
 
-  const [isNew] = useState(!props.match.params || !props.match.params.id);
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
+  const isNew = !id;
 
   const discounts = useAppSelector(state => state.discount.entities);
   const orders = useAppSelector(state => state.order.entities);
@@ -25,20 +28,21 @@ export const OrderDiscountUpdate = (props: RouteComponentProps<{ id: string }>) 
   const loading = useAppSelector(state => state.orderDiscount.loading);
   const updating = useAppSelector(state => state.orderDiscount.updating);
   const updateSuccess = useAppSelector(state => state.orderDiscount.updateSuccess);
+
   const handleClose = () => {
-    props.history.push('/order-discount' + props.location.search);
+    navigate('/order-discount' + location.search);
   };
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
     } else {
-      dispatch(getEntity(props.match.params.id));
+      dispatch(getEntity(id));
     }
 
     dispatch(getDiscounts({}));
     dispatch(getOrders({}));
-  }, []);
+  }, [id, isNew, dispatch]);
 
   useEffect(() => {
     if (updateSuccess) {

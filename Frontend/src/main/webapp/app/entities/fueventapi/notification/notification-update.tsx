@@ -1,35 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { getEntity, updateEntity, createEntity, reset } from './notification.reducer';
 import { INotification } from 'app/shared/model/fueventapi/notification.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-export const NotificationUpdate = (props: RouteComponentProps<{ id: string }>) => {
+export const NotificationUpdate = () => {
   const dispatch = useAppDispatch();
 
-  const [isNew] = useState(!props.match.params || !props.match.params.id);
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
+  const isNew = !id;
 
   const notificationEntity = useAppSelector(state => state.notification.entity);
   const loading = useAppSelector(state => state.notification.loading);
   const updating = useAppSelector(state => state.notification.updating);
   const updateSuccess = useAppSelector(state => state.notification.updateSuccess);
+
   const handleClose = () => {
-    props.history.push('/notification' + props.location.search);
+    navigate('/notification' + location.search);
   };
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
     } else {
-      dispatch(getEntity(props.match.params.id));
+      dispatch(getEntity(id));
     }
-  }, []);
+  }, [id, isNew, dispatch]);
 
   useEffect(() => {
     if (updateSuccess) {

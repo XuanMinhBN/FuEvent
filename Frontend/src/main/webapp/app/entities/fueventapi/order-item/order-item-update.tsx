@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { IProduct } from 'app/shared/model/fueventapi/product.model';
 import { getEntities as getProducts } from 'app/entities/fueventapi/product/product.reducer';
 import { IOrder } from 'app/shared/model/fueventapi/order.model';
@@ -14,10 +13,14 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-export const OrderItemUpdate = (props: RouteComponentProps<{ id: string }>) => {
+export const OrderItemUpdate = () => {
   const dispatch = useAppDispatch();
 
-  const [isNew] = useState(!props.match.params || !props.match.params.id);
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
+  const isNew = !id;
 
   const products = useAppSelector(state => state.product.entities);
   const orders = useAppSelector(state => state.order.entities);
@@ -25,20 +28,21 @@ export const OrderItemUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const loading = useAppSelector(state => state.orderItem.loading);
   const updating = useAppSelector(state => state.orderItem.updating);
   const updateSuccess = useAppSelector(state => state.orderItem.updateSuccess);
+
   const handleClose = () => {
-    props.history.push('/order-item' + props.location.search);
+    navigate('/order-item' + location.search);
   };
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
     } else {
-      dispatch(getEntity(props.match.params.id));
+      dispatch(getEntity(id));
     }
 
     dispatch(getProducts({}));
     dispatch(getOrders({}));
-  }, []);
+  }, [id, isNew, dispatch]);
 
   useEffect(() => {
     if (updateSuccess) {
