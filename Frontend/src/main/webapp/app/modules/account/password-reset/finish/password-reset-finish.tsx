@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Row, Button } from 'reactstrap';
 import { Translate, translate, getUrlParameter, ValidatedField, ValidatedForm } from 'react-jhipster';
-import { RouteComponentProps } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { handlePasswordResetFinish, reset } from '../password-reset.reducer';
 import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-export const PasswordResetFinishPage = (props: RouteComponentProps<{ key: string }>) => {
-  const [password, setPassword] = useState('');
-  const [key] = useState(getUrlParameter('key', props.location.search));
+export const PasswordResetFinishPage = () => {
   const dispatch = useAppDispatch();
+
+  const location = useLocation();
+
+  const [password, setPassword] = useState('');
+  const [key] = useState(getUrlParameter('key', location.search));
 
   useEffect(
     () => () => {

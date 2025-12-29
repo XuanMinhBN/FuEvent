@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table, Badge } from 'reactstrap';
 import { Translate, TextFormat, JhiPagination, JhiItemCount, getSortState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { APP_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { getUsersAsAdmin, updateUser } from './user-management.reducer';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-export const UserManagement = (props: RouteComponentProps<any>) => {
+export const UserManagement = () => {
   const dispatch = useAppDispatch();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [pagination, setPagination] = useState(
-    overridePaginationStateWithQueryParams(getSortState(props.location, ITEMS_PER_PAGE, 'id'), props.location.search)
+    overridePaginationStateWithQueryParams(getSortState(location, ITEMS_PER_PAGE, 'id'), location.search)
   );
 
   const getUsersFromProps = () => {
@@ -26,8 +28,9 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
       })
     );
     const endURL = `?page=${pagination.activePage}&sort=${pagination.sort},${pagination.order}`;
-    if (props.location.search !== endURL) {
-      props.history.push(`${props.location.pathname}${endURL}`);
+
+    if (location.search !== endURL) {
+      navigate(`${location.pathname}${endURL}`);
     }
   };
 
@@ -36,7 +39,7 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
   }, [pagination.activePage, pagination.order, pagination.sort]);
 
   useEffect(() => {
-    const params = new URLSearchParams(props.location.search);
+    const params = new URLSearchParams(location.search);
     const page = params.get('page');
     const sortParam = params.get(SORT);
     if (page && sortParam) {
@@ -48,7 +51,7 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
         order: sortSplit[1],
       });
     }
-  }, [props.location.search]);
+  }, [location.search]);
 
   const sort = p => () =>
     setPagination({
@@ -75,11 +78,12 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
       })
     );
 
-  const { match } = props;
   const account = useAppSelector(state => state.authentication.account);
   const users = useAppSelector(state => state.userManagement.users);
   const totalItems = useAppSelector(state => state.userManagement.totalItems);
   const loading = useAppSelector(state => state.userManagement.loading);
+
+  const matchUrl = '/admin/user-management';
 
   return (
     <div>
@@ -90,7 +94,7 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
             <Translate contentKey="userManagement.home.refreshListLabel">Refresh List</Translate>
           </Button>
-          <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity">
+          <Link to={`${matchUrl}/new`} className="btn btn-primary jh-create-entity">
             <FontAwesomeIcon icon="plus" /> <Translate contentKey="userManagement.home.createLabel">Create a new user</Translate>
           </Link>
         </div>
@@ -137,7 +141,7 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
           {users.map((user, i) => (
             <tr id={user.login} key={`user-${i}`}>
               <td>
-                <Button tag={Link} to={`${match.url}/${user.login}`} color="link" size="sm">
+                <Button tag={Link} to={`${matchUrl}/${user.login}`} color="link" size="sm">
                   {user.id}
                 </Button>
               </td>
@@ -175,13 +179,13 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
               </td>
               <td className="text-end">
                 <div className="btn-group flex-btn-group-container">
-                  <Button tag={Link} to={`${match.url}/${user.login}`} color="info" size="sm">
+                  <Button tag={Link} to={`${matchUrl}/${user.login}`} color="info" size="sm">
                     <FontAwesomeIcon icon="eye" />{' '}
                     <span className="d-none d-md-inline">
                       <Translate contentKey="entity.action.view">View</Translate>
                     </span>
                   </Button>
-                  <Button tag={Link} to={`${match.url}/${user.login}/edit`} color="primary" size="sm">
+                  <Button tag={Link} to={`${matchUrl}/${user.login}/edit`} color="primary" size="sm">
                     <FontAwesomeIcon icon="pencil-alt" />{' '}
                     <span className="d-none d-md-inline">
                       <Translate contentKey="entity.action.edit">Edit</Translate>
@@ -189,7 +193,7 @@ export const UserManagement = (props: RouteComponentProps<any>) => {
                   </Button>
                   <Button
                     tag={Link}
-                    to={`${match.url}/${user.login}/delete`}
+                    to={`${matchUrl}/${user.login}/delete`}
                     color="danger"
                     size="sm"
                     disabled={account.login === user.login}

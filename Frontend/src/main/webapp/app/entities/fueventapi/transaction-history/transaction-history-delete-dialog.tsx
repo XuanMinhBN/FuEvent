@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntity, deleteEntity } from './transaction-history.reducer';
 
-export const TransactionHistoryDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
+export const TransactionHistoryDeleteDialog = () => {
   const [loadModal, setLoadModal] = useState(false);
   const dispatch = useAppDispatch();
 
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
   useEffect(() => {
-    dispatch(getEntity(props.match.params.id));
-    setLoadModal(true);
-  }, []);
+    if (id) {
+      dispatch(getEntity(id));
+      setLoadModal(true);
+    }
+  }, [id, dispatch]);
 
   const transactionHistoryEntity = useAppSelector(state => state.transactionHistory.entity);
   const updateSuccess = useAppSelector(state => state.transactionHistory.updateSuccess);
 
   const handleClose = () => {
-    props.history.push('/transaction-history' + props.location.search);
+    navigate('/transaction-history' + location.search);
   };
 
   useEffect(() => {

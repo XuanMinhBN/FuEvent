@@ -1,35 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { getEntity, updateEntity, createEntity, reset } from './wallet.reducer';
 import { IWallet } from 'app/shared/model/fueventapi/wallet.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-export const WalletUpdate = (props: RouteComponentProps<{ id: string }>) => {
+export const WalletUpdate = () => {
   const dispatch = useAppDispatch();
 
-  const [isNew] = useState(!props.match.params || !props.match.params.id);
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
+  const isNew = !id;
 
   const walletEntity = useAppSelector(state => state.wallet.entity);
   const loading = useAppSelector(state => state.wallet.loading);
   const updating = useAppSelector(state => state.wallet.updating);
   const updateSuccess = useAppSelector(state => state.wallet.updateSuccess);
+
   const handleClose = () => {
-    props.history.push('/wallet' + props.location.search);
+    navigate('/wallet' + location.search);
   };
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
     } else {
-      dispatch(getEntity(props.match.params.id));
+      dispatch(getEntity(id));
     }
-  }, []);
+  }, [id, isNew, dispatch]);
 
   useEffect(() => {
     if (updateSuccess) {

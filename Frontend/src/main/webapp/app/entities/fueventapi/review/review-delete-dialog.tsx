@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntity, deleteEntity } from './review.reducer';
 
-export const ReviewDeleteDialog = (props: RouteComponentProps<{ id: string }>) => {
+export const ReviewDeleteDialog = () => {
   const [loadModal, setLoadModal] = useState(false);
   const dispatch = useAppDispatch();
 
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
   useEffect(() => {
-    dispatch(getEntity(props.match.params.id));
-    setLoadModal(true);
-  }, []);
+    if (id) {
+      dispatch(getEntity(id));
+      setLoadModal(true);
+    }
+  }, [id, dispatch]);
 
   const reviewEntity = useAppSelector(state => state.review.entity);
   const updateSuccess = useAppSelector(state => state.review.updateSuccess);
 
   const handleClose = () => {
-    props.history.push('/review' + props.location.search);
+    navigate('/review' + location.search);
   };
 
   useEffect(() => {

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { getEntity, updateEntity, createEntity, reset } from './transaction-history.reducer';
 import { ITransactionHistory } from 'app/shared/model/fueventapi/transaction-history.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -11,27 +10,32 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { TransactionType } from 'app/shared/model/enumerations/transaction-type.model';
 
-export const TransactionHistoryUpdate = (props: RouteComponentProps<{ id: string }>) => {
+export const TransactionHistoryUpdate = () => {
   const dispatch = useAppDispatch();
 
-  const [isNew] = useState(!props.match.params || !props.match.params.id);
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
+  const isNew = !id;
 
   const transactionHistoryEntity = useAppSelector(state => state.transactionHistory.entity);
   const loading = useAppSelector(state => state.transactionHistory.loading);
   const updating = useAppSelector(state => state.transactionHistory.updating);
   const updateSuccess = useAppSelector(state => state.transactionHistory.updateSuccess);
   const transactionTypeValues = Object.keys(TransactionType);
+
   const handleClose = () => {
-    props.history.push('/transaction-history' + props.location.search);
+    navigate('/transaction-history' + location.search);
   };
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
     } else {
-      dispatch(getEntity(props.match.params.id));
+      dispatch(getEntity(id));
     }
-  }, []);
+  }, [id, isNew, dispatch]);
 
   useEffect(() => {
     if (updateSuccess) {

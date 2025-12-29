@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { IEvent } from 'app/shared/model/fueventapi/event.model';
 import { getEntities as getEvents } from 'app/entities/fueventapi/event/event.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './product.reducer';
@@ -13,10 +12,14 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { ProductType } from 'app/shared/model/enumerations/product-type.model';
 
-export const ProductUpdate = (props: RouteComponentProps<{ id: string }>) => {
+export const ProductUpdate = () => {
   const dispatch = useAppDispatch();
 
-  const [isNew] = useState(!props.match.params || !props.match.params.id);
+  const navigate = useNavigate();
+  const { id } = useParams<'id'>();
+  const location = useLocation();
+
+  const isNew = !id;
 
   const events = useAppSelector(state => state.event.entities);
   const productEntity = useAppSelector(state => state.product.entity);
@@ -24,19 +27,20 @@ export const ProductUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const updating = useAppSelector(state => state.product.updating);
   const updateSuccess = useAppSelector(state => state.product.updateSuccess);
   const productTypeValues = Object.keys(ProductType);
+
   const handleClose = () => {
-    props.history.push('/product' + props.location.search);
+    navigate('/product' + location.search);
   };
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
     } else {
-      dispatch(getEntity(props.match.params.id));
+      dispatch(getEntity(id));
     }
 
     dispatch(getEvents({}));
-  }, []);
+  }, [id, isNew, dispatch]);
 
   useEffect(() => {
     if (updateSuccess) {

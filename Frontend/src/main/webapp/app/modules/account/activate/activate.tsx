@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Row, Col, Alert } from 'reactstrap';
 import { Translate, getUrlParameter } from 'react-jhipster';
-
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { activateAction, reset } from './activate.reducer';
 
@@ -26,15 +25,18 @@ const failureAlert = (
   </Alert>
 );
 
-export const ActivatePage = (props: RouteComponentProps<{ key: any }>) => {
+export const ActivatePage = () => {
   const dispatch = useAppDispatch();
+
+  const location = useLocation();
+
   useEffect(() => {
-    const key = getUrlParameter('key', props.location.search);
+    const key = getUrlParameter('key', location.search);
     dispatch(activateAction(key));
     return () => {
       dispatch(reset());
     };
-  }, []);
+  }, [dispatch, location.search]);
 
   const { activationSuccess, activationFailure } = useAppSelector(state => state.activate);
 
