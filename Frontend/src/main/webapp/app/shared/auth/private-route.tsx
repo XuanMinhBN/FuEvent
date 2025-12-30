@@ -6,7 +6,7 @@ import ErrorBoundary from 'app/shared/error/error-boundary';
 import { Spinner } from 'reactstrap';
 
 interface IOwnProps {
-  children: JSX.Element; // Thay thế cho RouteProps và component
+  children: JSX.Element;
   hasAnyAuthorities?: string[];
 }
 

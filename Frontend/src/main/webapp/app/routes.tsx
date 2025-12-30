@@ -16,7 +16,7 @@ import { Spinner } from 'reactstrap';
 const Account = React.lazy(() => import(/* webpackChunkName: "account" */ 'app/modules/account'));
 const Admin = React.lazy(() => import(/* webpackChunkName: "administration" */ 'app/modules/administration'));
 
-const AppRoutes = () => {
+const ApplicationRoutes = () => {
   return (
     <div className="view-routes">
       <Suspense
@@ -74,4 +74,4 @@ const AppRoutes = () => {
   );
 };
 
-export default Routes;
+export default ApplicationRoutes;

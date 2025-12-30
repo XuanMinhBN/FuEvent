@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
 import { TranslatorContext } from 'react-jhipster';
@@ -30,13 +30,18 @@ describe('private-route component', () => {
     const originalError = console.error;
     console.error = jest.fn();
     expect(() =>
-      wrapper(<PrivateRouteComponent component={null} path="/" />, {
-        isAuthenticated: true,
-        sessionHasBeenFetched: true,
-        account: {
-          authorities: [],
-        },
-      })
+      wrapper(
+        <PrivateRouteComponent>
+          <div className="test-child">Test Content</div>
+        </PrivateRouteComponent>,
+        {
+          isAuthenticated: true,
+          sessionHasBeenFetched: true,
+          account: {
+            authorities: [],
+          },
+        }
+      )
     ).toThrow(Error);
     console.error = originalError;
   });
@@ -44,9 +49,11 @@ describe('private-route component', () => {
   it('Should render an error message when the user has no authorities', () => {
     const history = createMemoryHistory();
     const { container } = wrapper(
-      <Router history={history as any}>
-        <PrivateRouteComponent component={TestComp} path="/" />
-      </Router>,
+      <MemoryRouter>
+        <PrivateRouteComponent>
+          <div className="test-child">Test Content</div>
+        </PrivateRouteComponent>
+      </MemoryRouter>,
       {
         isAuthenticated: true,
         sessionHasBeenFetched: true,
@@ -63,9 +70,11 @@ describe('private-route component', () => {
   it('Should render a route for the component provided when authenticated', () => {
     const history = createMemoryHistory();
     const { container } = wrapper(
-      <Router history={history as any}>
-        <PrivateRouteComponent component={TestComp} path="/" />
-      </Router>,
+      <MemoryRouter>
+        <PrivateRouteComponent>
+          <div className="test-child">Test Content</div>
+        </PrivateRouteComponent>
+      </MemoryRouter>,
       {
         isAuthenticated: true,
         sessionHasBeenFetched: true,
@@ -80,9 +89,11 @@ describe('private-route component', () => {
   it('Should render a redirect to login when not authenticated', () => {
     const history = createMemoryHistory();
     const { container } = wrapper(
-      <Router history={history as any}>
-        <PrivateRouteComponent exact component={TestComp} path="/" />
-      </Router>,
+      <MemoryRouter>
+        <PrivateRouteComponent>
+          <div className="test-child">Test Content</div>
+        </PrivateRouteComponent>
+      </MemoryRouter>,
       {
         isAuthenticated: false,
         sessionHasBeenFetched: true,

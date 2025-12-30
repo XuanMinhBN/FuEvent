@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Router } from 'react-router-dom';
+import { MemoryRouter, Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 
 import { AccountMenu } from './account';
@@ -12,9 +12,9 @@ describe('AccountMenu', () => {
     if (!mountedWrapper) {
       const history = createMemoryHistory();
       const { container } = render(
-        <Router history={history as any}>
+        <MemoryRouter>
           <AccountMenu isAuthenticated />
-        </Router>
+        </MemoryRouter>
       );
       mountedWrapper = container.innerHTML;
     }
@@ -24,9 +24,9 @@ describe('AccountMenu', () => {
     if (!mountedWrapper) {
       const history = createMemoryHistory();
       const { container } = (mountedWrapper = render(
-        <Router history={history as any}>
+        <MemoryRouter>
           <AccountMenu />
-        </Router>
+        </MemoryRouter>
       ));
       mountedWrapper = container.innerHTML;
     }
