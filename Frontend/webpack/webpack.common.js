@@ -82,6 +82,13 @@ module.exports = async options => {
             include: [utils.root('./src/main/webapp/app')],
             exclude: [utils.root('node_modules')],
           },
+          {
+            test: /\.(png|jpe?g|gif|svg|webp)$/i,
+            type: 'asset/resource',
+            generator: {
+              filename: 'content/images/[name].[hash][ext]',
+            },
+          },
           /*
        ,
        Disabled due to https://github.com/jhipster/generator-jhipster/issues/16116

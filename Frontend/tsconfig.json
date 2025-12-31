@@ -17,6 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "app/*": ["src/main/webapp/app/*"],
+      "content/*": ["src/main/webapp/content/*"],
       "@/*": ["./*", "src/main/webapp/app/*"]
     },
     "importHelpers": true,
