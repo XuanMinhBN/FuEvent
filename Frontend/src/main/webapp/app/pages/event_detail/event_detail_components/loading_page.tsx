@@ -48,7 +48,7 @@ export const LoadingPage: React.FC = () => {
           <Translate contentKey="global.loading">Đang tải — Xin chờ tý</Translate>
         </h1>
         <p>
-          <Translate contentKey="eventDetail.loadingMessage">Chuẩn bị nội dung cho bạn...</Translate>
+          <Translate contentKey="fuEventUiApp.fueventapiEvent.detail.loadings">Loading...</Translate>
         </p>
         <div className="lp-progress">
           <div className="lp-bar" style={{ width: `${progress}%` }} />

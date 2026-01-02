@@ -13,6 +13,29 @@
       "chat": "JHipster public chat room",
       "follow": "follow @jhipster on Twitter"
     },
+    "header": {
+      "title": "FuEvent"
+    },
+    "footer": {
+      "title": "FuEvent",
+      "text": "Your go-to platform for discovering and managing university events with ease and convenience.",
+      "quickLinks": "Quick Links",
+      "home": "Home",
+      "events": "Events",
+      "about": "About Us",
+      "faq": "FAQ",
+      "contact": "Contact Us",
+      "categories": "Categories",
+      "academic": "Academic",
+      "music": "Music",
+      "workshop": "Workshop",
+      "sport": "Sport",
+      "club": "Club",
+      "map_pin": "FPT University, Hoa Lac Hi-Tech Park, Hanoi",
+      "phone": "Phone: +84 123 456 789",
+      "email": "Email: support@fpticket.edu.vn",
+      "copyright": "© 2025 FuEvent. All rights reserved."
+    },
     "like": "If you like JHipster, don't forget to give us a star on",
     "github": "GitHub"
   }

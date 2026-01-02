@@ -66,14 +66,14 @@ export const EventCarousel: React.FC = () => {
           <div className="tabs flex gap-2">
             <CustomButton
               name="Cuối tuần này"
-              contentKey="global.this_weekend"
+              contentKey="fuEventUiApp.fueventapiEvent.detail.this_weekend"
               variant={activeTab === 'week' ? 'default' : 'outline'}
               onClick={() => setActiveTab('week')}
               className={`rounded-full transition-all ${activeTab === 'week' ? 'shadow-md' : ''}`}
             />
             <CustomButton
               name="Tháng này"
-              contentKey="global.this_month"
+              contentKey="fuEventUiApp.fueventapiEvent.detail.this_month"
               variant={activeTab === 'month' ? 'default' : 'outline'}
               onClick={() => setActiveTab('month')}
               className={`rounded-full transition-all ${activeTab === 'month' ? 'shadow-md' : ''}`}
@@ -81,7 +81,7 @@ export const EventCarousel: React.FC = () => {
           </div>
           <div className="flex items-center gap-2">
             <Link to="/events" className="see-more mr-4 text-blue-600 hover:underline">
-              <Translate contentKey="global.more">Xem thêm</Translate>
+              <Translate contentKey="fuEventUiApp.fueventapiEvent.detail.more">Xem thêm</Translate>
             </Link>
             <CustomButton
               variant="outline"
@@ -102,8 +102,16 @@ export const EventCarousel: React.FC = () => {
           </div>
         </div>
         <div className="event-carousel">
-          {loading && <p>Đang tải dữ liệu...</p>}
-          {!loading && events.length === 0 && <p className="no-events-text">Khoảng thời gian này không có sự kiện</p>}
+          {loading && (
+            <p>
+              <Translate contentKey="global.loading">Loading - Please wait...</Translate>
+            </p>
+          )}
+          {!loading && events.length === 0 && (
+            <p className="no-events-text">
+              <Translate contentKey="">There are currently no events available.</Translate>
+            </p>
+          )}
           {!loading && events.length > 0 && (
             <Swiper
               modules={[Navigation]}

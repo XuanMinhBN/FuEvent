@@ -2,38 +2,53 @@
   "fuEventUiApp": {
     "fueventapiEvent": {
       "home": {
-        "title": "Events",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Thêm mới một Event",
-        "createOrEditLabel": "Thêm mới hoặc cập nhật Event",
-        "notFound": "No Events found"
+        "all": "Tất cả sự kiện",
+        "title": "Các sự kiện",
+        "refreshListLabel": "Làm mới danh sách",
+        "createLabel": "Thêm mới một sự kiện",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật sự kiện",
+        "notFound": "Không tìm thấy sự kiện nào",
+        "notMatch": "Không tìm thấy sự kiện nào phù hợp với tiêu chí của bạn.",
+        "no_events": "Khoảng thời gian này không có sự kiện.",
+        "explore": "Khám phá các sự kiện",
+        "view_all": "Xem tất cả các sự kiện →"
       },
       "delete": {
-        "question": "Bạn có chắc là muốn xóa Event {{ id }}?"
+        "question": "Bạn có chắc là muốn xóa sự kiện có mã {{ id }}?"
       },
       "detail": {
-        "title": "Event"
+        "title": "Sự kiện",
+        "loading": "Chuẩn bị nội dung cho bạn...",
+        "this_weekend": "Cuối tuần này",
+        "this_month": "Tháng này",
+        "more": "Xem thêm",
+        "view": "Xem chi tiết"
       },
-      "id": "ID",
-      "title": "Title",
-      "description": "Description",
-      "location": "Location",
-      "status": "Status",
-      "posterUrl": "Poster Url",
-      "startTime": "Start Time",
-      "endTime": "End Time",
-      "organizerLogin": "Organizer Login",
-      "products": "Products",
-      "reviews": "Reviews",
-      "discounts": "Discounts",
-      "category": "Category"
+      "id": "Mã",
+      "title": "Tiêu đề",
+      "description": "Mô tả",
+      "location": "Địa điểm",
+      "status": "Trang thái",
+      "posterUrl": "Đường dẫn poster",
+      "startTime": "Thời gian bắt đầu",
+      "endTime": "Thời gian kết thúc",
+      "organizerLogin": "Nhà tổ chức đăng nhập",
+      "products": "Các sản phẩm",
+      "reviews": "Các đánh giá",
+      "discounts": "Các mã giảm giá",
+      "category": "Đề mục",
+      "feedback": "Đánh giá sự kiện này",
+      "comment": "Viết cảm nhận của bạn...",
+      "send": "Gửi đánh giá",
+      "no_reviews": "Chưa có đánh giá nào cho sự kiện này.",
+      "share_feedback": "Chia sẻ cảm nhận của bạn về sự kiện này"
     }
   },
   "fueventapiApp": {
     "fueventapiEvent": {
-      "created": "Một Event mới được tạo với định danh {{ param }}",
-      "updated": "Một Event cập nhật với định danh {{ param }}",
-      "deleted": "Một Event đã xóa với định danh {{ param }}"
+      "created": "Một sự kiện mới được tạo với định danh {{ param }}",
+      "updated": "Một sự kiện cập nhật với định danh {{ param }}",
+      "deleted": "Một sự kiện đã xóa với định danh {{ param }}"
     }
   }
 }

@@ -2,34 +2,52 @@
   "fuEventUiApp": {
     "fueventapiProduct": {
       "home": {
-        "title": "Products",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Thêm mới một Product",
+        "title": "Các sản phẩm",
+        "refreshListLabel": "Làm mới danh sách",
+        "createLabel": "Thêm mới một sản phẩm",
         "createOrEditLabel": "Thêm mới hoặc cập nhật Product",
-        "notFound": "No Products found"
+        "notFound": "Không tìm thấy sản phẩm nào"
       },
       "delete": {
-        "question": "Bạn có chắc là muốn xóa Product {{ id }}?"
+        "question": "Bạn có chắc là muốn xóa sản phẩm có mã {{ id }}?"
       },
       "detail": {
-        "title": "Product"
+        "title": "Sản phẩm"
       },
-      "id": "ID",
-      "name": "Name",
-      "description": "Description",
-      "type": "Type",
-      "price": "Price",
-      "quantityTotal": "Quantity Total",
-      "quantitySold": "Quantity Sold",
-      "imageUrl": "Image Url",
-      "event": "Event"
+      "id": "Mã",
+      "name": "Tên",
+      "description": "Mô tả",
+      "type": "Loại",
+      "price": "Giá",
+      "quantityTotal": "Tổng số lượng",
+      "quantitySold": "Số lượng đã bán",
+      "imageUrl": "Đường dẫn ảnh",
+      "event": "Sự kiện"
+    },
+    "ticketType": {
+      "GENERAL": "Thông thường",
+      "VIP": "VIP",
+      "expired": "Hết hạn",
+      "select": "Chọn loại vé",
+      "get_ticket": "Lấy vé",
+      "ticketInformation": "Thông tin vé",
+      "most_popular": "Phổ biến nhất",
+      "pick_ticket": "Chọn vé của bạn",
+      "out_of_stock": "Hết hàng"
+    },
+    "merchantType": {
+      "FOOD": "Đồ ăn",
+      "DRINK": "Đồ uống",
+      "MERCHANDISE": "Hàng hóa",
+      "product_attachment": "Sản phẩm kèm theo",
+      "pick_product": "Chọn sản phẩm của bạn"
     }
   },
   "fueventapiApp": {
     "fueventapiProduct": {
-      "created": "Một Product mới được tạo với định danh {{ param }}",
-      "updated": "Một Product cập nhật với định danh {{ param }}",
-      "deleted": "Một Product đã xóa với định danh {{ param }}"
+      "created": "Một sản phẩm mới được tạo với định danh {{ param }}",
+      "updated": "Một sản phẩm cập nhật với định danh {{ param }}",
+      "deleted": "Một sản phẩm đã xóa với định danh {{ param }}"
     }
   }
 }

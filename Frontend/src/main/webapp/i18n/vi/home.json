@@ -13,6 +13,29 @@
       "chat": "Phòng chat công cộng JHipster",
       "follow": "Theo dõi @jhipster trên Twitter"
     },
+    "header": {
+      "title": "Ép U Ì Ven"
+    },
+    "footer": {
+      "title": "Ép U Ì Ven",
+      "text": "Nền tảng hàng đầu của bạn để khám phá và quản lý các sự kiện đại học một cách dễ dàng và tiện lợi.",
+      "quickLinks": "Liên kết nhanh",
+      "home": "Trang chủ",
+      "events": "Sự kiện",
+      "about": "Về chúng tôi",
+      "faq": "Câu hỏi thường gặp",
+      "contact": "Liên hệ chúng tôi",
+      "categories": "Danh mục",
+      "academic": "Học thuật",
+      "music": "Âm nhạc",
+      "workshop": "Workshop",
+      "sport": "Thể thao",
+      "club": "Câu lạc bộ",
+      "map_pin": "Đại học FPT, Khu công nghệ cao Hòa Lạc, Hà Nội",
+      "phone": "Số điện thoại: +84 123 456 789",
+      "email": "Thư điện tử: support@fpticket.edu.vn",
+      "copyright": "© 2025 Ép U Ì Ven. Bản quyền."
+    },
     "like": "Nếu bạn thích JHipster, đừng quên cho chúng tôi thêm một ngôi sao trên",
     "github": "GitHub"
   }

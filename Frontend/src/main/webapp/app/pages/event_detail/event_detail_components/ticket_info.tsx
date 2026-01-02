@@ -112,7 +112,9 @@ export const TicketInfo: React.FC<TicketInfoProps> = ({ id, discount, event }) =
       {notification && <div className="de-notification">{notification}</div>}
 
       {/* --- PHẦN VÉ --- */}
-      <h2 className="de-section-title">Thông tin vé</h2>
+      <h2 className="de-section-title">
+        <Translate contentKey="fueEventUiApp.ticketType.ticketInformation">Ticket Information</Translate>
+      </h2>
       <div className="de-tickets-list">
         {tickets.map(ticket => (
           <div key={ticket.id} className={`de-ticket-card ${ticket.popular ? 'de-popular' : ''}`}>
@@ -121,7 +123,7 @@ export const TicketInfo: React.FC<TicketInfoProps> = ({ id, discount, event }) =
                 <h3 className="de-ticket-name">{ticket.name}</h3>
                 {ticket.popular && (
                   <span className="de-popular-badge">
-                    <Translate contentKey="global.most_popular">Phổ biến nhất</Translate>
+                    <Translate contentKey="fueEventUiApp.ticketType.most_popular">Phổ biến nhất</Translate>
                   </span>
                 )}
               </div>
@@ -132,13 +134,18 @@ export const TicketInfo: React.FC<TicketInfoProps> = ({ id, discount, event }) =
                 </div>
                 {ticket.valid ? (
                   <CustomButton
-                    name="Chọn vé"
-                    contentKey="global.pick_ticket"
+                    name="Pick your ticket"
+                    contentKey="fueEventUiApp.ticketType.pick_ticket"
                     className="de-buy-button"
                     onClick={() => handleAddToCart(ticket, 'ticket')}
                   />
                 ) : (
-                  <CustomButton name="Hết Hàng" contentKey="global.out_of_stock" className="de-buy-button de-expired" disabled />
+                  <CustomButton
+                    name="Out of stock"
+                    contentKey="fueEventUiApp.ticketType.out_of_stock"
+                    className="de-buy-button de-expired"
+                    disabled
+                  />
                 )}
               </div>
             </div>
@@ -154,7 +161,7 @@ export const TicketInfo: React.FC<TicketInfoProps> = ({ id, discount, event }) =
       {products.length > 0 && (
         <>
           <h2 className="de-section-title">
-            <Translate contentKey="global.alternate_prod">Sản phẩm kèm theo</Translate>
+            <Translate contentKey="fueEventUiApp.merchantType.product_attachment"></Translate>
           </h2>
           <div className="de-products-list">
             {products.map(product => (
@@ -169,8 +176,8 @@ export const TicketInfo: React.FC<TicketInfoProps> = ({ id, discount, event }) =
                       <span className="de-current-price">{product.price}</span>
                     </div>
                     <CustomButton
-                      name="Chọn sản phẩm"
-                      contentKey="global.pick_prod"
+                      name="Pick your product"
+                      contentKey="fueEventUiApp.merchantType.pick_product"
                       className="de-buy-button"
                       onClick={() => handleAddToCart(product, 'product')}
                     />

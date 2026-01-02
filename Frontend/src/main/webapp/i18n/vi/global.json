@@ -1,9 +1,17 @@
 {
   "global": {
+    "attending": "người tham gia",
+    "filter": "Bộ lọc",
+    "free": "Miễn phí",
     "title": "FuEventUI",
+    "facebookShare": "Chia sẻ lên Facebook",
+    "copy": "Sao chép liên kết",
+    "copied": "Đã sao chép!",
+    "loading": "Đang tải — Xin chờ tý...",
     "browsehappy": "Bạn đang sử dụng một trình duyệt <strong>quá cũ</strong>. Vui lòng <a href=\"http://browsehappy.com/?locale=en\">nâng cấp trình duyệt</a> của bạn để có trải nghiệm tốt nhất.",
     "menu": {
       "home": "Trang chủ",
+      "introduction": "Giới thiệu",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Thực thể",
@@ -109,7 +117,11 @@
       "edit": "Sửa",
       "open": "Mở",
       "save": "Lưu",
-      "view": "Xem"
+      "view": "Xem",
+      "close": "Đóng",
+      "send": "Gửi",
+      "previous": "Trước",
+      "next": "Tiếp"
     },
     "detail": {
       "field": "Trường",

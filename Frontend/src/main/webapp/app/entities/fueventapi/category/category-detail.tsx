@@ -28,7 +28,7 @@ export const CategoryDetail = () => {
         <dl className="jh-entity-details">
           <dt>
             <span id="id">
-              <Translate contentKey="global.field.id">ID</Translate>
+              <Translate contentKey="fuEventUiApp.fueventapiCategory.id">ID</Translate>
             </span>
           </dt>
           <dd>{categoryEntity.id}</dd>

@@ -97,7 +97,7 @@ export const Banner: React.FC = () => {
                       <CustomButton
                         name="Get Tickets"
                         icon={Ticket}
-                        contentKey="global.get_ticket"
+                        contentKey="fuEventUiApp.fueventapiProduct.ticketType.get_ticket"
                         className="btn-secondary"
                         onClick={() => navigate(`/event/${event.id}`)}
                       />
@@ -110,14 +110,14 @@ export const Banner: React.FC = () => {
         </div>
         <CustomButton
           icon={ChevronLeft}
-          contentKey="global.previous"
+          contentKey="entity.action.previous"
           className="banner-nav banner-nav-prev"
           onClick={prevSlide}
           type="button"
         />
         <CustomButton
           icon={ChevronRight}
-          contentKey="global.next"
+          contentKey="entity.action.next"
           className="banner-nav banner-nav-next"
           onClick={nextSlide}
           type="button"

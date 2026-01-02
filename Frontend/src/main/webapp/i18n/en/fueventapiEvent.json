@@ -2,17 +2,27 @@
   "fuEventUiApp": {
     "fueventapiEvent": {
       "home": {
+        "all": "All Events",
         "title": "Events",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Event",
         "createOrEditLabel": "Create or edit a Event",
-        "notFound": "No Events found"
+        "notFound": "No events found",
+        "notMatch": "No events found matching your criteria.",
+        "no_events": "There are currently no events available.",
+        "explore": "Explore Events",
+        "view_all": "View All Events →"
       },
       "delete": {
         "question": "Are you sure you want to delete Event {{ id }}?"
       },
       "detail": {
-        "title": "Event"
+        "title": "Event",
+        "loading": "Loading...",
+        "this_weekend": "This Weekend",
+        "this_month": "This Month",
+        "more": "View More",
+        "view": "View Details"
       },
       "id": "ID",
       "title": "Title",
@@ -26,7 +36,12 @@
       "products": "Products",
       "reviews": "Reviews",
       "discounts": "Discounts",
-      "category": "Category"
+      "category": "Category",
+      "feedback": "Feedback",
+      "comment": "Comment",
+      "send": "Send",
+      "no_reviews": "No reviews for this event yet.",
+      "share_feedback": "Share your feedback about this event"
     }
   },
   "fueventapiApp": {

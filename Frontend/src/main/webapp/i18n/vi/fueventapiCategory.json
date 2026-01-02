@@ -2,29 +2,29 @@
   "fuEventUiApp": {
     "fueventapiCategory": {
       "home": {
-        "title": "Categories",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Thêm mới một Category",
-        "createOrEditLabel": "Thêm mới hoặc cập nhật Category",
-        "notFound": "No Categories found"
+        "title": "Các đề mục",
+        "refreshListLabel": "Làm mới danh sách",
+        "createLabel": "Thêm mới một đề mục",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật đề mục",
+        "notFound": "Không tìm thấy đề mục"
       },
       "delete": {
-        "question": "Bạn có chắc là muốn xóa Category {{ id }}?"
+        "question": "Bạn có chắc là muốn xóa đề mục có mã {{ id }}?"
       },
       "detail": {
-        "title": "Category"
+        "title": "Đề mục"
       },
-      "id": "ID",
-      "name": "Name",
-      "description": "Description",
-      "events": "Events"
+      "id": "Mã",
+      "name": "Tên",
+      "description": "Mô tả",
+      "events": "Các sự kiện"
     }
   },
   "fueventapiApp": {
     "fueventapiCategory": {
-      "created": "Một Category mới được tạo với định danh {{ param }}",
-      "updated": "Một Category cập nhật với định danh {{ param }}",
-      "deleted": "Một Category đã xóa với định danh {{ param }}"
+      "created": "Một đề mục mới được tạo với định danh {{ param }}",
+      "updated": "Một đề mục cập nhật với định danh {{ param }}",
+      "deleted": "Một đề mục đã xóa với định danh {{ param }}"
     }
   }
 }

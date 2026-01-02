@@ -111,7 +111,7 @@ export const EventList: React.FC = () => {
             <div className="results-header">
               <div>
                 <h2>
-                  <Translate contentKey="global.all_events">All Events</Translate>
+                  <Translate contentKey="fuEventUiApp.fueventapiEvent.home.all">All Events</Translate>
                 </h2>
                 <p>
                   {events.length} events found {appliedFilters.from && `from ${appliedFilters.from}`}{' '}
@@ -119,13 +119,15 @@ export const EventList: React.FC = () => {
                   {appliedFilters.category !== 'all' && `category: ${appliedFilters.category}`}
                 </p>
               </div>
-              <CustomButton contentKey="global.filter" name="Filters" onClick={() => setSidebarOpen(true)} className="filter-btn" />
+              <CustomButton contentKey="global.filter" name="Filter" onClick={() => setSidebarOpen(true)} className="filter-btn" />
             </div>
             <div className="events-grid">
               {events.length > 0 ? (
                 events.map(event => <EventCard key={event.id} event={event} />)
               ) : (
-                <div className="no-results">No events found matching your criteria.</div>
+                <div className="no-results">
+                  <Translate contentKey="fuEventUiApp.fueventapiEvent.home.notMatch">No events found matching your criteria.</Translate>
+                </div>
               )}
             </div>
           </div>

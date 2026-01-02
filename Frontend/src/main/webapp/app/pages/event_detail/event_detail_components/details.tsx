@@ -15,7 +15,7 @@ export function EventDetails({ event }: EventDetailsProps) {
   return (
     <div className="event-details">
       <h2>
-        <Translate contentKey="global.introduction">Giới thiệu</Translate>
+        <Translate contentKey="global.menu.introduction">Introduction</Translate>
       </h2>
       <div className="video-container">
         {event.videoUrl ? (

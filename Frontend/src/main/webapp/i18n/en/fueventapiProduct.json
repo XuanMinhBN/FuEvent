@@ -23,6 +23,24 @@
       "quantitySold": "Quantity Sold",
       "imageUrl": "Image Url",
       "event": "Event"
+    },
+    "ticketType": {
+      "GENERAL": "General",
+      "VIP": "VIP",
+      "expired": "Expired",
+      "select": "Select ticket type",
+      "get_ticket": "Get Ticket",
+      "ticketInformation": "Ticket Information",
+      "most_popular": "Most Popular",
+      "pick_ticket": "Pick your ticket",
+      "out_of_stock": "Out of Stock"
+    },
+    "merchantType": {
+      "FOOD": "Food",
+      "DRINK": "Drink",
+      "MERCHANDISE": "Merchandise",
+      "product_attachment": "Product Attachment",
+      "pick_product": "Pick your product"
     }
   },
   "fueventapiApp": {

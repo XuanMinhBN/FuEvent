@@ -68,7 +68,7 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
       {/* 🌐 SEO + Facebook share meta tags */}
       <Helmet>
         <meta property="og:title" content={event.title} />
-        <meta property="og:description" content={`Tham gia ngay sự kiện ${event.title}!`} />
+        <meta property="og:description" content={`Join event ${event.title}!`} />
         <meta property="og:image" content={event.image} />
         <meta property="og:url" content={link} />
         <meta property="og:type" content="website" />
@@ -87,7 +87,7 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
               <p>{event.location}</p>
               {event.date_end && (
                 <p className="location-detail">
-                  <Translate contentKey="global.end_date">Kết thúc:</Translate>
+                  <Translate contentKey="fuEventUiApp.fueventapiEvent.endTime">Kết thúc:</Translate>
                   {event.date_end}
                 </p>
               )}
@@ -96,34 +96,34 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           <div className="pricing">
             <span className="price-label">Giá từ</span>
             <span className="price">
-              {event.price === 0 ? <Translate contentKey="global.free">Miễn phí</Translate> : `${event.price.toLocaleString('vi-VN')} ₫`}
+              {event.price === 0 ? <Translate contentKey="global.free">Free</Translate> : `${event.price.toLocaleString('vi-VN')} ₫`}
             </span>
             <span className="price-arrow">›</span>
           </div>
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             {isExpired ? (
-              <CustomButton name="Đã quá hạn" contentKey="global.out_expired" className="cta-button expired" disabled />
+              <CustomButton name="Expired" contentKey="fuEventUiApp.ticketType.expired" className="cta-button expired" disabled />
             ) : (
-              <CustomButton name="Chọn loại vé" contentKey="global.out_expired" className="cta-button" />
+              <CustomButton name="Select ticket type" contentKey="fuEventUiApp.ticketType.select" className="cta-button" />
             )}
             <div className="share-buttons">
               {/* 📤 Chia sẻ Facebook */}
               <CustomButton
                 name="Chia sẻ lên Facebook"
                 icon={Share2}
-                contentKey="global.out_expired"
+                contentKey="global.facebookShare"
                 className="share-button"
                 onClick={e =>
                   onShare(e, {
                     url: link,
-                    quote: `Tham gia ngay sự kiện ${event.title}!`,
+                    quote: `Join event now ${event.title}!`,
                   })
                 }
               />
               {/* 🔗 Sao chép liên kết */}
               <CustomButton
-                name={copied ? 'Đã sao chép' : 'Sao chép liên kết'}
-                contentKey="global.copy_link"
+                name={copied ? 'Copied!' : 'Copy to clipboard'}
+                contentKey={copied ? 'global.copied' : 'global.copy'}
                 icon={copied ? Check : LinkIcon}
                 onClick={onCopyLink}
                 className={`share-button ${copied ? 'copied' : ''}`}

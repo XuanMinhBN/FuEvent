@@ -42,7 +42,7 @@ export const Categories: React.FC<CategoriesProps> = ({ selectedCategory, setSel
     <section className="categories section">
       <div className="container">
         <h2 className="section-title">
-          <Translate contentKey="global.section.title">Explore Events</Translate>
+          <Translate contentKey="fuEventUiApp.fueventapiEvent.home.explore">Explore Events</Translate>
         </h2>
         <div className="categories-grid">
           {categories.map(category => (

@@ -59,7 +59,7 @@ export const PopularEvents: React.FC<PopularEventsProps> = ({ selectedCategory }
         >
           <h3 className="section-title">{selectedCategory === 'All' ? 'Popular Events' : `${selectedCategory} Events`}</h3>
           <a href="/events" className="view-all">
-            <Translate contentKey="global.view_all">View All Events →</Translate>
+            <Translate contentKey="fuEventUiApp.fueventapiEvent.home.view_all">View All Events →</Translate>
           </a>
         </div>
         <div className="events-grid">
@@ -68,7 +68,9 @@ export const PopularEvents: React.FC<PopularEventsProps> = ({ selectedCategory }
               <div className="event-image">
                 <img src={event.image} alt={event.title} />
                 <div className="event-category">{event.category}</div>
-                <p className="event-price">{event.price === 0 ? 'Miễn phí' : `${event.price.toLocaleString('vi-VN')} ₫`}</p>
+                <p className="event-price">
+                  {event.price === 0 ? <Translate contentKey="global.free">Free</Translate> : `${event.price.toLocaleString('vi-VN')} ₫`}
+                </p>
               </div>
               <div className="event-content">
                 <h3 className="event-title">{event.title}</h3>
@@ -94,7 +96,7 @@ export const PopularEvents: React.FC<PopularEventsProps> = ({ selectedCategory }
                     name="View Details"
                     variant="outline"
                     className="btn btn-primary event-btn"
-                    contentKey="global.view_detail"
+                    contentKey="fuEventUiApp.fueventapiEvent.detail.view"
                     icon={ArrowRight}
                     onClick={() => navigate(`/event/${event.id}`)}
                   />
@@ -106,7 +108,7 @@ export const PopularEvents: React.FC<PopularEventsProps> = ({ selectedCategory }
         {events.length === 0 && (
           <div className="no-events">
             <p>
-              <Translate contentKey="global.no_event">No events found in this category.</Translate>
+              <Translate contentKey="fuEventUiApp.fueventapiEvent.home.notMatch">No events found matching your criteria.</Translate>
             </p>
           </div>
         )}

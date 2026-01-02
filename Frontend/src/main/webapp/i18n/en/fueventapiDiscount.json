@@ -23,7 +23,12 @@
       "validTo": "Valid To",
       "type": "Type",
       "userLogin": "User Login",
-      "event": "Event"
+      "event": "Event",
+      "take_code": "Take Code",
+      "discount": "Discount",
+      "user_discount": "for quick users",
+      "out_of_voucher": "Out of voucher",
+      "currently_using": "Currently Using"
     }
   },
   "fueventapiApp": {

@@ -90,7 +90,7 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({ eventId, reviews, 
       {/* Form nhập */}
       <div className="review-form">
         <h4>
-          <Translate contentKey="global.feedback">Đánh giá sự kiện này</Translate>
+          <Translate contentKey="fuEventUiApp.fueventapiEvent.feedback">Đánh giá sự kiện này</Translate>
         </h4>
         <div className="rating-stars">
           {[1, 2, 3, 4, 5].map(star => (
@@ -106,18 +106,18 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({ eventId, reviews, 
           ))}
         </div>
         <CustomTextarea
-          contentKey="global.comment"
+          contentKey="fuEventUiApp.fueventapiEvent.comment"
           label="Comment"
-          placeholder="Viết cảm nhận của bạn..."
+          placeholder="Comment"
           value={comment}
           onChange={e => setComment(e.target.value)}
         />
-        <CustomButton name="Gửi đánh giá" contentKey="global.send_feedback" className="btn primary" onClick={handleSubmit} />
+        <CustomButton name="Gửi đánh giá" contentKey="fuEventUiApp.fueventapiEvent.send" className="btn primary" onClick={handleSubmit} />
       </div>
       <div className="review-list">
         {/* {sortedReviews.length === 0 ? (
           <p className="no-review">
-            <Translate contentKey="global.no_reviews">Chưa có đánh giá nào cho sự kiện này.</Translate>
+            <Translate contentKey="fuEventUiApp.fueventapiEvent.no_reviews">No reviews for this event yet.</Translate>
           </p>
         ) : (
           sortedReviews.map((r, idx) => (

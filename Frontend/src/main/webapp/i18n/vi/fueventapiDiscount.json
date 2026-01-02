@@ -2,35 +2,40 @@
   "fuEventUiApp": {
     "fueventapiDiscount": {
       "home": {
-        "title": "Discounts",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Thêm mới một Discount",
-        "createOrEditLabel": "Thêm mới hoặc cập nhật Discount",
-        "notFound": "No Discounts found"
+        "title": "Các mã giảm giá",
+        "refreshListLabel": "Làm mới danh sách",
+        "createLabel": "Thêm mới một mã giảm giá",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật mã giảm giá",
+        "notFound": "Không tìm thấy mã giảm giá"
       },
       "delete": {
-        "question": "Bạn có chắc là muốn xóa Discount {{ id }}?"
+        "question": "Bạn có chắc là muốn xóa mã giảm giá có mã {{ id }}?"
       },
       "detail": {
-        "title": "Discount"
+        "title": "Mã giảm giá"
       },
-      "id": "ID",
-      "code": "Code",
-      "description": "Description",
-      "percentage": "Percentage",
-      "maxUsers": "Max Users",
-      "validFrom": "Valid From",
-      "validTo": "Valid To",
-      "type": "Type",
-      "userLogin": "User Login",
-      "event": "Event"
+      "id": "Mã",
+      "code": "Mã giảm giá",
+      "description": "Mô tả",
+      "percentage": "Phần trăm",
+      "maxUsers": "Số người dùng tối đa",
+      "validFrom": "Có hiệu lực từ",
+      "validTo": "Hêt hiệu lực vào",
+      "type": "Loại",
+      "userLogin": "Người dùng đăng nhập",
+      "event": "Sự kiện",
+      "take_code": "Nhận mã",
+      "discount": "Giảm giá",
+      "user_discount": "cho người dùng nhanh tay",
+      "out_of_voucher": "Hết voucher",
+      "currently_using": "Đang sử dụng"
     }
   },
   "fueventapiApp": {
     "fueventapiDiscount": {
-      "created": "Một Discount mới được tạo với định danh {{ param }}",
-      "updated": "Một Discount cập nhật với định danh {{ param }}",
-      "deleted": "Một Discount đã xóa với định danh {{ param }}"
+      "created": "Một mã giảm giá mới được tạo với định danh {{ param }}",
+      "updated": "Một mã giảm giá cập nhật với định danh {{ param }}",
+      "deleted": "Một mã giảm giá đã xóa với định danh {{ param }}"
     }
   }
 }

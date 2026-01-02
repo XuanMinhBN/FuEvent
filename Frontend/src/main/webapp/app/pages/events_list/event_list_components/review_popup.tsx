@@ -45,7 +45,7 @@ export const ReviewPopup: React.FC<ReviewPopupProps> = ({ eventId, userId, onClo
     <div className="pu-review-popup" onClick={onClose}>
       <div className="pu-review-popup__content" onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
         <h2>
-          <Translate contentKey="global.feedback">Đánh giá sự kiện</Translate>
+          <Translate contentKey="fuEventUiApp.fueventapiEvent.feedback">Feedback</Translate>
         </h2>
         <div className="pu-rating-stars">
           {[1, 2, 3, 4, 5].map(star => (
@@ -63,7 +63,7 @@ export const ReviewPopup: React.FC<ReviewPopupProps> = ({ eventId, userId, onClo
 
         <CustomTextarea
           label="Comment"
-          contentKey="global.share_feedback"
+          contentKey="fuEventUiApp.fueventapiEvent.share_feedback"
           className="pu-textarea"
           placeholder="Chia sẻ cảm nhận của bạn..."
           value={comment}
@@ -71,8 +71,8 @@ export const ReviewPopup: React.FC<ReviewPopupProps> = ({ eventId, userId, onClo
         />
 
         <div className="pu-review-popup__actions">
-          <CustomButton name="Gửi" className="pu-btn primary" onClick={handleSubmit} disabled={loading} />
-          <CustomButton name="Đóng" className="pu-btn" onClick={onClose} disabled={loading} />
+          <CustomButton name="Send" contentKey="entity.action.open" className="pu-btn primary" onClick={handleSubmit} disabled={loading} />
+          <CustomButton name="Close" contentKey="entity.action.close" className="pu-btn" onClick={onClose} disabled={loading} />
         </div>
       </div>
     </div>

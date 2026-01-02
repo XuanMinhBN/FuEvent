@@ -118,26 +118,31 @@ export const Sidebar: React.FC<SidebarProps> = ({ id, discount, setDiscount }) =
             <div className="promo-content">
               <h3>{item.description}</h3>
               <h2 className="promo-title">
-                <Translate contentKey="global.take_code">Nhận mã {item.code}</Translate>
+                <Translate contentKey="fuEventUiApp.fueventapiDiscount.take_code">Nhận mã {item.code}</Translate>
               </h2>
               <h2 className="promo-subtitle">{promoData.subtitle}</h2>
               <div className="discount-badges">
                 <div className="badge">
                   <span className="badge-text">
-                    <Translate contentKey="global.discount">Giảm </Translate>
+                    <Translate contentKey="fuEventUiApp.fueventapiDiscount.discount">Giảm </Translate>
                     {item.percentage}%
                   </span>
                   <span className="badge-sub">
-                    <Translate contentKey="global.user_discount">cho người dùng nhanh tay</Translate>
+                    <Translate contentKey="fuEventUiApp.fueventapiDiscount.user_discount">cho người dùng nhanh tay</Translate>
                   </span>
                 </div>
               </div>
               {isFull ? (
-                <CustomButton name="Hết voucher" contentKey="global.out_of_voucher" className="promo-button" disabled />
+                <CustomButton
+                  name="Out of voucher"
+                  contentKey="fuEventUiApp.fueventapiDiscount.out_of_voucher"
+                  className="promo-button"
+                  disabled
+                />
               ) : status === item.id ? (
                 <CustomButton
-                  name="Đang sử dụng"
-                  contentKey="event_detail.currently_using"
+                  name="Currently Using"
+                  contentKey="fuEventUiApp.fueventapiDiscount.currently_using"
                   className="promo-button"
                   onClick={() => {
                     setDiscount({});
