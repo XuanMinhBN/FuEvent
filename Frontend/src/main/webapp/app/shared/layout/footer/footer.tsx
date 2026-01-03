@@ -40,12 +40,12 @@ const Footer = () => (
           </li>
           <li>
             <Link to="/events">
-              <Translate contentKey="home.footer.event">Events</Translate>
+              <Translate contentKey="home.footer.events">Events</Translate>
             </Link>
           </li>
           <li>
             <Link to="/about">
-              <Translate contentKey="home.footer.aboutUs">About Us</Translate>
+              <Translate contentKey="home.footer.about">About Us</Translate>
             </Link>
           </li>
           <li>
@@ -97,19 +97,19 @@ const Footer = () => (
           <li>
             <MapPinIcon size={16} />
             <span>
-              <Translate contentKey="home.map_pin">FPT University, Hoa Lac Hi-Tech Park, Hanoi</Translate>
+              <Translate contentKey="home.footer.map_pin">FPT University, Hoa Lac Hi-Tech Park, Hanoi</Translate>
             </span>
           </li>
           <li>
             <PhoneIcon size={16} />
             <span>
-              <Translate contentKey="home.phone">+84 123 456 789</Translate>
+              <Translate contentKey="home.footer.phone">+84 123 456 789</Translate>
             </span>
           </li>
           <li>
             <MailIcon size={16} />
             <span>
-              <Translate contentKey="home.email">support@fpticket.edu.vn</Translate>
+              <Translate contentKey="home.footer.email">support@fpticket.edu.vn</Translate>
             </span>
           </li>
         </ul>

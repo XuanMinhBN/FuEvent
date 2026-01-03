@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { Book, Music, Wrench, Users, Trophy, Briefcase, Gift, Cpu, MoreHorizontal, LucideIcon } from 'lucide-react';
+import { Book, Music, Wrench, Users, Trophy, Briefcase, Gift, Cpu, MoreHorizontal, LucideIcon, LayoutGrid } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { CustomButton } from 'app/shared/components/button';
 import { Translate } from 'react-jhipster';
@@ -21,7 +21,7 @@ export const Categories: React.FC<CategoriesProps> = ({ selectedCategory, setSel
   const navigate = useNavigate();
 
   const categories: ICategory[] = [
-    { name: 'All', color: '#FF6B35', count: 48 },
+    { name: 'All', icon: LayoutGrid, color: '#FF6B35', count: 48 },
     { name: 'Academic', icon: Book, color: '#4F46E5', count: 12 },
     { name: 'Music', icon: Music, color: '#EC4899', count: 8 },
     { name: 'Workshop', icon: Wrench, color: '#10B981', count: 15 },
@@ -50,7 +50,7 @@ export const Categories: React.FC<CategoriesProps> = ({ selectedCategory, setSel
               key={category.name}
               className="category-card"
               name={category.name}
-              contentKey={category.name}
+              contentKey={`fuEventUiApp.fueventapiCategory.type.${category.name}`}
               icon={category.icon}
               variant={selectedCategory === category.name ? 'default' : 'outline'}
               onClick={() => handleCategoryClick(category.name)}

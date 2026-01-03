@@ -14,6 +14,18 @@
       "detail": {
         "title": "Đề mục"
       },
+      "type": {
+        "All": "Tất cả",
+        "Academic": "Học thuật",
+        "Music": "Âm nhạc",
+        "Sports": "Thể thao",
+        "Workshop": "Workshop",
+        "Club": "Câu lạc bộ",
+        "Career": "Nghề nghiệp",
+        "Festival": "Lễ hội",
+        "Technology": "Công nghệ",
+        "Other": "Khác"
+      },
       "id": "Mã",
       "name": "Tên",
       "description": "Mô tả",

@@ -11,18 +11,14 @@ import Footer from 'app/shared/layout/footer/footer';
 export const Home: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   return (
-    <div>
-      <Header />
-      <main>
-        <Banner />
-        <Categories selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
-        <TrendingEvents />
-        <EventCarousel />
-        <PopularEvents selectedCategory="Career" />
-        <PopularEvents selectedCategory="Festival" />
-        <InterestingDestinations />
-      </main>
-      <Footer />
-    </div>
+    <main>
+      <Banner />
+      <Categories selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+      <TrendingEvents />
+      <EventCarousel />
+      <PopularEvents selectedCategory="Career" />
+      <PopularEvents selectedCategory="Festival" />
+      <InterestingDestinations />
+    </main>
   );
 };

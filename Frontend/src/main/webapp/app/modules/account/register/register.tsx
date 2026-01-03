@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getSession } from 'app/shared/reducers/authentication';
 import { Translate, translate, isEmail } from 'react-jhipster';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';

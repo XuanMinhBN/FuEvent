@@ -51,7 +51,7 @@ module.exports = async options =>
       proxy: [
         {
           context: ['/api', '/services', '/management', '/swagger-resources', '/v2/api-docs', '/v3/api-docs', '/h2-console', '/auth'],
-          target: `http${options.tls ? 's' : ''}://localhost:8080`,
+          target: `http${options.tls ? 's' : ''}://localhost:3000`,
           secure: false,
           changeOrigin: options.tls,
         },

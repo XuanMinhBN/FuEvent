@@ -81,8 +81,6 @@ export const Detail: React.FC = () => {
 
   return (
     <div className="de-app">
-      <Header />
-
       {/* EventHero đã có typing */}
       <EventHero event={event} />
       <div className="de-main-content">
@@ -128,7 +126,6 @@ export const Detail: React.FC = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

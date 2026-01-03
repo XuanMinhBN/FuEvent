@@ -14,6 +14,18 @@
       "detail": {
         "title": "Category"
       },
+      "type": {
+        "All": "All",
+        "Academic": "Academic",
+        "Music": "Music",
+        "Sports": "Sports",
+        "Workshop": "Workshop",
+        "Club": "Club",
+        "Career": "Career",
+        "Festival": "Festival",
+        "Technology": "Technology",
+        "Other": "Other"
+      },
       "id": "ID",
       "name": "Name",
       "description": "Description",

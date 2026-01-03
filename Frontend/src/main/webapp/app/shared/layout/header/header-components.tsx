@@ -37,7 +37,7 @@ export const Brand: React.FC = () => {
   return (
     <div className="header-left">
       <Link to="/" className="logo">
-        <Translate contentKey="global.brand">FuEvent</Translate>
+        <Translate contentKey="home.header.title">FuEvent</Translate>
       </Link>
     </div>
   );
@@ -47,16 +47,16 @@ export const Navbar: React.FC = () => {
   return (
     <nav className="menu-desktop">
       <Link to="/">
-        <Translate contentKey="global.navbar.home">Trang chủ</Translate>
+        <Translate contentKey="home.header.home">Home</Translate>
       </Link>
       <Link to="/events">
-        <Translate contentKey="global.navbar.events">Các sự kiện</Translate>
+        <Translate contentKey="home.header.events">Events</Translate>
       </Link>
       <Link to="/about">
-        <Translate contentKey="global.navbar.about_us">Về chúng tôi</Translate>
+        <Translate contentKey="home.header.about_us">About Us</Translate>
       </Link>
       <Link to="/contact">
-        <Translate contentKey="global.navbar.contact">Liên hệ</Translate>
+        <Translate contentKey="home.header.contact">Contact Us</Translate>
       </Link>
     </nav>
   );
@@ -94,23 +94,23 @@ export const AccountMenu: React.FC<AccountMenuProps> = ({ user, handleLogout }) 
       {showProfileMenu && (
         <div className="profile-menu shadow">
           <Link to="/profile" className="profile-menu-item" onClick={() => setShowProfileMenu(false)}>
-            <Translate contentKey="global.profile">Hồ sơ</Translate>
+            <Translate contentKey="home.header.profile">Profile</Translate>
           </Link>
 
           {user?.role === 'Admin' && (
             <Link to="/admin/dashboard" className="profile-menu-item" onClick={() => setShowProfileMenu(false)}>
-              <Translate contentKey="global.admin_dashboard">Quản trị hệ thống</Translate>
+              <Translate contentKey="home.header.admin_dashboard">Admin Dashboard</Translate>
             </Link>
           )}
           <Link to="/organizer" className="profile-menu-item" onClick={() => setShowProfileMenu(false)}>
-            <Translate contentKey="global.create_event">Tạo sự kiện</Translate>
+            <Translate contentKey="home.header.create_event">Create Event</Translate>
           </Link>
           <Link to="/profile/tickets" className="profile-menu-item" onClick={() => setShowProfileMenu(false)}>
-            <Translate contentKey="global.my_tickets">Vé của tôi</Translate>
+            <Translate contentKey="home.header.my_tickets">My Ticket</Translate>
           </Link>
 
           <button className="profile-menu-item logout-btn" onClick={handleLogout}>
-            <Translate contentKey="global.logout">Đăng xuất</Translate>
+            <Translate contentKey="home.header.logout">Logout</Translate>
           </button>
         </div>
       )}
@@ -126,27 +126,27 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, user 
   return (
     <nav className="menu-mobile">
       <Link to="/" onClick={closeMenu}>
-        <Translate contentKey="global.navbar.home">Trang chủ</Translate>
+        <Translate contentKey="home.header.home">Home</Translate>
       </Link>
       <Link to="/events" onClick={closeMenu}>
-        <Translate contentKey="global.navbar.events">Các sự kiện</Translate>
+        <Translate contentKey="home.header.events">Events</Translate>
       </Link>
       <Link to="/about" onClick={closeMenu}>
-        <Translate contentKey="global.navbar.about_us">Về chúng tôi</Translate>
+        <Translate contentKey="home.header.about_us">About Us</Translate>
       </Link>
       <Link to="/contact" onClick={closeMenu}>
-        <Translate contentKey="global.navbar.contact">Liên hệ</Translate>
+        <Translate contentKey="home.header.contact">Contact Us</Translate>
       </Link>
 
       {user?.role === 'Admin' && (
         <Link to="/admin/dashboard" onClick={closeMenu}>
-          <Translate contentKey="global.admin_dashboard">Quản trị hệ thống</Translate>
+          <Translate contentKey="home.header.admin_dashboard">Admin Dashboard</Translate>
         </Link>
       )}
 
       <div className="menu-mobile-bottom">
         <Link to="/profile/tickets" className="icon-btn" onClick={closeMenu}>
-          <Translate contentKey="global.my_tickets">Vé của tôi</Translate>
+          <Translate contentKey="home.header.my_tickets">My Ticket</Translate>
         </Link>
         {userId ? (
           <Link to="/profile" className="login-btn" onClick={closeMenu}>
@@ -154,7 +154,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, user 
           </Link>
         ) : (
           <Link to="/signin" className="login-btn" onClick={closeMenu}>
-            <UserIcon size={18} className="icon" /> <Translate contentKey="global.login">Login</Translate>
+            <UserIcon size={18} className="icon" /> <Translate contentKey="home.header.login">Login</Translate>
           </Link>
         )}
       </div>

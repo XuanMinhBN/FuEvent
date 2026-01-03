@@ -89,7 +89,6 @@ export const EventList: React.FC = () => {
 
   return (
     <div className="app-container">
-      <Header />
       <div className="hero-section">
         <div className="hero-content">
           <div className="hero-text">
@@ -155,7 +154,6 @@ export const EventList: React.FC = () => {
           }}
         />
       </div>
-      <Footer />
     </div>
   );
 };
