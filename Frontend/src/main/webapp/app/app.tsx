@@ -2,9 +2,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import './app.scss';
 import 'app/config/dayjs.ts';
 import React, { useEffect } from 'react';
+import { BrowserRouter, useLocation } from 'react-router-dom';
 import { Card } from 'reactstrap';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getSession } from 'app/shared/reducers/authentication';
 import { getProfile } from 'app/shared/reducers/application-profile';
@@ -17,8 +17,11 @@ import AppRoutes from 'app/routes';
 
 const baseHref = document.querySelector('base').getAttribute('href').replace(/\/$/, '');
 
-export const App = () => {
+const AppInner = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  const isFullPage = location.pathname === '/login' || location.pathname === '/account/register';
 
   useEffect(() => {
     dispatch(getSession());
@@ -34,29 +37,43 @@ export const App = () => {
 
   const paddingTop = '60px';
   return (
-    <Router basename={baseHref}>
-      <div className="app-container" style={{ paddingTop }}>
-        <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
+    <div className="app-container" style={{ paddingTop: isFullPage ? '0' : '2px' }}>
+      <ToastContainer position="top-left" className="toastify-container" toastClassName="toastify-toast" />
+
+      {/* Ẩn Header nếu là FullPage */}
+      {!isFullPage && (
         <ErrorBoundary>
           <Header
           // isAuthenticated={isAuthenticated}
           // isAdmin={isAdmin}
-          // currentLocale={currentLocale}
+          // currentLocale={useAppSelector(state => state.locale.currentLocale)}
           // ribbonEnv={ribbonEnv}
           // isInProduction={isInProduction}
           // isOpenAPIEnabled={isOpenAPIEnabled}
           />
         </ErrorBoundary>
-        <div className="container-fluid view-container" id="app-view-container">
-          <Card className="jh-card">
-            <ErrorBoundary>
-              <AppRoutes />
-            </ErrorBoundary>
-          </Card>
-          <Footer />
-        </div>
+      )}
+
+      {/* Logic Container */}
+      <div className={isFullPage ? '' : 'container-fluid view-container'} id="app-view-container">
+        <Card className={isFullPage ? 'border-0 shadow-none bg-transparent' : 'jh-card mx-auto max-w-7xl'}>
+          <ErrorBoundary>
+            <AppRoutes />
+          </ErrorBoundary>
+        </Card>
       </div>
-    </Router>
+
+      {/* Ẩn Footer nếu là FullPage */}
+      {!isFullPage && <Footer />}
+    </div>
+  );
+};
+
+export const App = () => {
+  return (
+    <BrowserRouter basename={baseHref}>
+      <AppInner />
+    </BrowserRouter>
   );
 };
 

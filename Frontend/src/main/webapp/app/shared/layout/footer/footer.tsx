@@ -1,5 +1,4 @@
 import './footer.scss';
-
 import React from 'react';
 import { Translate } from 'react-jhipster';
 import { Link } from 'react-router-dom';

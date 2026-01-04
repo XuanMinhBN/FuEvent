@@ -1,51 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AccountMenu, Brand, IUser, MobileMenu, Navbar } from './header-components';
-import { useStore } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Bell, MenuIcon, XIcon } from 'lucide-react';
+import './header.scss';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-  const store = useStore();
-  const user = (store as IUser) || {};
-  // const setDataUser = store?.setDataUser;
+  const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.user || state) as IUser;
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const savedUser = localStorage.getItem('user');
-  //   // Cast user ID về string hoặc undefined để so sánh an toàn
-  //   const userId = user?._id || user?.id;
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    // Cast user ID về string hoặc undefined để so sánh an toàn
+    const userId = user?._id || user?.id;
 
-  //   if (savedUser && !userId) {
-  //     try {
-  //       const parsedUser = JSON.parse(savedUser) as IUser;
-  //       if (setDataUser) {
-  //         setDataUser(parsedUser);
-  //       }
-  //     } catch {}
-  //   }
-  // }, [user, setDataUser]);
+    if (savedUser && !userId) {
+      try {
+        const parsedUser = JSON.parse(savedUser) as IUser;
+        dispatch(setDataUser(parsedUser));
+      } catch {
+        console.error('Failed to parse user from localStorage');
+      }
+    }
+  }, [user, setDataUser]);
 
-  // const handleLogout = async () => {
-  //   const ok = window.confirm('Are you sure you want to logout?');
-  //   if (!ok) return;
+  const handleLogout = async () => {
+    const ok = window.confirm('Are you sure you want to logout?');
+    if (!ok) return;
 
-  //   try {
-  //     await requestLogout();
-  //   } catch (e) {
-  //     console.error('Logout API error:', e);
-  //   }
+    try {
+      // eslint-disable-next-line @typescript-eslint/await-thenable
+      await requestLogout();
+    } catch (e) {
+      console.error('Logout API error:', e);
+    }
 
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
 
-  //   try {
-  //     if (setDataUser) setDataUser({});
-  //   } catch (e) {}
+    try {
+      if (setDataUser) setDataUser({});
+    } catch (e) {
+      console.error('Failed to clear user data in Redux store:', e);
+    }
 
-  //   navigate('/signin');
-  // };
+    navigate('/signin');
+  };
 
   return (
     <>
@@ -63,7 +66,7 @@ const Header: React.FC = () => {
               <Bell size={18} />
             </button> */}
 
-            {/* <AccountMenu user={user} handleLogout={handleLogout} /> */}
+            <AccountMenu user={user} handleLogout={handleLogout} />
           </div>
 
           {/* --- Toggle button mobile --- */}
@@ -91,3 +94,10 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+function setDataUser(parsedUser: IUser): any {
+  throw new Error('Function not implemented.');
+}
+
+function requestLogout() {
+  throw new Error('Function not implemented.');
+}

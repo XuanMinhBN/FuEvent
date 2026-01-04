@@ -112,9 +112,9 @@ $primary-hover: #d46510; /* Màu cam đậm khi hover */
     color: $text-gray;
   }
 
-  &:hover {
-    background-color: $primary-hover;
-    transform: translateY(-2px);
-    color: $text-white;
-  }
+  // &:hover {
+  //   background-color: $primary-hover;
+  //   transform: translateY(-2px);
+  //   color: $text-white;
+  // }
 }

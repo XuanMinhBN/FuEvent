@@ -1,5 +1,6 @@
 {
   "global": {
+    "login": "Đăng nhập",
     "attending": "người tham gia",
     "filter": "Bộ lọc",
     "free": "Miễn phí",

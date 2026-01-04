@@ -1,5 +1,6 @@
 {
   "global": {
+    "login": "Sign in",
     "attending": "attending",
     "filter": "Filter",
     "free": "Free",

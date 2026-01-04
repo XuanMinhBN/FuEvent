@@ -29,7 +29,7 @@ export function CustomButton({
 }: CustomButtonProps) {
   return (
     <Button type={type} variant={variant} size={size} className={className} disabled={isLoading || disabled} {...props}>
-      {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : Icon && <Icon className="h-4 w-4" />}
+      {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : Icon && <Icon className="h-5 w-5" />}
       {contentKey ? <Translate contentKey={contentKey}>{name}</Translate> : name}
     </Button>
   );

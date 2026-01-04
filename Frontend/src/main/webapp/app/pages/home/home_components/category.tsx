@@ -41,7 +41,7 @@ export const Categories: React.FC<CategoriesProps> = ({ selectedCategory, setSel
   return (
     <section className="categories section">
       <div className="container">
-        <h2 className="section-title">
+        <h2 className="section-title text-center mb-5">
           <Translate contentKey="fuEventUiApp.fueventapiEvent.home.explore">Explore Events</Translate>
         </h2>
         <div className="categories-grid">

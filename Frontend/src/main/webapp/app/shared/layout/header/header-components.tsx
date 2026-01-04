@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Translate } from 'react-jhipster';
 import { NavLink as Link } from 'react-router-dom';
 import { UserIcon } from 'lucide-react';
+import './header.scss';
 
 export interface IUser {
   id?: string;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { getSession } from 'app/shared/reducers/authentication';
 import { Translate, translate, isEmail } from 'react-jhipster';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -9,7 +8,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { handleRegister, reset } from './register.reducer';
 import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import logo from 'app/assets/images/logo.png';
 
 export const RegisterPage = () => {
@@ -54,13 +53,18 @@ export const RegisterPage = () => {
 
   return (
     <div className="auth-page">
+      <Link to="/" className="absolute top-4 left-4 text-gray-500 hover:text-orange-500 transition-colors">
+        <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
+        <Translate contentKey="entity.action.back">Back</Translate>
+      </Link>
+
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="auth-card">
         {/* --- Header --- */}
         <div className="text-center mb-4">
           <h2 className="auth-title flex justify-center">
             <img src={logo} alt="logo" className="logo" style={{ height: '60px', objectFit: 'contain' }} />
           </h2>
-          <h2 className="auth-subtitle mt-2">
+          <h2 className="text-xl mt-2">
             <Translate contentKey="register.title">Registration</Translate>
           </h2>
         </div>
@@ -70,7 +74,7 @@ export const RegisterPage = () => {
           <div className="space-y-4">
             {/* Username */}
             <div className="form-row block">
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="username" className="block font-medium text-gray-700 mb-1">
                 <Translate contentKey="global.form.username.label">Username</Translate>
               </label>
               <input
@@ -92,7 +96,7 @@ export const RegisterPage = () => {
 
             {/* Email */}
             <div className="form-row block">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="block font-medium text-gray-700 mb-1">
                 <Translate contentKey="global.form.email.label">Email</Translate>
               </label>
               <input
@@ -112,7 +116,7 @@ export const RegisterPage = () => {
 
             {/* Password */}
             <div className="form-row block">
-              <label htmlFor="firstPassword" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="firstPassword" className="block font-medium text-gray-700 mb-1">
                 <Translate contentKey="global.form.newpassword.label">New Password</Translate>
               </label>
               <div className="input-wrapper relative">
@@ -145,7 +149,7 @@ export const RegisterPage = () => {
 
             {/* Confirm Password */}
             <div className="form-row block">
-              <label htmlFor="secondPassword" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="secondPassword" className="block font-medium text-gray-700 mb-1">
                 <Translate contentKey="global.form.confirmpassword.label">Confirm Password</Translate>
               </label>
               <div className="input-wrapper relative">
