@@ -2,19 +2,63 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AccountMenu, Brand, IUser, MobileMenu, Navbar } from './header-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { Bell, MenuIcon, XIcon } from 'lucide-react';
 import './header.scss';
+import { setDataUser, logoutUser } from 'app/shared/redux/userSlice';
+import axios from 'axios';
+import { CustomButton } from 'app/shared/components/button';
+import { MenuIcon, XIcon } from 'lucide-react';
+import { setLocale } from 'app/shared/reducers/locale';
+import { LanguageMenu } from './header-components';
 
-const Header: React.FC = () => {
+export interface IHeaderProps {
+  isAuthenticated: boolean;
+  isAdmin: boolean;
+  ribbonEnv: string;
+  isInProduction: boolean;
+  isOpenAPIEnabled: boolean;
+  currentLocale: string;
+}
+
+const Header = (props: IHeaderProps) => {
+  const { isAuthenticated, isAdmin, ribbonEnv } = props;
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user || state) as IUser;
   const navigate = useNavigate();
 
+  const currentLocale = useSelector((state: any) => state.locale.currentLocale);
+
+  const requestLogout = async () => {
+    await axios.post('api/logout');
+  };
+
+  const handleLocaleChange = (langKey: string) => {
+    dispatch(setLocale(langKey));
+  };
+
+  const handleLogout = async () => {
+    const ok = window.confirm('Are you sure you want to logout?');
+    if (!ok) return;
+
+    try {
+      await requestLogout();
+    } catch (e) {
+      console.warn('Logout server failed/ignored', e);
+    }
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('jhi-authenticationToken');
+
+    dispatch(logoutUser());
+
+    navigate('/signin');
+  };
+
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
-    // Cast user ID về string hoặc undefined để so sánh an toàn
     const userId = user?._id || user?.id;
 
     if (savedUser && !userId) {
@@ -25,34 +69,12 @@ const Header: React.FC = () => {
         console.error('Failed to parse user from localStorage');
       }
     }
-  }, [user, setDataUser]);
-
-  const handleLogout = async () => {
-    const ok = window.confirm('Are you sure you want to logout?');
-    if (!ok) return;
-
-    try {
-      // eslint-disable-next-line @typescript-eslint/await-thenable
-      await requestLogout();
-    } catch (e) {
-      console.error('Logout API error:', e);
-    }
-
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-
-    try {
-      if (setDataUser) setDataUser({});
-    } catch (e) {
-      console.error('Failed to clear user data in Redux store:', e);
-    }
-
-    navigate('/signin');
-  };
+  }, [user, dispatch]);
 
   return (
     <>
       <header className="header">
+        {ribbonEnv === 'dev' && <div className="ribbon dev">Development</div>}
         <div className="header-container">
           {/* --- Logo + Desktop Nav --- */}
           <div className="header-left-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
@@ -66,16 +88,18 @@ const Header: React.FC = () => {
               <Bell size={18} />
             </button> */}
 
-            <AccountMenu user={user} handleLogout={handleLogout} />
+            <LanguageMenu currentLocale={currentLocale} onLocaleChange={handleLocaleChange} />
+
+            <AccountMenu user={user} handleLogout={handleLogout} isAuthenticated={isAuthenticated} isAdmin={isAdmin} />
           </div>
 
           {/* --- Toggle button mobile --- */}
           <div className="menu-toggle">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}</button>
+            <CustomButton icon={isMenuOpen ? XIcon : MenuIcon} onClick={() => setIsMenuOpen(!isMenuOpen)} />
           </div>
         </div>
 
-        <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} user={user} />
+        <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} user={user} isAuthenticated={isAuthenticated} isAdmin={isAdmin} />
       </header>
 
       {/* --- Sidebar Notifications --- */}
@@ -94,10 +118,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-function setDataUser(parsedUser: IUser): any {
-  throw new Error('Function not implemented.');
-}
-
-function requestLogout() {
-  throw new Error('Function not implemented.');
-}

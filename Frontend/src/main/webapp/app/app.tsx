@@ -44,12 +44,12 @@ const AppInner = () => {
       {!isFullPage && (
         <ErrorBoundary>
           <Header
-          // isAuthenticated={isAuthenticated}
-          // isAdmin={isAdmin}
-          // currentLocale={useAppSelector(state => state.locale.currentLocale)}
-          // ribbonEnv={ribbonEnv}
-          // isInProduction={isInProduction}
-          // isOpenAPIEnabled={isOpenAPIEnabled}
+            isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
+            currentLocale={useAppSelector(state => state.locale.currentLocale)}
+            ribbonEnv={ribbonEnv}
+            isInProduction={isInProduction}
+            isOpenAPIEnabled={isOpenAPIEnabled}
           />
         </ErrorBoundary>
       )}

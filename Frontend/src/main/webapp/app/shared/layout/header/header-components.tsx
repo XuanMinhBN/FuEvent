@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Translate } from 'react-jhipster';
 import { NavLink as Link } from 'react-router-dom';
-import { UserIcon } from 'lucide-react';
+import { Globe, UserIcon } from 'lucide-react';
 import './header.scss';
+import { languages } from 'app/config/translation';
 
 export interface IUser {
   id?: string;
@@ -26,13 +27,80 @@ export interface INotification {
 export interface AccountMenuProps {
   user: IUser | null;
   handleLogout: () => void;
+  isAdmin?: boolean;
+  isAuthenticated?: boolean;
 }
 
 export interface MobileMenuProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   user: IUser | null;
+  isAdmin?: boolean;
+  isAuthenticated?: boolean;
 }
+
+interface LanguageMenuProps {
+  currentLocale: string;
+  onLocaleChange: (langKey: string) => void;
+}
+
+export const LanguageMenu: React.FC<LanguageMenuProps> = ({ currentLocale, onLocaleChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const currentLanguageName = languages[currentLocale]?.name || currentLocale;
+
+  return (
+    <div className="language-root" ref={menuRef} style={{ position: 'relative', marginLeft: '1rem' }}>
+      <button
+        className="icon-btn"
+        onClick={() => setIsOpen(!isOpen)}
+        title="Change Language"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '5px',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          color: 'inherit',
+        }}
+      >
+        <Globe size={20} />
+        {/* Nếu muốn hiện tên ngôn ngữ cạnh icon thì bỏ comment dòng dưới */}
+        <span className="d-none d-md-inline">{currentLanguageName}</span>
+      </button>
+
+      {isOpen && (
+        <div className="profile-menu shadow" style={{ right: 0, minWidth: '150px' }}>
+          {Object.keys(languages).map(langKey => (
+            <button
+              key={langKey}
+              className={`profile-menu-item ${currentLocale === langKey ? 'active' : ''}`}
+              onClick={() => {
+                onLocaleChange(langKey);
+                setIsOpen(false);
+              }}
+              style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', padding: '10px 15px', cursor: 'pointer' }}
+            >
+              {languages[langKey].name}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export const Brand: React.FC = () => {
   return (
@@ -63,11 +131,11 @@ export const Navbar: React.FC = () => {
   );
 };
 
-export const AccountMenu: React.FC<AccountMenuProps> = ({ user, handleLogout }) => {
+export const AccountMenu: React.FC<AccountMenuProps> = ({ user, handleLogout, isAdmin, isAuthenticated }) => {
   const [showProfileMenu, setShowProfileMenu] = useState<boolean>(false);
   const profileRef = useRef<HTMLDivElement>(null);
-  const userId = user?._id || user?.id || null;
   const usernameDisplay = user?.username || user?.user_name || user?.userName || user?.full_name || 'Profile';
+
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
@@ -78,7 +146,9 @@ export const AccountMenu: React.FC<AccountMenuProps> = ({ user, handleLogout }) 
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  if (!userId) {
+  const isUserLoggedIn = isAuthenticated && (user?._id || user?.id);
+
+  if (!isUserLoggedIn) {
     return (
       <Link to="/signin" className="login-btn">
         <UserIcon size={18} className="icon" /> <Translate contentKey="global.login">Login</Translate>
@@ -98,7 +168,7 @@ export const AccountMenu: React.FC<AccountMenuProps> = ({ user, handleLogout }) 
             <Translate contentKey="home.header.profile">Profile</Translate>
           </Link>
 
-          {user?.role === 'Admin' && (
+          {(isAdmin || user?.role === 'Admin') && (
             <Link to="/admin/dashboard" className="profile-menu-item" onClick={() => setShowProfileMenu(false)}>
               <Translate contentKey="home.header.admin_dashboard">Admin Dashboard</Translate>
             </Link>
@@ -119,11 +189,11 @@ export const AccountMenu: React.FC<AccountMenuProps> = ({ user, handleLogout }) 
   );
 };
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, user }) => {
+export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, user, isAuthenticated, isAdmin }) => {
   if (!isOpen) return null;
-  const userId = user?._id || user?.id || null;
   const usernameDisplay = user?.username || user?.user_name || user?.userName || user?.full_name || 'Profile';
   const closeMenu = () => setIsOpen(false);
+
   return (
     <nav className="menu-mobile">
       <Link to="/" onClick={closeMenu}>
@@ -139,17 +209,18 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, user 
         <Translate contentKey="home.header.contact">Contact Us</Translate>
       </Link>
 
-      {user?.role === 'Admin' && (
-        <Link to="/admin/dashboard" onClick={closeMenu}>
-          <Translate contentKey="home.header.admin_dashboard">Admin Dashboard</Translate>
-        </Link>
-      )}
+      {isAdmin ||
+        (user?.role === 'Admin' && (
+          <Link to="/admin/dashboard" onClick={closeMenu}>
+            <Translate contentKey="home.header.admin_dashboard">Admin Dashboard</Translate>
+          </Link>
+        ))}
 
       <div className="menu-mobile-bottom">
         <Link to="/profile/tickets" className="icon-btn" onClick={closeMenu}>
           <Translate contentKey="home.header.my_tickets">My Ticket</Translate>
         </Link>
-        {userId ? (
+        {isAuthenticated ? (
           <Link to="/profile" className="login-btn" onClick={closeMenu}>
             <UserIcon size={18} className="icon" /> {usernameDisplay}
           </Link>
