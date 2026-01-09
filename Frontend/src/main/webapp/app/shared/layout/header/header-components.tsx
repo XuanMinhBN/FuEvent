@@ -6,14 +6,15 @@ import './header.scss';
 import { languages } from 'app/config/translation';
 
 export interface IUser {
-  id?: string;
-  _id?: string;
-  username?: string;
-  user_name?: string;
-  userName?: string;
-  full_name?: string;
-  role?: string;
-  [key: string]: any;
+  id?: any;
+  login?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  imageUrl?: string;
+  activated?: boolean;
+  langKey?: string;
+  authorities?: string[];
 }
 
 export interface INotification {
@@ -132,9 +133,15 @@ export const Navbar: React.FC = () => {
 };
 
 export const AccountMenu: React.FC<AccountMenuProps> = ({ user, handleLogout, isAdmin, isAuthenticated }) => {
+  // eslint-disable-next-line no-console
+  console.log('AccountMenu User Data:', user);
   const [showProfileMenu, setShowProfileMenu] = useState<boolean>(false);
   const profileRef = useRef<HTMLDivElement>(null);
-  const usernameDisplay = user?.username || user?.user_name || user?.userName || user?.full_name || 'Profile';
+  const fullName = `${user?.lastName || ''} ${user?.firstName || ''}`.trim();
+  const usernameDisplay = fullName || user?.login || 'Profile';
+  const hasUserId = user && user.id;
+  const isUserLoggedIn = isAuthenticated || hasUserId;
+  const hasAdminAuthority = isAdmin || (user?.authorities && user.authorities.includes('ROLE_ADMIN'));
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -146,11 +153,9 @@ export const AccountMenu: React.FC<AccountMenuProps> = ({ user, handleLogout, is
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const isUserLoggedIn = isAuthenticated && (user?._id || user?.id);
-
   if (!isUserLoggedIn) {
     return (
-      <Link to="/signin" className="login-btn">
+      <Link to="/login" className="login-btn">
         <UserIcon size={18} className="icon" /> <Translate contentKey="global.login">Login</Translate>
       </Link>
     );
@@ -168,7 +173,7 @@ export const AccountMenu: React.FC<AccountMenuProps> = ({ user, handleLogout, is
             <Translate contentKey="home.header.profile">Profile</Translate>
           </Link>
 
-          {(isAdmin || user?.role === 'Admin') && (
+          {hasAdminAuthority && (
             <Link to="/admin/dashboard" className="profile-menu-item" onClick={() => setShowProfileMenu(false)}>
               <Translate contentKey="home.header.admin_dashboard">Admin Dashboard</Translate>
             </Link>
@@ -191,7 +196,9 @@ export const AccountMenu: React.FC<AccountMenuProps> = ({ user, handleLogout, is
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, user, isAuthenticated, isAdmin }) => {
   if (!isOpen) return null;
-  const usernameDisplay = user?.username || user?.user_name || user?.userName || user?.full_name || 'Profile';
+  const fullName = `${user?.lastName || ''} ${user?.firstName || ''}`.trim();
+  const usernameDisplay = fullName || user?.login || 'Profile';
+  const hasAdminAuthority = isAdmin || (user?.authorities && user.authorities.includes('ROLE_ADMIN'));
   const closeMenu = () => setIsOpen(false);
 
   return (
@@ -209,12 +216,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, user,
         <Translate contentKey="home.header.contact">Contact Us</Translate>
       </Link>
 
-      {isAdmin ||
-        (user?.role === 'Admin' && (
-          <Link to="/admin/dashboard" onClick={closeMenu}>
-            <Translate contentKey="home.header.admin_dashboard">Admin Dashboard</Translate>
-          </Link>
-        ))}
+      {hasAdminAuthority && (
+        <Link to="/admin/dashboard" onClick={closeMenu}>
+          <Translate contentKey="home.header.admin_dashboard">Admin Dashboard</Translate>
+        </Link>
+      )}
 
       <div className="menu-mobile-bottom">
         <Link to="/profile/tickets" className="icon-btn" onClick={closeMenu}>
@@ -225,7 +231,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen, user,
             <UserIcon size={18} className="icon" /> {usernameDisplay}
           </Link>
         ) : (
-          <Link to="/signin" className="login-btn" onClick={closeMenu}>
+          <Link to="/login" className="login-btn" onClick={closeMenu}>
             <UserIcon size={18} className="icon" /> <Translate contentKey="home.header.login">Login</Translate>
           </Link>
         )}

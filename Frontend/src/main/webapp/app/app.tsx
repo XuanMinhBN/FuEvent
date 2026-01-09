@@ -21,7 +21,7 @@ const AppInner = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
 
-  const isFullPage = location.pathname === '/login' || location.pathname === '/account/register';
+  const isFullPage = location.pathname === '/login' || location.pathname === '/signin' || location.pathname === '/account/register';
 
   useEffect(() => {
     dispatch(getSession());
@@ -30,12 +30,8 @@ const AppInner = () => {
 
   const currentLocale = useAppSelector(state => state.locale.currentLocale);
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
-  const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
-  const ribbonEnv = useAppSelector(state => state.applicationProfile.ribbonEnv);
-  const isInProduction = useAppSelector(state => state.applicationProfile.inProduction);
-  const isOpenAPIEnabled = useAppSelector(state => state.applicationProfile.isOpenAPIEnabled);
+  const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account?.authorities || [], [AUTHORITIES.ADMIN]));
 
-  const paddingTop = '60px';
   return (
     <div className="app-container" style={{ paddingTop: isFullPage ? '0' : '2px' }}>
       <ToastContainer position="top-left" className="toastify-container" toastClassName="toastify-toast" />
@@ -43,14 +39,7 @@ const AppInner = () => {
       {/* Ẩn Header nếu là FullPage */}
       {!isFullPage && (
         <ErrorBoundary>
-          <Header
-            isAuthenticated={isAuthenticated}
-            isAdmin={isAdmin}
-            currentLocale={useAppSelector(state => state.locale.currentLocale)}
-            ribbonEnv={ribbonEnv}
-            isInProduction={isInProduction}
-            isOpenAPIEnabled={isOpenAPIEnabled}
-          />
+          <Header isAuthenticated={isAuthenticated} isAdmin={isAdmin} currentLocale={currentLocale} />
         </ErrorBoundary>
       )}
 

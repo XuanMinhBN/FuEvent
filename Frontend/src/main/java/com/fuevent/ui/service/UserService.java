@@ -319,7 +319,7 @@ public class UserService {
     /**
      * Not activated users should be automatically deleted after 3 days.
      * <p>
-     * This is scheduled to get fired everyday, at 01:00 (am).
+     * This is scheduled to get fired everyday, at 01:00 (am).q
      */
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {

@@ -4,77 +4,71 @@ import { AccountMenu, Brand, IUser, MobileMenu, Navbar } from './header-componen
 import { useDispatch, useSelector } from 'react-redux';
 import './header.scss';
 import { setDataUser, logoutUser } from 'app/shared/redux/userSlice';
-import axios from 'axios';
 import { CustomButton } from 'app/shared/components/button';
 import { MenuIcon, XIcon } from 'lucide-react';
 import { setLocale } from 'app/shared/reducers/locale';
 import { LanguageMenu } from './header-components';
+import { logout } from 'app/shared/reducers/authentication';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
   isAdmin: boolean;
-  ribbonEnv: string;
-  isInProduction: boolean;
-  isOpenAPIEnabled: boolean;
   currentLocale: string;
 }
 
 const Header = (props: IHeaderProps) => {
-  const { isAuthenticated, isAdmin, ribbonEnv } = props;
+  const { isAuthenticated, isAdmin, currentLocale } = props;
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.user || state) as IUser;
   const navigate = useNavigate();
 
-  const currentLocale = useSelector((state: any) => state.locale.currentLocale);
+  const user = useSelector((state: any) => state.user) as IUser;
 
-  const requestLogout = async () => {
-    await axios.post('api/logout');
-  };
+  // eslint-disable-next-line no-console
+  console.log('Current Redux User:', user);
+  // eslint-disable-next-line no-console
+  console.log('Props isAuthenticated:', props.isAuthenticated);
 
   const handleLocaleChange = (langKey: string) => {
     dispatch(setLocale(langKey));
   };
 
-  const handleLogout = async () => {
-    const ok = window.confirm('Are you sure you want to logout?');
-    if (!ok) return;
-
-    try {
-      await requestLogout();
-    } catch (e) {
-      console.warn('Logout server failed/ignored', e);
-    }
-
-    localStorage.removeItem('token');
+  const handleLogout = () => {
+    // const ok = window.confirm('Are you sure you want to logout?');
+    // if (!ok) return;
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     localStorage.removeItem('jhi-authenticationToken');
-
+    dispatch(logout());
     dispatch(logoutUser());
-
-    navigate('/signin');
+    navigate('/login', {
+      replace: true,
+      state: { fromLogout: true },
+    });
   };
 
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
-    const userId = user?._id || user?.id;
+    const isReduxEmpty = !user || (!user.id && !user.login);
 
-    if (savedUser && !userId) {
+    if (savedUser && isReduxEmpty) {
       try {
         const parsedUser = JSON.parse(savedUser) as IUser;
+        // eslint-disable-next-line no-console
+        console.log('Restoring user from LocalStorage:', parsedUser);
         dispatch(setDataUser(parsedUser));
       } catch {
         console.error('Failed to parse user from localStorage');
+        localStorage.removeItem('user');
       }
     }
-  }, [user, dispatch]);
+  }, [dispatch]);
 
   return (
     <>
       <header className="header">
-        {ribbonEnv === 'dev' && <div className="ribbon dev">Development</div>}
         <div className="header-container">
           {/* --- Logo + Desktop Nav --- */}
           <div className="header-left-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>

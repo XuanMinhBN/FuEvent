@@ -1,6 +1,6 @@
 import { AnyAction, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-
+import userReducer from 'app/shared/redux/userSlice';
 import reducer from 'app/shared/reducers';
 import errorMiddleware from './error-middleware';
 import notificationMiddleware from './notification-middleware';
@@ -8,7 +8,10 @@ import loggerMiddleware from './logger-middleware';
 import { loadingBarMiddleware } from 'react-redux-loading-bar';
 
 const store = configureStore({
-  reducer,
+  reducer: {
+    user: userReducer,
+    ...reducer,
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

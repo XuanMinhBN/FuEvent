@@ -33,6 +33,8 @@ export const getSession = (): AppThunk => async (dispatch, getState) => {
     const langKey = Storage.session.get('locale', account.langKey);
     dispatch(setLocale(langKey));
   }
+
+  return account;
 };
 
 export const getAccount = createAsyncThunk('authentication/get_account', async () => axios.get<any>('api/account'), {
@@ -67,7 +69,7 @@ export const login: (username: string, password: string, rememberMe?: boolean) =
         Storage.session.set(AUTH_TOKEN_KEY, jwt);
       }
     }
-    dispatch(getSession());
+    return await dispatch(getSession() as any);
   };
 
 export const clearAuthToken = () => {

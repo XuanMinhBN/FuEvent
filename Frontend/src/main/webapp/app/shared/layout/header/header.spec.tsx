@@ -40,9 +40,7 @@ describe('Header', () => {
       const { container } = render(
         <Provider store={store}>
           <MemoryRouter>
-            <Header
-            // {...props}
-            />
+            <Header {...props} />
           </MemoryRouter>
         </Provider>
       );
