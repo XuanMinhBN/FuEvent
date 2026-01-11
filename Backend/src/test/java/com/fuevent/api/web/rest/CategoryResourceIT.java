@@ -35,8 +35,8 @@ class CategoryResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_DESCRIPTION = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_DESCRIPTION = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_DESCRIPTION = "CCCCCCCCCCCC";
+    private static final String UPDATED_DESCRIPTION = "DDDDDDDDDDDD";
     private static final String DEFAULT_DESCRIPTION_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_DESCRIPTION_CONTENT_TYPE = "image/png";
 
@@ -145,7 +145,7 @@ class CategoryResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(category.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].descriptionContentType").value(hasItem(DEFAULT_DESCRIPTION_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(Base64Utils.encodeToString(DEFAULT_DESCRIPTION))));
+            .andExpect(jsonPath("$.[*].description").value(hasItem((DEFAULT_DESCRIPTION))));
     }
 
     @Test
@@ -162,7 +162,7 @@ class CategoryResourceIT {
             .andExpect(jsonPath("$.id").value(category.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.descriptionContentType").value(DEFAULT_DESCRIPTION_CONTENT_TYPE))
-            .andExpect(jsonPath("$.description").value(Base64Utils.encodeToString(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.description").value((DEFAULT_DESCRIPTION)));
     }
 
     @Test

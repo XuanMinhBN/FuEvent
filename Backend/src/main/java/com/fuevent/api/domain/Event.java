@@ -27,7 +27,7 @@ public class Event implements Serializable {
 
     @Lob
     @Column(name = "description")
-    private byte[] description;
+    private String description;
 
     @Column(name = "description_content_type")
     private String descriptionContentType;
@@ -39,7 +39,7 @@ public class Event implements Serializable {
     @Column(name = "status")
     private EventStatus status;
 
-    @Column(name = "poster_url")
+    @Column(name = "poster_url", columnDefinition = "TEXT")
     private String posterUrl;
 
     @Column(name = "start_time")
@@ -95,16 +95,16 @@ public class Event implements Serializable {
         this.title = title;
     }
 
-    public byte[] getDescription() {
+    public String getDescription() {
         return this.description;
     }
 
-    public Event description(byte[] description) {
+    public Event description(String description) {
         this.setDescription(description);
         return this;
     }
 
-    public void setDescription(byte[] description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

@@ -16,7 +16,7 @@ public class EventDTO implements Serializable {
     private String title;
 
     @Lob
-    private byte[] description;
+    private String description;
 
     private String descriptionContentType;
     private String location;
@@ -49,11 +49,11 @@ public class EventDTO implements Serializable {
         this.title = title;
     }
 
-    public byte[] getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(byte[] description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

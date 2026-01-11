@@ -38,8 +38,8 @@ class EventResourceIT {
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_DESCRIPTION = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_DESCRIPTION = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_DESCRIPTION = "CCCCCCCCCCCCC";
+    private static final String UPDATED_DESCRIPTION = "DDDDDDDDDDDDD";
     private static final String DEFAULT_DESCRIPTION_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_DESCRIPTION_CONTENT_TYPE = "image/png";
 
@@ -184,7 +184,7 @@ class EventResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(event.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].descriptionContentType").value(hasItem(DEFAULT_DESCRIPTION_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(Base64Utils.encodeToString(DEFAULT_DESCRIPTION))))
+            .andExpect(jsonPath("$.[*].description").value(hasItem((DEFAULT_DESCRIPTION))))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].posterUrl").value(hasItem(DEFAULT_POSTER_URL)))
@@ -207,7 +207,7 @@ class EventResourceIT {
             .andExpect(jsonPath("$.id").value(event.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.descriptionContentType").value(DEFAULT_DESCRIPTION_CONTENT_TYPE))
-            .andExpect(jsonPath("$.description").value(Base64Utils.encodeToString(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.description").value((DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.posterUrl").value(DEFAULT_POSTER_URL))

@@ -25,7 +25,7 @@ public class Category implements Serializable {
 
     @Lob
     @Column(name = "description")
-    private byte[] description;
+    private String description;
 
     @Column(name = "description_content_type")
     private String descriptionContentType;
@@ -62,16 +62,16 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public byte[] getDescription() {
+    public String getDescription() {
         return this.description;
     }
 
-    public Category description(byte[] description) {
+    public Category description(String description) {
         this.setDescription(description);
         return this;
     }
 
-    public void setDescription(byte[] description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

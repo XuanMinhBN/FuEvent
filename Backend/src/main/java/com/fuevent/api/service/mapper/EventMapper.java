@@ -9,7 +9,7 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring", uses = { CategoryMapper.class })
 public interface EventMapper extends EntityMapper<EventDTO, Event> {
-    @Mapping(target = "category", source = "category", qualifiedByName = "id")
+    @Mapping(target = "category", source = "category")
     EventDTO toDto(Event s);
 
     @Named("id")
